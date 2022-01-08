@@ -2,21 +2,19 @@ import amongus from './amongus';
 import spring from './spring';
 import winter from './winter';
 
-const getParticlesTheme = () => {
+const getParticlesTheme = (bg: string) => {
   const currentMonth = new Date().getMonth();
 
   if (currentMonth >= 0 && currentMonth < 3) {
     // summer
-    return spring;
+    return spring(bg);
   } else if (currentMonth >= 3 && currentMonth < 11) {
     // autumn
-    return amongus;
+    return amongus(bg);
   } else {
     // winter
-    return winter;
+    return winter(bg);
   }
 };
 
-const particlesTheme = getParticlesTheme();
-
-export default particlesTheme;
+export default getParticlesTheme;

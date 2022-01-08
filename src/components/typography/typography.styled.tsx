@@ -1,12 +1,10 @@
-import { Button, ButtonProps, styled } from '@mui/material';
+import { styled, Typography, TypographyProps } from '@mui/material';
+import { Property } from 'csstype';
 
-export type TShape = 'none' | 'round' | 'curved';
-export interface TButtonProps extends ButtonProps {
+export type TTypographyProps = TypographyProps & {
+  display?: string;
   width?: number;
   height?: number;
-  shape?: TShape;
-  uppercase?: boolean;
-  borderRadius?: number;
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
@@ -17,14 +15,13 @@ export interface TButtonProps extends ButtonProps {
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
-}
+  color?: Property.Color | undefined;
+};
 
-const TButtonStyled = styled(Button)<{ 
-  width?: number; 
+const TTypographyStyled = styled(Typography)<{
+  display?: string;
+  width?: number;
   height?: number;
-  shape?: TShape;
-  uppercase?: boolean;
-  borderRadius?: number;
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
@@ -35,12 +32,11 @@ const TButtonStyled = styled(Button)<{
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  color?: Property.Color | undefined;
 }>`
+  display: ${({ display }) => display};
   width: ${({ width, theme }) => width && theme.spacing(width)};
   height: ${({ height, theme }) => height&&theme.spacing(height)};
-  border-radius: ${({ shape = 'none', theme }) => shape !== 'none' && (shape === 'round' ? '999px' : theme.spacing(0.5))};
-  border-radius: ${({ borderRadius, theme }) => borderRadius && theme.spacing(borderRadius)};
-  text-transform: ${({ uppercase }) => uppercase? 'uppercase' : 'none'};
   margin: ${({ margin, theme }) => (margin&&Number(margin))? theme.spacing(margin as number) : margin};
   padding: ${({ padding, theme }) => (padding&&Number(padding))? theme.spacing(padding as number) : padding};
   margin-top: ${({ marginTop, theme }) => marginTop && theme.spacing(marginTop)};
@@ -51,6 +47,7 @@ const TButtonStyled = styled(Button)<{
   margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
+  color: ${({ color, theme }) => color ?color : theme.palette.primary.dark};
 `;
 
-export default TButtonStyled;
+export default TTypographyStyled;

@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import { ThemeProvider } from '@mui/material';
 import { useSelector } from 'react-redux';

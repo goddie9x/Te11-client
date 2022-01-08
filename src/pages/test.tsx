@@ -16,6 +16,8 @@ import TTypography from 'components/typography';
 import TLinearProgress from 'components/progress';
 import TLoading from 'components/loading';
 import TBox from 'components/box';
+import TScrollProgress from 'components/scrollProgress';
+import TScrollToTop from 'components/scrollToTop';
 
 const Test = () => {
   const dataTest = [
@@ -40,7 +42,8 @@ const Test = () => {
   });
 
   return (
-    <TBox display="flex" flexDirection="column" alignItems="center">
+    <TBox display="flex" position="relative" flexDirection="column" alignItems="center">
+      <TScrollProgress height={10} position="fixed" display="block" zIndex={69}/>
       <TBreadcrumbs separator="/" items={dataTest} margin={1} />
       <TButton
         variant="contained"
@@ -72,7 +75,8 @@ const Test = () => {
         Hô hồ
       </TTypography>
       <TLinearProgress showPercentage fontSize={15} width={200} height={30} padding={1} value={progress} margin="12px 12px 12px 12px" />
-      <TLoading margin={1} height={10} />
+      <TLoading margin={1} height={1000} padding={0.5} />
+      <TScrollToTop bottom={1} right={1}/>
     </TBox>
   );
 };

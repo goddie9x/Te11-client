@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
+import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { RootState } from 'store';
 
 import TBreadcrumbs from 'components/breadcrumbs';
 import TButton from 'components/button';
-import AddIcon from '@mui/icons-material/Add';
 import TIconButton from 'components/iconButton';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store';
-
 import { setDarkMode } from 'store/slices/common';
 import TSwitch from 'components/switch';
 import TCard from 'components/card';
@@ -76,6 +77,7 @@ const Test = () => {
       </TTypography>
       <TLinearProgress showPercentage fontSize={15} width={200} height={30} padding={1} value={progress} margin="12px 12px 12px 12px" />
       <TLoading margin={1} height={1000} padding={0.5} />
+      <ReCAPTCHA sitekey="6LePBPwdAAAAALYlbbHOE4ylPkDLnhY05AMn5UIl"onChange={()=>{console.log('yup');}}/>
       <TScrollToTop bottom={1} right={1}/>
     </TBox>
   );

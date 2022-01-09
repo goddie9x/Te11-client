@@ -3,11 +3,11 @@ import React, { ReactNode } from 'react';
 
 import { TListStyled, TListItemStyled } from './list.styled';
 
-type HWListProps = BoxProps & {
+export type TListProps = BoxProps & {
   children: ReactNode;
 };
 
-export const TListItem = ({children,...props }: HWListProps) => {
+export const TListItem = ({children,...props }: TListProps) => {
   return (
     <TListItemStyled {...props} component="li">
       {children}
@@ -15,7 +15,7 @@ export const TListItem = ({children,...props }: HWListProps) => {
   );
 };
 
-const TList = ({ children,...props }: HWListProps) => {
+const TList = ({ children,...props }: TListProps) => {
   return <TListStyled component="ul" {...props}>{children}</TListStyled>;
 };
 

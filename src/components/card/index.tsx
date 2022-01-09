@@ -2,7 +2,9 @@ import { BoxProps } from "@mui/material";
 import React from "react";
 import TStyledCard from "./card.styled";
 
-const TCard = ({children, ...props}: BoxProps) => {
+export type TCardProps = BoxProps;
+
+const TCard = ({children, ...props}: TCardProps) => {
     return <TStyledCard {...props}>{children}</TStyledCard>;
 };
 

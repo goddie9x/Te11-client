@@ -14,7 +14,7 @@ export type TSliderProps<T> = Omit<SwiperProps, "width" | "height"> & BoxProps &
   renderItem: (item: T) => React.ReactNode;
 };
 
-const TSwiperStyled = styled(Swiper)`
+const TSliderStyled = styled(Swiper)`
     width: 100%;
     height: 100%;
     .swiper-pagination-bullet{
@@ -26,4 +26,4 @@ const TSwiperStyled = styled(Swiper)`
     }
 `;
 
-export default TSwiperStyled;
+export default TSliderStyled;

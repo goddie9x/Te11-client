@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TIconButtonStyled, { TIconButtonProps } from './IconButton.styled';
+import TIconButtonStyled, { TIconButtonProps } from './iconButton.styled';
 
 const TIconButton = (props: TIconButtonProps) => {
     return (

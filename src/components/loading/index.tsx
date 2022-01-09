@@ -1,5 +1,5 @@
 import TBox from "components/box";
-import TLinearProgressStyled, { TLinearProgressProps } from "components/progress/progress.styled";
+import {TLinearProgressStyled,  TLinearProgressProps } from "components";
 import React from "react";
 
 const TLoading = ({width, color="secondary", ...props}: TLinearProgressProps) => {

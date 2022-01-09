@@ -1,9 +1,7 @@
 import React from 'react';
 import { BreadcrumbsProps } from '@mui/material';
 
-import TLink from 'components/link';
-import TBreadcrumbsStyled from './breadcrumbs.styled';
-
+import {TLink, TBreadcrumbsStyled} from 'components';
 export interface TBreadcrumbsProps extends BreadcrumbsProps {
   width?: number;
   height?: number;

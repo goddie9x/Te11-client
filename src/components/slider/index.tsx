@@ -1,14 +1,14 @@
-import React, { useCallback } from 'react';
-import TBox from 'components/box';
-import TSwiperStyled, { TSliderProps } from './slider.styled';
 import { SwiperSlide } from 'swiper/react';
+import React, { useCallback } from 'react';
+
+import {TSliderStyled,  TSliderProps, TBox } from 'components';
 
 export default function TSlider({ items, width, height, renderItem, ...props }: TSliderProps<any>) {
   const memoizedRenderItem = useCallback(renderItem, []);
 
   return (
     <TBox width={width} height={height}{...props}>
-      <TSwiperStyled
+      <TSliderStyled
         spaceBetween={30}
         slidesPerView={4}
         breakpoints={{
@@ -45,7 +45,7 @@ export default function TSlider({ items, width, height, renderItem, ...props }: 
         {items.map((item, index) => {
           return item ? <SwiperSlide key={index}>{memoizedRenderItem(item)}</SwiperSlide> : null;
         })}
-      </TSwiperStyled>
+      </TSliderStyled>
     </TBox>
   );
 }

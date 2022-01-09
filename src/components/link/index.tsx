@@ -4,7 +4,7 @@ import {Link as LinkContent, LinkProps} from '@mui/material';
 
 import {StyledLink} from './link.styled';
 
-interface TLinkProps extends LinkProps{
+export interface TLinkProps extends LinkProps{
     href: string;
 }
 

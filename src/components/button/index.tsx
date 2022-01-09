@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TButtonStyled,{TButtonProps} from './button.styled';
+import {TButtonStyled, TButtonProps} from 'components';
 
 const TButton = (props: TButtonProps) => {
     return (

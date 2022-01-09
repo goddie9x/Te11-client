@@ -22,7 +22,7 @@ const TSwitch = ({height,darkmode, ...props}: TUseSwitchProps) => {
       <SwitchTrack height={height}>
         {darkmode?<SwitchThumbDarkMode height={height} className={clsx(stateClasses)}/>:<SwitchThumb height={height} className={clsx(stateClasses)}/>}
       </SwitchTrack>
-      <SwitchInput {...getInputProps()}  height={height} aria-label="Demo switch" />
+      <SwitchInput {...getInputProps()}  height={height} />
     </SwitchRoot>
   );
 };

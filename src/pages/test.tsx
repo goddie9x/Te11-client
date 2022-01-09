@@ -4,23 +4,27 @@ import AddIcon from '@mui/icons-material/Add';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from 'store';
-
-import TBreadcrumbs from 'components/breadcrumbs';
-import TButton from 'components/button';
-import TIconButton from 'components/iconButton';
 import { setDarkMode } from 'store/slices/common';
-import TSwitch from 'components/switch';
-import TCard from 'components/card';
-import TList, { TListItem } from 'components/list';
-import TImage from 'components/image';
-import TTypography from 'components/typography';
-import TLinearProgress from 'components/progress';
-import TLoading from 'components/loading';
-import TBox from 'components/box';
-import TScrollProgress from 'components/scrollProgress';
-import TScrollToTop from 'components/scrollToTop';
-import TSlider from 'components/slider';
-import TEditor from 'components/CKEditor';
+
+import {
+  TBreadcrumbs,
+  TButton,
+  TIconButton,
+  TSwitch,
+  TCard,
+  TList,
+  TListItem,
+  TImage,
+  TTypography,
+  TLinearProgress,
+  TLoading,
+  TBox,
+  TScrollProgress,
+  TScrollToTop,
+  TSlider,
+  TEditor,
+  TModal,
+} from 'components';
 
 const Test = () => {
   const dataTest = [
@@ -50,6 +54,7 @@ const Test = () => {
 
   const isDarkMode = useSelector((state: RootState) => state.common.isDarkMode);
   const [progress, setProgress] = useState(0);
+  const [openModalTest, setOpenModalTest] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -69,19 +74,24 @@ const Test = () => {
       <TButton
         variant="contained"
         shape="curved"
+        fontSize={3}
         width={50}
         height={10}
         margin={1}
-        startIcon={<TBreadcrumbs separator="/" items={dataTest} />}
+        onClick={() => setOpenModalTest(true)}
       >
-        Test
+        Test modal
       </TButton>
-      <TCard width={300} height={200} margin={1}>
-        <TIconButton width={4} height={4} aria-label="add" shape="round">
-          <AddIcon />
-        </TIconButton>
-        <TSwitch darkmode checked={isDarkMode} onChange={() => dispatch(setDarkMode(!isDarkMode))} />
-      </TCard>
+      <TModal title="Test modal" open={openModalTest} onClose={() => setOpenModalTest(false)}>
+        <TCard marginBottom={5}>
+          <TImage src={dataTest2[1].href} height={300} width="100%" />
+          <TTypography variant="h3">{dataTest2[1].label}</TTypography>
+        </TCard>
+      </TModal>
+      <TIconButton width={4} height={4} aria-label="add" shape="round">
+        <AddIcon />
+      </TIconButton>
+      <TSwitch darkmode={isDarkMode} checked={isDarkMode} onChange={() => dispatch(setDarkMode(!isDarkMode))} />
       <TList margin={1}>
         {dataTest2.map((item, index) => (
           <TListItem key={index}>
@@ -132,7 +142,7 @@ const Test = () => {
           );
         }}
       />
-      <TEditor width={800} height={200} margin={4}/>
+      <TEditor width={800} height={200} margin={4} />
     </TBox>
   );
 };

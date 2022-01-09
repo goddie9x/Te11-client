@@ -1,5 +1,4 @@
-import TLinearProgress from 'components/progress';
-import { TLinearProgressProps } from 'components/progress/progress.styled';
+import { TLinearProgressProps, TLinearProgress } from 'components';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 

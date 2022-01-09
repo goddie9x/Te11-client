@@ -1,5 +1,5 @@
 import React from "react";
-import TFloatingStyled, { TFloatingProps } from "./floating.styled";
+import  { TFloatingStyled,TFloatingProps } from "components";
 
 
 const TFloating = ({children,...props}: TFloatingProps)=>{

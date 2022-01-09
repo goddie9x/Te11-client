@@ -1,9 +1,7 @@
 import React,{useState, useEffect} from 'react';
 
-import TIconButton from 'components/iconButton';
 import ArrowUp from 'components/icon/arrowUp';
-import { TFloatingProps } from 'components/floating/floating.styled';
-import TFloating from 'components/floating';
+import { TFloatingProps, TIconButton, TFloating } from 'components';
 
 const TScrollToTop = ({positionShowUp, ...props}: TFloatingProps) => {
     const [show, setShow] = useState(false);

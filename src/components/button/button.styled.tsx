@@ -1,7 +1,7 @@
 import { Button, ButtonProps, styled } from '@mui/material';
 
 export type TShape = 'none' | 'round' | 'curved';
-export interface TButtonProps extends ButtonProps {
+export type TButtonProps = ButtonProps & {
   width?: number;
   height?: number;
   shape?: TShape;
@@ -17,7 +17,9 @@ export interface TButtonProps extends ButtonProps {
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
-}
+  fontSize?: number;
+  fontWeight?: number;
+};
 
 const TButtonStyled = styled(Button)<{ 
   width?: number; 
@@ -35,6 +37,8 @@ const TButtonStyled = styled(Button)<{
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  fontSize?: number;
+  fontWeight?: number;
 }>`
   width: ${({ width, theme }) => width && theme.spacing(width)};
   height: ${({ height, theme }) => height&&theme.spacing(height)};
@@ -51,6 +55,8 @@ const TButtonStyled = styled(Button)<{
   margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
+  font-size: ${({ fontSize, theme }) => fontSize && theme.spacing(fontSize)};
+  font-weight: ${({ fontWeight, theme }) => fontWeight && theme.typography.fontWeightMedium};
 `;
 
 export default TButtonStyled;

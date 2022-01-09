@@ -1,6 +1,9 @@
 import React from 'react';
 import { CKEditor, CKEditorConfig, CKEditorEventHandler } from 'ckeditor4-react';
-import TBox from 'components/box';
+
+import {TBox} from 'components';
+
+export type TEditorProps = CKEditorConfig;
 
 function TEditor({
   margin,
@@ -9,7 +12,7 @@ function TEditor({
   marginLeft,
   marginRight,
   ...props
-}: CKEditorConfig) {
+}: TEditorProps) {
   return (
     <TBox margin={margin} marginTop={marginTop} marginBottom={marginBottom} marginLeft={marginLeft} marginRight={marginRight} {...props}>
       <CKEditor<{

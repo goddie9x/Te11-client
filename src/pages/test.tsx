@@ -20,7 +20,7 @@ import TBox from 'components/box';
 import TScrollProgress from 'components/scrollProgress';
 import TScrollToTop from 'components/scrollToTop';
 import TSlider from 'components/slider';
-import { SwiperSlide } from 'swiper/react';
+import TEditor from 'components/CKEditor';
 
 const Test = () => {
   const dataTest = [
@@ -132,6 +132,7 @@ const Test = () => {
           );
         }}
       />
+      <TEditor width={800} height={200} margin={4}/>
     </TBox>
   );
 };

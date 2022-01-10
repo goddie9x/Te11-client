@@ -14,6 +14,7 @@ const commonSlice = createSlice({
   reducers: {
     setDarkMode: (state, { payload }) => {
       state.isDarkMode = payload;
+      localStorage.setItem('isDarkMode', payload);
     },
   },
 });

@@ -2,7 +2,7 @@ import { Breadcrumbs, styled } from '@mui/material';
 
 const TBreadcrumbsStyled = styled(Breadcrumbs)<{
   width?: number | string;
-  minWidth?: number;
+  minwidth?: number;
   height?: number | string;
   minHeight?: number;
   margin?: string | number;
@@ -28,7 +28,7 @@ const TBreadcrumbsStyled = styled(Breadcrumbs)<{
   margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
-  min-width: ${({ minWidth, theme }) => minWidth && theme.spacing(minWidth)};
+  min-width: ${({ minwidth, theme }) => minwidth && theme.spacing(minwidth)};
   min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};
 `;
 

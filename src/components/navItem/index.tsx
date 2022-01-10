@@ -30,7 +30,7 @@ const TNavItem = ({ href, title, navChildren }: TNavItemProps) => {
   return (
     <TNavItemStyled position="relative" active={active}>
       <TLink href={href} underline="none">
-        <TButton height="100%" fontSize={2.5} minWidth={12.5}>
+        <TButton height="100%" fontSize={2.5} minwidth={12.5}>
           {title}
         </TButton>
       </TLink>

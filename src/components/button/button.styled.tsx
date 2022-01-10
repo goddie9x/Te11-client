@@ -3,7 +3,7 @@ import { Button, ButtonProps, styled } from '@mui/material';
 export type TShape = 'none' | 'round' | 'curved';
 export type TButtonProps = ButtonProps & {
   width?: number | string;
-  minWidth?: number;
+  minwidth?: number;
   height?: number | string;
   minHeight?: number;
   shape?: TShape;
@@ -25,7 +25,7 @@ export type TButtonProps = ButtonProps & {
 
 const TButtonStyled = styled(Button)<{ 
   width?: number | string;
-  minWidth?: number;
+  minwidth?: number;
   height?: number | string;
   minHeight?: number;
   shape?: TShape;
@@ -46,7 +46,7 @@ const TButtonStyled = styled(Button)<{
 }>`
   width: ${({ width, theme }) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
   height: ${({ height, theme }) => height&&((typeof height=== 'string')?(height): theme.spacing(height))};
-  min-width: ${({ minWidth, theme }) => minWidth && theme.spacing(minWidth)};
+  min-width: ${({ minwidth, theme }) => minwidth && theme.spacing(minwidth)};
   min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};
   border-radius: ${({ shape = 'none', theme }) => shape !== 'none' && (shape === 'round' ? '999px' : theme.spacing(0.5))};
   border-radius: ${({ borderRadius, theme }) => borderRadius && theme.spacing(borderRadius)};

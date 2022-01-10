@@ -6,7 +6,7 @@ import TLink from 'components/link';
 
 export type TBreadcrumbsProps = BreadcrumbsProps &{
   width?: number | string;
-  minWidth?: number;
+  minwidth?: number;
   height?: number | string;
   minHeight?: number;
   margin?: string | number;

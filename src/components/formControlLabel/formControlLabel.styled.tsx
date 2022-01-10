@@ -2,7 +2,7 @@ import { FormControlLabel, FormControlLabelProps, styled } from '@mui/material';
 
 export type TFormControlLabelProps = FormControlLabelProps & {
   width?: number | string;
-  minWidth?: number;
+  minwidth?: number;
   height?: number | string;
   minHeight?: number;
   margin?: string | number;
@@ -19,7 +19,7 @@ export type TFormControlLabelProps = FormControlLabelProps & {
 
 const TFormControlLabelStyled = styled(FormControlLabel)<{
   width?: number | string;
-  minWidth?: number;
+  minwidth?: number;
   height?: number | string;
   minHeight?: number;
   margin?: string | number;
@@ -45,7 +45,7 @@ const TFormControlLabelStyled = styled(FormControlLabel)<{
   margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
-  min-width: ${({ minWidth, theme }) => minWidth && theme.spacing(minWidth)};
+  min-width: ${({ minwidth, theme }) => minwidth && theme.spacing(minwidth)};
   min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};
 `;
 

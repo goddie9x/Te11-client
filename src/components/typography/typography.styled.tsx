@@ -3,8 +3,10 @@ import { Property } from 'csstype';
 
 export type TTypographyProps = TypographyProps & {
   display?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  minWidth?: number;
+  height?: number | string;
+  minHeight?: number;
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
@@ -20,8 +22,10 @@ export type TTypographyProps = TypographyProps & {
 
 const TTypographyStyled = styled(Typography)<{
   display?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  minWidth?: number;
+  height?: number | string;
+  minHeight?: number;
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
@@ -35,8 +39,10 @@ const TTypographyStyled = styled(Typography)<{
   color?: Property.Color | undefined;
 }>`
   display: ${({ display }) => display};
-  width: ${({ width, theme }) => width && theme.spacing(width)};
-  height: ${({ height, theme }) => height&&theme.spacing(height)};
+  width: ${({ width, theme }) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
+  height: ${({ height, theme }) => height&&((typeof height=== 'string')?(height): theme.spacing(height))};
+  min-width: ${({ minWidth, theme }) => minWidth && theme.spacing(minWidth)};
+  min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};
   margin: ${({ margin, theme }) => (margin&&Number(margin))? theme.spacing(margin as number) : margin};
   padding: ${({ padding, theme }) => (padding&&Number(padding))? theme.spacing(padding as number) : padding};
   margin-top: ${({ marginTop, theme }) => marginTop && theme.spacing(marginTop)};

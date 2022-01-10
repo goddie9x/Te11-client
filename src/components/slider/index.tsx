@@ -1,7 +1,8 @@
 import { SwiperSlide } from 'swiper/react';
 import React, { useCallback } from 'react';
 
-import {TSliderStyled,  TSliderProps, TBox } from 'components';
+import TSliderStyled, { TSliderProps } from './slider.styled';
+import TBox from 'components/box';
 
 export default function TSlider({ items, width, height, renderItem, ...props }: TSliderProps<any>) {
   const memoizedRenderItem = useCallback(renderItem, []);

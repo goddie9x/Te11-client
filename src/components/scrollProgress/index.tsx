@@ -1,6 +1,8 @@
-import { TLinearProgressProps, TLinearProgress } from 'components';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+
+import { TLinearProgressProps } from 'components/progress/progress.styled';
+import TLinearProgress from 'components/progress';
 
 const TScrollProgress = (props: TLinearProgressProps) => {
   const [progress, setProgress] = useState(0);

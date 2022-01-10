@@ -1,35 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import AddIcon from '@mui/icons-material/Add';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from 'store';
-import { setDarkMode } from 'store/slices/common';
-
-import {
-  TBreadcrumbs,
-  TButton,
-  TIconButton,
-  TSwitch,
-  TCard,
-  TList,
-  TListItem,
-  TImage,
-  TTypography,
-  TLinearProgress,
-  TLoading,
-  TBox,
-  TScrollProgress,
-  TScrollToTop,
-  TSlider,
-  TEditor,
-  TModal,
-} from 'components';
+import TBox from 'components/box';
+import TBreadcrumbs from 'components/breadcrumbs';
+import TButton from 'components/button';
+import TModal from 'components/modal';
+import TCard from 'components/card';
+import TImage from 'components/image';
+import TIconButton from 'components/iconButton';
+import TList, { TListItem } from 'components/list';
+import TLoading from 'components/loading';
+import TTypography from 'components/typography';
+import TLinearProgress from 'components/progress';
+import TSlider from 'components/slider';
+import TScrollToTop from 'components/scrollToTop';
+import TEditor from 'components/CKEditor';
 
 const Test = () => {
   const dataTest = [
-    { href: '/', label: 'Test' },
-    { href: '/news', label: 'news' },
+    { href: '/', label: 'Home' },
+    { href: '/test', label: 'test' },
   ];
 
   const dataTest2 = [
@@ -50,9 +41,6 @@ const Test = () => {
     },
   ];
 
-  const dispatch = useDispatch();
-
-  const isDarkMode = useSelector((state: RootState) => state.common.isDarkMode);
   const [progress, setProgress] = useState(0);
   const [openModalTest, setOpenModalTest] = useState(false);
 
@@ -69,7 +57,6 @@ const Test = () => {
 
   return (
     <TBox display="flex" position="relative" flexDirection="column" alignItems="center" width="100%">
-      <TScrollProgress height={10} position="fixed" display="block" zIndex={69} />
       <TBreadcrumbs separator="/" items={dataTest} margin={1} />
       <TButton
         variant="contained"
@@ -91,7 +78,6 @@ const Test = () => {
       <TIconButton width={4} height={4} aria-label="add" shape="round">
         <AddIcon />
       </TIconButton>
-      <TSwitch darkmode={isDarkMode} checked={isDarkMode} onChange={() => dispatch(setDarkMode(!isDarkMode))} />
       <TList margin={1}>
         {dataTest2.map((item, index) => (
           <TListItem key={index}>

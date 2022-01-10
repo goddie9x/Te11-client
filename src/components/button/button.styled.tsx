@@ -2,8 +2,10 @@ import { Button, ButtonProps, styled } from '@mui/material';
 
 export type TShape = 'none' | 'round' | 'curved';
 export type TButtonProps = ButtonProps & {
-  width?: number;
-  height?: number;
+  width?: number | string;
+  minWidth?: number;
+  height?: number | string;
+  minHeight?: number;
   shape?: TShape;
   uppercase?: boolean;
   borderRadius?: number;
@@ -22,8 +24,10 @@ export type TButtonProps = ButtonProps & {
 };
 
 const TButtonStyled = styled(Button)<{ 
-  width?: number; 
-  height?: number;
+  width?: number | string;
+  minWidth?: number;
+  height?: number | string;
+  minHeight?: number;
   shape?: TShape;
   uppercase?: boolean;
   borderRadius?: number;
@@ -40,8 +44,10 @@ const TButtonStyled = styled(Button)<{
   fontSize?: number;
   fontWeight?: number;
 }>`
-  width: ${({ width, theme }) => width && theme.spacing(width)};
-  height: ${({ height, theme }) => height&&theme.spacing(height)};
+  width: ${({ width, theme }) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
+  height: ${({ height, theme }) => height&&((typeof height=== 'string')?(height): theme.spacing(height))};
+  min-width: ${({ minWidth, theme }) => minWidth && theme.spacing(minWidth)};
+  min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};
   border-radius: ${({ shape = 'none', theme }) => shape !== 'none' && (shape === 'round' ? '999px' : theme.spacing(0.5))};
   border-radius: ${({ borderRadius, theme }) => borderRadius && theme.spacing(borderRadius)};
   text-transform: ${({ uppercase }) => uppercase? 'uppercase' : 'none'};

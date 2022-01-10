@@ -6,6 +6,7 @@ import { createTheme } from '@mui/material/styles';
 
 import TRouter from 'router';
 import TParticles from 'components/particles';
+
 import {RootState} from 'store';
 
 function App() {

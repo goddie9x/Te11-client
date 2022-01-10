@@ -1,7 +1,7 @@
 import React from 'react';
 import { CKEditor, CKEditorConfig, CKEditorEventHandler } from 'ckeditor4-react';
 
-import {TBox} from 'components';
+import TBox from 'components/box';
 
 export type TEditorProps = CKEditorConfig;
 

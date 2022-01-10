@@ -1,10 +1,14 @@
 import React from 'react';
 import { BreadcrumbsProps } from '@mui/material';
 
-import {TLink, TBreadcrumbsStyled} from 'components';
-export interface TBreadcrumbsProps extends BreadcrumbsProps {
-  width?: number;
-  height?: number;
+import TBreadcrumbsStyled from './breadcrumbs.styled';
+import TLink from 'components/link';
+
+export type TBreadcrumbsProps = BreadcrumbsProps &{
+  width?: number | string;
+  minWidth?: number;
+  height?: number | string;
+  minHeight?: number;
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
@@ -16,7 +20,7 @@ export interface TBreadcrumbsProps extends BreadcrumbsProps {
   paddingLeft?: number;
   paddingRight?: number;
   items: Array<{ href: string; label: string }>;
-}
+};
 
 const TBreadcrumbs = ({ items, ...props }: TBreadcrumbsProps) => {
   return (

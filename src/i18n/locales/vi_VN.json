@@ -1,0 +1,23 @@
+{
+    "test": "Kiểm tra",
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "language": "Ngôn ngữ",
+    "contact": "Liên hệ",
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "logout": "Đăng xuất",
+    "profile": "Hồ sơ",
+    "account": "Tài khoản",
+    "settings": "Cài đặt",
+    "search": "Tìm kiếm",
+    "dashboard": "Bảng điều khiển",
+    "users": "Người dùng",
+    "user": "Người dùng",
+    "user_id": "ID người dùng",
+    "user_name": "Tên người dùng",
+    "user_email": "Email người dùng",
+    "user_password": "Mật khẩu người dùng",
+    "user_role": "Vai trò người dùng",
+    "user_status": "Trạng thái người dùng"
+}

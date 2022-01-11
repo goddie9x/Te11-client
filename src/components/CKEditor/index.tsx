@@ -1,5 +1,5 @@
 import React from 'react';
-import { CKEditor, CKEditorConfig, CKEditorEventHandler } from 'ckeditor4-react';
+import { CKEditor, CKEditorConfig } from 'ckeditor4-react';
 
 import TBox from 'components/box';
 
@@ -15,12 +15,7 @@ function TEditor({
 }: TEditorProps) {
   return (
     <TBox margin={margin} marginTop={marginTop} marginBottom={marginBottom} marginLeft={marginLeft} marginRight={marginRight} {...props}>
-      <CKEditor<{
-        onCustomEvent: CKEditorEventHandler<'customEvent'>;
-      }>
-        onCustomEvent={({ name }) => {
-          console.log(name); // 'customEvent'
-        }}
+      <CKEditor
         config={{
           filebrowserBrowseUrl: 'https://te11cli.herokuapp.com/images',
           filebrowserUploadMethod: 'form',

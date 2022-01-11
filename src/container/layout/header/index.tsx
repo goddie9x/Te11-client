@@ -1,4 +1,5 @@
 import React from 'react';
+import i18n from 'i18n';
 import Toolbar from '@mui/material/Toolbar';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -6,6 +7,12 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { InputLabel, Select, SelectChangeEvent } from '@mui/material';
+
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
+import { Language } from 'constants/enum/language';
 
 import TIconTButton from 'components/iconButton';
 import TTypography from 'components/typography';
@@ -15,37 +22,44 @@ import TScrollProgress from 'components/scrollProgress';
 import THeaderStyled from './header.styled';
 import TNavItem from 'components/navItem';
 import TNavItemVeritical from 'components/navItem/navItemVertical';
-
-const pages = [
-  { href: '/', title: 'home' },
-  {
-    href: '/test',
-    title: 'test',
-    navChildren: [
-      {
-        href: '/test1',
-        title: 'test1',
-        navChildren: [
-          { href: '/test1', title: 'test1' },
-          { href: '/test2', title: 'test2' },
-        ],
-      },
-      {
-        href: '/test2',
-        title: 'test2',
-        navChildren: [
-          { href: '/test1', title: 'test1' },
-          { href: '/test2', title: 'test2 dàiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii' },
-        ],
-      },
-    ],
-  },
-];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { setLanguage } from 'store/slices/common';
+import TFormControl from 'components/formControl';
 
 const THeader = () => {
+  //TODO: remove this after have API
+  const { t } = useTranslation();
+  const pages = [
+    { href: '/', title: t('home') },
+    {
+      href: '/test',
+      title: t('test'),
+      navChildren: [
+        {
+          href: '/test1',
+          title: t('test') + 1,
+          navChildren: [
+            { href: '/test3', title: t('test') + 3 },
+            { href: '/test4', title: t('test') + 4 },
+          ],
+        },
+        {
+          href: '/test2',
+          title: t('test') + 2,
+          navChildren: [
+            { href: '/test3', title: t('test') + 3 },
+            { href: '/test4', title: t('test') + 4 + 'dàiiiiiiiiiiiiiiiiiiiiiiiii' },
+          ],
+        },
+      ],
+    },
+  ];
+  const settings = [t('profile'), t('account'),t('dashboard'), t('logout')];
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [lang, setLang] = React.useState<string>(i18n.language);
+
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -60,6 +74,14 @@ const THeader = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
+    const lang = event.target.value as Language;
+
+    i18n.changeLanguage(lang);
+    dispatch(setLanguage(lang));
+    setLang(lang);
   };
 
   return (
@@ -143,6 +165,19 @@ const THeader = () => {
           <TBox>
             <TSwitchDarkMode />
           </TBox>
+          <TFormControl height={5}>
+            <InputLabel id="select-language">{t('language')}</InputLabel>
+            <Select
+              labelId="select-language"
+              id="select-language"
+              value={lang}
+              label="Language"
+              onChange={handleChangeLanguage}
+            >
+              <MenuItem value={Language.EN_US}>English</MenuItem>
+              <MenuItem value={Language.VI_VN}>Việt Nam</MenuItem>
+            </Select>
+          </TFormControl>
         </Toolbar>
       </Container>
       <TScrollProgress height={5} display="block" />

@@ -1,0 +1,23 @@
+{
+    "test": "Test",
+    "home": "Tome",
+    "language": "Language",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "account": "Account",
+    "settings": "Settings",
+    "search": "Search",
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "user": "User",
+    "user_id": "User ID",
+    "user_name": "User name",
+    "user_email": "User email",
+    "user_password": "User password",
+    "user_role": "User role",
+    "user_status": "User status"
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import TLayout from 'container/layout';
 import THome from 'pages/home';
@@ -13,7 +13,6 @@ const TAppRouter = () => {
         <TLayout>
           <Route path="/" exact component={THome} />
           <TestRouter />
-          <Redirect to="/" />
         </TLayout>
       </Switch>
     </Router>

@@ -12,7 +12,6 @@ export type TNavItemProps = {
 
 const TNavItemVeritical = ({ href, title, navChildren }: TNavItemProps) => {
   const [active, setActive] = useState(false);
-  const [firstNav, setFirstNav] = useState(false);
 
   useEffect(() => {
     const localHref = window.location.pathname.split('/');
@@ -21,8 +20,6 @@ const TNavItemVeritical = ({ href, title, navChildren }: TNavItemProps) => {
     const arraySpitHref = href.split('/');
     const currentHref = arraySpitHref.pop()||'';
     const isNavActive =  localHref?.includes(currentHref);
-   
-    (arraySpitHref.length<2)?setFirstNav(true):setFirstNav(false);
    
     (isNavActive)?setActive(true):setActive(false);
   });

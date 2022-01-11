@@ -1,12 +1,13 @@
 import React from 'react';
-import {Box, BoxProps } from "@mui/material";
+import {BoxProps } from "@mui/material";
+import TBoxStyled from './box.styled';
 
 export type TBoxProps = BoxProps&{
     minwidth?: number;
 };
 
 const TBox = (props: TBoxProps)=>{
-    return <Box {...props} boxSizing="border-box"/>;
+    return <TBoxStyled {...props} boxSizing="border-box"/>;
 };
 
 export default TBox;

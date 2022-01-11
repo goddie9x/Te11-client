@@ -6,7 +6,7 @@ const THelmet = ()=>{
     const title = "Te11 app";
     const relativePath = "https://te11test.herokuapp.com";
     const description = "Te11 app description";
-    const verification = "https://te11test.herokuapp.com";
+    const verification = "googlebc518704c4c4ae36.html";
 
     return <Helmet>
         <title>{title}</title>

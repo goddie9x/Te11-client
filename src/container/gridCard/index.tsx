@@ -1,10 +1,12 @@
 import React from 'react';
-import { Grid, GridProps } from '@mui/material';
 
-import TBox, { TBoxProps } from 'components/box';
+import TBox from 'components/box';
 import TTypography from 'components/typography';
-
-export type TGridCardProps<T> = GridProps &
+import {TBoxProps} from 'components/box/box.styled';
+import TGrid from 'components/grid';
+import { TGridProps } from 'components/grid/grid.styled';
+ 
+export type TGridCardProps<T> = TGridProps &
   TBoxProps & {
     title: string;
     subtitle?: string;
@@ -23,13 +25,13 @@ const TGridCard = ({ title, subtitle, data, renderItem, xs, sm, md, lg, xl, spac
           {subtitle}
         </TTypography>
       )}
-      <Grid container spacing={spacing || 2}>
+      <TGrid container spacing={spacing || 2}>
         {data.map((item, index) => (
-          <Grid item key={index} xs={xs ? xs : 12} sm={sm ? sm : 6} md={md ? md : 4} lg={lg ? lg : 3} xl={xl ? xl : 2}>
+          <TGrid item key={index} xs={xs ? xs : 12} sm={sm ? sm : 6} md={md ? md : 4} lg={lg ? lg : 3} xl={xl ? xl : 2}>
             {renderItem(item)}
-          </Grid>
+          </TGrid>
         ))}
-      </Grid>
+      </TGrid>
     </TBox>
   );
 };

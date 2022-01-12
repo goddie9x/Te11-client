@@ -13,7 +13,7 @@ const TLayout = ({ children }: TLayoutProps) => {
     <>
       <THelmet />
       <THeader />
-      <TBox margin="80px 30px 30px 30px">{children}</TBox>
+      <TBox margin="80px 30px 30px 30px" minHeight={500}>{children}</TBox>
       <TFooter />
     </>
   );

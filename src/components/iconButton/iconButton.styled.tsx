@@ -15,6 +15,7 @@ export interface TIconButtonProps extends FabProps {
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  background?: string;
 }
 
 const TIconButtonStyled = styled(Fab)<{
@@ -31,6 +32,7 @@ const TIconButtonStyled = styled(Fab)<{
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  background?: string;
 }>`
   width: ${({ width, theme }) => width && theme.spacing(width > 4.5 ? width : 4.5)};
   height: ${({ height, theme }) => height && theme.spacing(height > 4.5 ? height : 4.5)};
@@ -45,6 +47,7 @@ const TIconButtonStyled = styled(Fab)<{
   margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
+  background-color: ${({ background}) => background};
 `;
 
 export default TIconButtonStyled;

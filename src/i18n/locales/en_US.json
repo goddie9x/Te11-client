@@ -5,6 +5,7 @@
     "about": "About",
     "contact": "Contact",
     "login": "Login",
+    "creater": "Creater",
     "register": "Register",
     "logout": "Logout",
     "profile": "Profile",
@@ -19,5 +20,9 @@
     "user_email": "User email",
     "user_password": "User password",
     "user_role": "User role",
-    "user_status": "User status"
+    "user_status": "User status",
+    "get_connected_with_me_on_social_networks": "Get connected with me on social networks:",
+    "copyright": "© 2022 TE11 this is the test website create by Hoàng Tâm",
+    "page_not_found": "Page not found",
+    "main_quote": "I'm not special I'm just different"
 }

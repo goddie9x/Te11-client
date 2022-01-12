@@ -24,12 +24,15 @@ import TNavItem from 'components/navItem';
 import TNavItemVeritical from 'components/navItem/navItemVertical';
 import { setLanguage } from 'store/slices/common';
 import TFormControl from 'components/formControl';
+import TImage from 'components/image';
+
+import Logo from 'assets/images/T_logo.png';
+import TLink from 'components/link';
 
 const THeader = () => {
   //TODO: remove this after have API
   const { t } = useTranslation();
   const pages = [
-    { href: '/', title: t('home') },
     {
       href: '/test',
       title: t('test'),
@@ -53,7 +56,7 @@ const THeader = () => {
       ],
     },
   ];
-  const settings = [t('profile'), t('account'),t('dashboard'), t('logout')];
+  const settings = [t('profile'), t('account'), t('dashboard'), t('logout')];
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -88,9 +91,9 @@ const THeader = () => {
     <THeaderStyled position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <TTypography variant="h6" noWrap sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
-            LOGO
-          </TTypography>
+          <TLink href="/">
+            <TImage src={Logo} width={75} marginRight={10} borderRadius={10} />
+          </TLink>
           <TBox sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <TIconTButton
               size="large"

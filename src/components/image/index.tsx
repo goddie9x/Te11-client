@@ -15,6 +15,7 @@ export type TImageProps = {
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  borderRadius?: number;
 } & React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
 
 const TImage = ({ objectFit, objectPosition, ...props }: TImageProps) => {

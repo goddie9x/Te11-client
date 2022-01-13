@@ -6,6 +6,7 @@
     "contact": "Contact",
     "login": "Login",
     "creater": "Creater",
+    "devBy": "Hoàng Tâm",
     "register": "Register",
     "logout": "Logout",
     "profile": "Profile",
@@ -24,5 +25,8 @@
     "get_connected_with_me_on_social_networks": "Get connected with me on social networks:",
     "copyright": "© 2022 TE11 this is the test website create by Hoàng Tâm",
     "page_not_found": "Page not found",
-    "main_quote": "I'm not special I'm just different"
+    "main_quote": "I'm not special I'm just different",
+    "open_menu": "Open menu",
+    "account_settings": "Account settings",
+    "dark_mode": "Dark mode"
 }

@@ -21,6 +21,7 @@ export type TButtonProps = ButtonProps & {
   paddingRight?: number;
   fontSize?: number;
   fontWeight?: number;
+  lineHeight?: number;
 };
 
 const TButtonStyled = styled(Button)<{ 
@@ -43,6 +44,7 @@ const TButtonStyled = styled(Button)<{
   paddingRight?: number;
   fontSize?: number;
   fontWeight?: number;
+  lineHeight?: number;
 }>`
   width: ${({ width, theme }) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
   height: ${({ height, theme }) => height&&((typeof height=== 'string')?(height): theme.spacing(height))};
@@ -63,6 +65,7 @@ const TButtonStyled = styled(Button)<{
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
   font-size: ${({ fontSize, theme }) => fontSize && theme.spacing(fontSize)};
   font-weight: ${({ fontWeight, theme }) => fontWeight && theme.typography.fontWeightMedium};
-`;
+  line-height: ${({ lineHeight, theme }) => lineHeight};
+  `;
 
 export default TButtonStyled;

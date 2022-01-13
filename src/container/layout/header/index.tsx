@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import { useTranslation } from 'react-i18next';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LoginIcon from '@mui/icons-material/Login';
 
 import TBox from 'components/box';
 import TScrollProgress from 'components/scrollProgress';
@@ -13,12 +14,20 @@ import TImage from 'components/image';
 import TLink from 'components/link';
 import THeaderMenuDropdown from 'components/headerMenuDropdown';
 import THeaderSetting from './headerSetting';
+import THeaderMenuRenderOption from 'components/headerMenuDropdown/headerMenuRenderOption';
+import TLoginModal from 'container/modal/login';
+import TRegisterModal from 'container/modal/register';
+import TButton from 'components/button';
 
 import Logo from 'assets/images/T_logo.png';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'store';
+import { openLoginModal, openRegisterModal } from 'store/slices/auth';
 
 const THeader = () => {
   //TODO: remove this after have API
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const pages = [
     {
       href: '/test',
@@ -49,6 +58,21 @@ const THeader = () => {
     { href: 'user/dashboard', title: t('dashboard') },
     { href: 'logout', title: t('logout') },
   ];
+  const loginOption = [
+    {
+      title: t('login'),
+      onClick: () => {
+        dispatch(openLoginModal(true));
+      },
+    },
+    {
+      title: t('register'),
+      onClick: () => {
+        dispatch(openRegisterModal(true));
+      },
+    },
+  ];
+  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
 
   return (
     <THeaderStyled position="fixed">
@@ -63,18 +87,42 @@ const THeader = () => {
               <TNavItem key={index} {...page} />
             ))}
           </TBox>
-          <THeaderMenuDropdown
-            menuProps={{ width: '250px', textAlign: 'left' }}
-            marginRight={2}
-            toolTip={t('account_settings')}
-            IconButton={<AccountCircleIcon />}
-            menuList={AccountSettings}
-          />
+          {isLogin ? (
+            <THeaderMenuDropdown
+              menuProps={{ width: '250px', textalign: 'left' }}
+              marginRight={2}
+              toolTip={t('account_settings')}
+              IconButton={<AccountCircleIcon />}
+              menuList={AccountSettings}
+            />
+          ) : null}
           <THeaderSetting />
+          <THeaderMenuRenderOption
+            marginLeft={2}
+            menuList={loginOption}
+            toolTip={t('login')}
+            IconButton={<LoginIcon />}
+            renderMenuItem={(title, onClick, index) => {
+              return (
+                <TBox minwidth={12.5}>
+                  <TButton
+                    key={index}
+                    onClick={() => {
+                      onClick && onClick();
+                    }}
+                  >
+                    {title}
+                  </TButton>
+                </TBox>
+              );
+            }}
+          />
         </Toolbar>
       </Container>
       <TScrollProgress height={5} display="block" />
+      <TLoginModal />
+      <TRegisterModal/>
     </THeaderStyled>
   );
 };
-export default THeader;
+export default memo(THeader);

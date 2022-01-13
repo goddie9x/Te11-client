@@ -18,6 +18,8 @@ export type TTypographyProps = TypographyProps & {
   paddingLeft?: number;
   paddingRight?: number;
   color?: Property.Color | undefined;
+  lineheight?: number;
+  textalign?: 'left' | 'center' | 'right';
 };
 
 const TTypographyStyled = styled(Typography)<{
@@ -36,7 +38,9 @@ const TTypographyStyled = styled(Typography)<{
   marginRight?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  lineheight?: number;
   color?: Property.Color | undefined;
+  textalign?: 'left' | 'center' | 'right';
 }>`
   display: ${({ display }) => display};
   width: ${({ width, theme }) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
@@ -54,6 +58,8 @@ const TTypographyStyled = styled(Typography)<{
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
   padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
   color: ${({ color, theme }) => color ?color : theme.palette.primary.dark};
+  line-height: ${({ lineheight }) => lineheight};
+  text-align: ${({ textalign }) => textalign};
 `;
 
 export default TTypographyStyled;

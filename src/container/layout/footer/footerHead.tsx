@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -30,44 +30,44 @@ const TFooterHead = (socicalsUrl: socicalsUrl) => {
         <TTypography variant="h5">{t('get_connected_with_me_on_social_networks')}</TTypography>
       </TGrid>
       <TGrid item xs={12} md={6}>
-        <TGrid container lineHeight={3}>
+        <TGrid container lineheight={3}>
           <TGrid item md={2} xs={4}>
-            <TIconButton width={3} lineHeight={0.75} height={3} background="#38262647">
+            <TIconButton width={3} lineheight={0.75} height={3} background="#38262647">
               <a href={socicalsUrl.facebook}>
                 <FacebookIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
-            <TIconButton width={3} lineHeight={0.75}  height={3} background="#38262647">
+            <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
               <a href={socicalsUrl.twitter}>
                 <TwitterIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
-            <TIconButton width={3} lineHeight={0.75}  height={3} background="#38262647">
+            <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
               <a href={socicalsUrl.google}>
                 <GoogleIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
-            <TIconButton width={3} lineHeight={0.75}  height={3} background="#38262647">
+            <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
               <a href={socicalsUrl.instagram}>
                 <InstagramIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
-            <TIconButton width={3} lineHeight={0.75}  height={3} background="#38262647">
+            <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
               <a href={socicalsUrl.linkedin}>
                 <LinkedInIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
-            <TIconButton width={3} lineHeight={0.75}  height={3} background="#38262647">
+            <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
               <a href={socicalsUrl.github}>
                 <GitHubIcon />
               </a>
@@ -79,4 +79,4 @@ const TFooterHead = (socicalsUrl: socicalsUrl) => {
   );
 };
 
-export default TFooterHead;
+export default memo(TFooterHead);

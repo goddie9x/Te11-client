@@ -6,7 +6,7 @@ import { TModalCloseButton, TModalWrapper } from './modal.styled';
 import TBox from 'components/box';
 import TTypography from 'components/typography';
 
-export type TModalProps = Omit<ModalProps, 'children'> & { title?: string; children: ReactNode; width?: number };
+export type TModalProps = ModalProps& { title?: string; width?: number };
 
 const TModal = ({ title, width, ...props }: TModalProps) => {
   const theme = useTheme();
@@ -23,13 +23,13 @@ const TModal = ({ title, width, ...props }: TModalProps) => {
       <Fade in={props.open}>
         <TModalWrapper width={width}>
           {title && (
-            <TBox textAlign="center" marginBottom={2}>
-              <TTypography variant="h6" color={theme.palette.primary.main}>
+            <TBox textalign="center" marginBottom={2}>
+              <TTypography variant="h4" color={theme.palette.primary.main}>
                 {title}
               </TTypography>
             </TBox>
           )}
-          <TBox>{props.children}</TBox>
+          <TBox {...props}>{props.children}</TBox>
           <TModalCloseButton
             onClick={() => {
               props.onClose?.({}, 'escapeKeyDown');

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Menu, MenuProps, styled } from '@mui/material';
 
 export type TMenuProps = MenuProps & {
@@ -21,7 +20,7 @@ export type TMenuProps = MenuProps & {
   fontSize?: string | number;
   fontWeight?: string | number;
   fontFamily?: string;
-  textAlign?: string;
+  textalign?: string;
   textTransform?: string;
   textDecoration?: string;
   textOverflow?: string;
@@ -49,7 +48,7 @@ const TMenuStyled = styled(Menu)<{
   fontSize?: string | number;
   fontWeight?: string | number;
   fontFamily?: string;
-  textAlign?: string;
+  textalign?: string;
   textTransform?: string;
   textDecoration?: string;
   textOverflow?: string;
@@ -85,7 +84,7 @@ const TMenuStyled = styled(Menu)<{
   font-weight: ${({ fontWeight, theme }) =>
     fontWeight && (typeof fontWeight === 'string' ? fontWeight : theme.spacing(fontWeight))};
   font-family: ${({ fontFamily }) => fontFamily && fontFamily};
-  text-align: ${({ textAlign }) => textAlign && textAlign};
+  text-align: ${({ textalign }) => textalign && textalign};
   text-transform: ${({ textTransform }) => textTransform && textTransform};
   text-decoration: ${({ textDecoration }) => textDecoration && textDecoration};
   text-overflow: ${({ textOverflow }) => textOverflow && textOverflow};

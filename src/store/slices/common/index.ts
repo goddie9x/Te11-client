@@ -30,6 +30,5 @@ const commonSlice = createSlice({
 
 const {reducer, actions} = commonSlice;
 
-export const {setDarkMode} = actions;
-export const {setLanguage} = actions;
+export const {setDarkMode, setLanguage} = actions;
 export {reducer as commonReducer};

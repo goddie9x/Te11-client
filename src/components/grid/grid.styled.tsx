@@ -14,6 +14,8 @@ export type TGridProps = GridProps & {
   paddingLeft?: number | string;
   paddingRight?: number | string;
   background?: string;
+  lineheight?: number | string;
+  textalign?: "left" | "center" | "right";
 };
 
 const TGridStyled = styled(Grid)<{
@@ -30,6 +32,8 @@ const TGridStyled = styled(Grid)<{
   paddingLeft?: number | string;
   paddingRight?: number | string;
   background?: string;
+  lineheight?: number | string;
+  textalign?: "left" | "center" | "right";
 }>`
     width: ${({ width, theme})=> width && ((typeof width === 'string')?(width): theme.spacing(width))};
     height: ${({ height, theme})=> height && ((typeof height === 'string')?(height): theme.spacing(height))};
@@ -44,6 +48,8 @@ const TGridStyled = styled(Grid)<{
     padding-left: ${({ paddingLeft, theme})=> paddingLeft && ((typeof paddingLeft === 'string')?(paddingLeft): theme.spacing(paddingLeft))};
     padding-right: ${({ paddingRight, theme})=> paddingRight && ((typeof paddingRight === 'string')?(paddingRight): theme.spacing(paddingRight))};
     background: ${({ background})=> background && background};
-`;
+    line-height: ${({ lineheight, theme})=> lineheight && ((typeof lineheight === 'string')?(lineheight): theme.spacing(lineheight))};
+    text-align: ${({ textalign})=> textalign && textalign};
+    `;
 
 export default TGridStyled;

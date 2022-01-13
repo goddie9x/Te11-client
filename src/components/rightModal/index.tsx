@@ -1,7 +1,7 @@
 import React from 'react';
 import { ModalProps, useTheme } from '@mui/material';
 
-import TRightModalStyled from './rightModal.styled';
+import TRightModalStyled, { TRightModalWrapper } from './rightModal.styled';
 import TBox from 'components/box';
 import TTypography from 'components/typography';
 import TDivider from 'components/divider';
@@ -14,7 +14,7 @@ const TRightModal = ({ children, title, ...props }: ModalProps) => {
 
   return (
     <TRightModalStyled {...props}>
-      <TBox
+      <TRightModalWrapper
         background={theme.palette.mode === 'dark' ? 'rgb(10, 25, 41)' : '#fff'}
         position="absolute"
         top={0}
@@ -27,7 +27,7 @@ const TRightModal = ({ children, title, ...props }: ModalProps) => {
         {title && (
           <>
             <TBox padding={2}>
-              <TTypography variant="h6" color="textPrimary" height={6} lineHeight={2.5}>
+              <TTypography variant="h6" color="textPrimary" height={6} lineheight={2.5}>
                 {title}
               </TTypography>
             </TBox>
@@ -42,7 +42,7 @@ const TRightModal = ({ children, title, ...props }: ModalProps) => {
         <TBox padding={2}>
             {children}
         </TBox>
-      </TBox>
+      </TRightModalWrapper>
     </TRightModalStyled>
   );
 };

@@ -5,7 +5,7 @@ export const TModalWrapper = styled(Paper)<{ width?: number }>`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${({ theme }) => theme.palette.common.white};
+  background-color: ${({ theme }) => theme.palette.primary.contrastText};
   padding: ${({ theme }) => `${theme.spacing(5)}  ${theme.spacing(4)}`};
   min-width: ${({ theme }) => theme.spacing(50)};
   width: ${({ width }) => width && width}px;
@@ -16,10 +16,7 @@ export const TModalWrapper = styled(Paper)<{ width?: number }>`
 
 export const TModalCloseButton = styled(IconButton)`
   position: absolute;
-  top: ${({ theme }) => theme.spacing(6.5)};
-  right: ${({ theme }) => theme.spacing(3.5)};
-  background-color: ${({ theme }) => theme.palette.common.white};
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.common.white};
-  }
+  top: ${({ theme }) => theme.spacing(1.5)};
+  right: ${({ theme }) => theme.spacing(1.5)};
+  background-color: transparent;
 `;

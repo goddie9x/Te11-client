@@ -19,10 +19,10 @@ const TListColumnGrid = ({ data, ...props }: TListColumnGridProps) => {
   const responsiveColumnLG = 12 / data.length;
 
   return (
-    <TGrid display="flex" {...props}>
+    <TGrid container display="flex" {...props}>
       {data.map(({ title, typeHead, column, typeColumn }, index) => {
         return (
-          <TGrid item key={index} {...props} xs={12} md={6}  lg={responsiveColumnLG}>
+          <TGrid item key={index} {...props} xs={6} md={12}  lg={responsiveColumnLG}>
             <TTypography variant="h5" {...typeHead}>
               {title}
             </TTypography>

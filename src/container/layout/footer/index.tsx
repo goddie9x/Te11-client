@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import TBox from 'components/box';
@@ -46,8 +46,8 @@ const TFooter = () => {
     <TBox height="max-content">
      <TFooterHead {...socicalsUrl}/>
       <TFooterMain data={footerGridColumnData}/>
-      <TBox height={50} paddingLeft={3.25} lineHeight={50} paddingRight={3.25} background="#38262647">
-        <TTypography variant="h6" textAlign="center" lineHeight={2.3} color="textSecondary">
+      <TBox height={50} paddingLeft={3.25} lineheight={50} paddingRight={3.25} background="#38262647">
+        <TTypography variant="h6" textalign="center" lineheight={2.3} color="textSecondary">
           {t('copyright')}
         </TTypography>
       </TBox>
@@ -55,4 +55,4 @@ const TFooter = () => {
   );
 };
 
-export default TFooter;
+export default memo(TFooter);

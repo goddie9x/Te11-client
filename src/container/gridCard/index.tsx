@@ -17,11 +17,11 @@ export type TGridCardProps<T> = TGridProps &
 const TGridCard = ({ title, subtitle, data, renderItem, xs, sm, md, lg, xl, spacing, ...props }: TGridCardProps<any>) => {
   return (
     <TBox {...props}>
-      <TTypography variant="h2" textAlign="center">
+      <TTypography variant="h2" textalign="center">
         {title}
       </TTypography>
       {subtitle && (
-        <TTypography variant="h4" textAlign="center" marginBottom={3}>
+        <TTypography variant="h4" textalign="center" marginBottom={3}>
           {subtitle}
         </TTypography>
       )}

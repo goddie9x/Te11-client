@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import i18n from 'i18n';
 import { InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
@@ -76,4 +76,4 @@ const THeaderSetting = () => {
   );
 };
 
-export default THeaderSetting;
+export default memo(THeaderSetting);

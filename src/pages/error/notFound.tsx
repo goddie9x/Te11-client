@@ -9,8 +9,8 @@ import TImage from "components/image";
 const TNotFound = () => {
     const {t}= useTranslation();
 
-    return <TBox  textAlign="center">
-        <TTypography variant="h3" lineHeight={2.3} color="textSecondary">
+    return <TBox  textalign="center">
+        <TTypography variant="h3" lineheight={2.3} color="textSecondary">
             {t('page_not_found')}
         </TTypography>
         <TImage src={TImageNotFound}/>

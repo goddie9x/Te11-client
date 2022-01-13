@@ -1,14 +1,29 @@
 import { styled } from '@mui/material';
 import TBox from 'components/box';
 
-const TNavItemStyled = styled(TBox)<{ active: boolean }>`
+const TNavItemStyled = styled(TBox)<{ active: boolean, hasChild?: boolean, firstNav?: boolean }>`
   ${({ active, theme }) => {
     if (active) {
-      return `
-               border-bottom: 2px solid ${theme.palette.primary.main};
-            `;
+      return `border-bottom: 2px solid ${theme.palette.primary.main}`;
     }
   }};
+  ${({ hasChild, firstNav, theme }) => {
+    if (hasChild) {
+      return `::after{
+        content: '';
+        position: absolute;
+        top:50%;
+        right: 2px;
+        width: 0; 
+        height: 0; 
+        ${firstNav?`border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid ${theme.palette.primary.main};`:`border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 5px solid ${theme.palette.primary.main};`}
+      }`;
+    }
+  }}
   &:hover {
     & > .MuiBox-root {
       display: block;

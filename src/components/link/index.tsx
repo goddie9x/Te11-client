@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {Link as LinkContent, LinkProps} from '@mui/material';
+import {Link as LinkContent} from '@mui/material';
 
-import {StyledLink} from './link.styled';
+import {StyledLink, TLinkProps} from './link.styled';
 
-export interface TLinkProps extends LinkProps{
-    href: string;
-}
 
 const TLink = ({href, children, ...props}: TLinkProps) =>{
     return (

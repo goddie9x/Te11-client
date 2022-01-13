@@ -11,14 +11,14 @@ import { TIconButtonProps } from 'components/iconButton/iconButton.styled';
 import TTooltip from 'components/toolTip';
 import THeaderMenuDropdownStyled from './headerMenuDropDown';
 
-export type PagesProps = {
+export type TPagesProps = {
   href: string;
   title: string;
-  navChildren?: Array<PagesProps>;
+  navChildren?: Array<TPagesProps>;
 };
 
 export type THeaderMenuDropdownProps = TBoxProps & {
-  menuList: Array<PagesProps>;
+  menuList: Array<TPagesProps>;
   forMobile?: boolean;
   iconButtonProps?: TIconButtonProps;
   IconButton?: React.ReactElement;

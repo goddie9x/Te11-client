@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 import TButton from 'components/button';
 import TLink from 'components/link';
@@ -13,23 +14,25 @@ export type TNavItemProps = {
 const TNavItem = ({ href, title, navChildren }: TNavItemProps) => {
   const [active, setActive] = useState(false);
   const [firstNav, setFirstNav] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
-    const localHref = window.location.pathname.split('/');
-    localHref.shift();
-
-    const arraySpitHref = href.split('/');
-    const currentHref = arraySpitHref.pop()||'';
-    const isNavActive =  localHref?.includes(currentHref);
-   
-    (arraySpitHref.length<2)?setFirstNav(true):setFirstNav(false);
-   
-    (isNavActive)?setActive(true):setActive(false);
-  });
+    history.listen(() => {
+      const localHref = window.location.pathname.split('/');
+      localHref.shift();
+  
+      const arraySpitHref = href.split('/');
+      const currentHref = arraySpitHref.pop()||'';
+      const isNavActive =  localHref?.includes(currentHref);
+     
+      (!!isNavActive)?setActive(true):setActive(false);
+      (arraySpitHref.length<2)?setFirstNav(true):setFirstNav(false);
+    });
+  },[history]);
 
   return (
-    <TNavItemStyled position="relative" active={active}>
-      <TLink href={href} underline="none">
+    <TNavItemStyled position="relative" active={active} hasChild={!!navChildren} firstNav={firstNav}>
+      <TLink href={href}>
         <TButton height="100%" fontSize={2.5} minwidth={12.5}>
           {title}
         </TButton>

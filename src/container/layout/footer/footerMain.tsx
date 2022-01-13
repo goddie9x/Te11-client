@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import TGrid from 'components/grid';
@@ -15,7 +15,7 @@ const TFooterMain = ({data}: TFooterMainProps) => {
 
   return (
     <TFooterMainStyled padding="40px 26px" container alignItems="center">
-      <TGrid item xs={12} md={6} textAlign="center">
+      <TGrid item xs={12} md={6} textalign="center">
         <TImage src={Logo} borderRadius={50} height={75} marginBottom={10} />
         <TTypography variant="h5" marginBottom={4}>
           {t('main_quote')}
@@ -28,4 +28,4 @@ const TFooterMain = ({data}: TFooterMainProps) => {
   );
 };
 
-export default TFooterMain;
+export default memo(TFooterMain);

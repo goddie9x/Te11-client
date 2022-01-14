@@ -12,6 +12,7 @@ import TTypography from 'components/typography';
 import TButton from 'components/button';
 
 import { openLoginModal, openRegisterModal } from 'store/slices/auth';
+import { setAlert } from 'store/slices/alert';
 
 const TRegisterModal = () => {
   const isOpenRegisterModal = useSelector((state: RootState) => state.auth.isOpenRegisterModal);
@@ -24,12 +25,18 @@ const TRegisterModal = () => {
     reEnterPassword: '',
   };
   const RegisterSchema = Yup.object().shape({
-    account: Yup.string().min(5, t('accounr_not_valid')).max(50, t('accounr_not_valid')).required(t('accounr_not_valid')),
+    account: Yup.string()
+      .trim(t('accounr_not_valid'))
+      .min(5, t('accounr_not_valid'))
+      .max(50, t('accounr_not_valid'))
+      .required(t('accounr_not_valid')),
     password: Yup.string()
+      .trim(t('password_are_not_valid'))
       .min(8, t('password_are_not_valid'))
       .max(50, t('password_are_not_valid'))
       .required(t('password_are_not_valid')),
     reEnterPassword: Yup.string()
+      .trim(t('password_are_not_valid'))
       .oneOf([Yup.ref('password')], t('password_are_not_match'))
       .required(t('password_are_not_valid')),
   });
@@ -43,8 +50,7 @@ const TRegisterModal = () => {
       <Formik
         initialValues={initialValue}
         onSubmit={(values, actions) => {
-          console.log({ values, actions });
-          alert(JSON.stringify(values, null, 2));
+          dispatch(setAlert({ type: 'info', title: t('register'), message: t('this_is_a_feature_testing') }));
           actions.setSubmitting(false);
         }}
         validationSchema={RegisterSchema}
@@ -66,6 +72,7 @@ const TRegisterModal = () => {
                 <TInput
                   marginBottom={2}
                   name="password"
+                  type="password"
                   label={t('password')}
                   placeholder={t('password')}
                   error={!!touched.password && !!errors.password}
@@ -76,6 +83,7 @@ const TRegisterModal = () => {
                 <TInput
                   marginBottom={2}
                   name="reEnterPassword"
+                  type="password"
                   label={t('re_enter_password')}
                   placeholder={t('re_enter_password')}
                   error={!!touched.reEnterPassword && !!errors.reEnterPassword}
@@ -84,7 +92,7 @@ const TRegisterModal = () => {
                   onChange={handleChange}
                 />
                 <TButton type="submit" variant="contained" marginBottom={3}>
-                  {t('login')}
+                  {t('register')}
                 </TButton>
                 <TBox display="flex" marginBottom={2} alignItems="center">
                   <TTypography variant="caption" color="textSecondary">

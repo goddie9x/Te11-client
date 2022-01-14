@@ -17,8 +17,10 @@ import THeaderMenuRenderOption from 'components/headerMenuDropdown/headerMenuRen
 import TLoginModal from 'container/modal/login';
 import TRegisterModal from 'container/modal/register';
 import TButton from 'components/button';
+import TAlert from 'components/alert';
 
 import Logo from 'assets/images/T_logo.png';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { openLoginModal, openRegisterModal } from 'store/slices/auth';
@@ -27,6 +29,7 @@ const THeader = () => {
   //TODO: remove this after have API
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const alertOpenStatus = useSelector((state: RootState) => state.alert.open);
 
   const pages = [
     {
@@ -97,7 +100,7 @@ const THeader = () => {
   const isLogin = useSelector((state: RootState) => state.auth.isLogin);
 
   return (
-    <THeaderStyled position="fixed">
+    <THeaderStyled position="fixed" zindex={1400}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <TLink href="/">
@@ -154,6 +157,7 @@ const THeader = () => {
       <TScrollProgress height={5} display="block" />
       <TLoginModal />
       <TRegisterModal />
+      {alertOpenStatus && <TAlert />}
     </THeaderStyled>
   );
 };

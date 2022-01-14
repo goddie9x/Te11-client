@@ -58,5 +58,16 @@
     "accounr_not_valid": "Account not valid",
     "posts": "Posts",
     "news": "News",
-    "post_not_found": "Post not found"
+    "post_not_found": "Post not found",
+    "post_title": "Post title",
+    "post_content": "Post content",
+    "post_image": "Post image",
+    "post_category": "Post category",
+    "post_tags": "Post tags",
+    "post_status": "Post status",
+    "post_created_at": "Post created at",
+    "post_updated_at": "Post updated at",
+    "post_author": "Post author",
+    "post_comments": "Post comments",
+    "this_is_a_feature_testing": "This is a feature testing"
 }

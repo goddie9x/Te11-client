@@ -12,6 +12,7 @@ import TTypography from 'components/typography';
 import TButton from 'components/button';
 
 import { openRegisterModal, openLoginModal } from 'store/slices/auth';
+import { setAlert } from 'store/slices/alert';
 
 const TLoginModal = () => {
   const isOpenLoginModal = useSelector((state: RootState) => state.auth.isOpenLoginModal);
@@ -23,8 +24,8 @@ const TLoginModal = () => {
     password: '',
   };
   const LoginSchema = Yup.object().shape({
-    account: Yup.string().min(5, t('accounr_not_valid')).max(50, t('accounr_not_valid')).required( t('accounr_not_valid')),
-    password: Yup.string().min(8, t('password_are_not_valid')).max(50, t('password_are_not_valid')).required(t('password_are_not_valid')),
+    account: Yup.string().trim(t('accounr_not_valid')).min(5, t('accounr_not_valid')).max(50, t('accounr_not_valid')).required( t('accounr_not_valid')),
+    password: Yup.string().trim(t('password_are_not_valid')).min(8, t('password_are_not_valid')).max(50, t('password_are_not_valid')).required(t('password_are_not_valid')),
   });
 
   const handleCloseLoginModal = () => {
@@ -36,8 +37,7 @@ const TLoginModal = () => {
       <Formik
         initialValues={initialValue}
         onSubmit={(values, actions) => {
-          console.log({ values, actions });
-          alert(JSON.stringify(values, null, 2));
+          dispatch(setAlert({type:'info',title: t('login'), message:t('this_is_a_feature_testing')}));
           actions.setSubmitting(false);
         }}
         validationSchema={LoginSchema}
@@ -57,6 +57,7 @@ const TLoginModal = () => {
               />
               <TInput
                 marginBottom={2}
+                type="password"
                 name="password"
                 label={t('password')}
                 placeholder={t('password')}
@@ -73,7 +74,7 @@ const TLoginModal = () => {
                 <TButton type="submit" variant="contained" marginBottom={3}>{t('login')}</TButton>
               <TBox display="flex" marginBottom={2} alignItems="center">
                 <TTypography variant="caption" color="textSecondary">
-                  {t('you_already_have_an_account')}
+                  {t('you_don_not_have_an_account')}
                 </TTypography>
                 <TButton onClick={() => dispatch(openRegisterModal(true))}>{t('register_here')}</TButton>
               </TBox>

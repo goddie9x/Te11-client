@@ -24,7 +24,7 @@ const TModal = ({ title, width, ...props }: TModalProps) => {
         <TModalWrapper width={width}>
           {title && (
             <TBox textalign="center" marginBottom={2}>
-              <TTypography variant="h4" color={theme.palette.primary.main}>
+              <TTypography variant="h5" color={theme.palette.primary.main}>
                 {title}
               </TTypography>
             </TBox>

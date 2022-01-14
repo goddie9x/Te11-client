@@ -33,42 +33,42 @@ const TFooterHead = (socicalsUrl: socicalsUrl) => {
         <TGrid container lineheight={3}>
           <TGrid item md={2} xs={4}>
             <TIconButton width={3} lineheight={0.75} height={3} background="#38262647">
-              <a href={socicalsUrl.facebook}>
+              <a target="_blank" rel="noreferrer" href={socicalsUrl.facebook}>
                 <FacebookIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
             <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
-              <a href={socicalsUrl.twitter}>
+              <a target="_blank" rel="noreferrer" href={socicalsUrl.twitter}>
                 <TwitterIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
             <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
-              <a href={socicalsUrl.google}>
+              <a target="_blank" rel="noreferrer" href={socicalsUrl.google}>
                 <GoogleIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
             <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
-              <a href={socicalsUrl.instagram}>
+              <a target="_blank" rel="noreferrer" href={socicalsUrl.instagram}>
                 <InstagramIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
             <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
-              <a href={socicalsUrl.linkedin}>
+              <a target="_blank" rel="noreferrer" href={socicalsUrl.linkedin}>
                 <LinkedInIcon />
               </a>
             </TIconButton>
           </TGrid>
           <TGrid item md={2} xs={4}>
             <TIconButton width={3} lineheight={0.75}  height={3} background="#38262647">
-              <a href={socicalsUrl.github}>
+              <a target="_blank" rel="noreferrer" href={socicalsUrl.github}>
                 <GitHubIcon />
               </a>
             </TIconButton>

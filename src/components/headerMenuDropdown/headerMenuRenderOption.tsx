@@ -64,7 +64,7 @@ const THeaderMenuRenderOption = ({
   }, []);
 
   return (
-    <THeaderMenuRenderOptionStyled ref={menuRef} width="max-content" minwidth={48} height={48} {...props}>
+    <THeaderMenuRenderOptionStyled ref={menuRef} width="max-content" minwidth={6} height={48} {...props}>
       <TTooltip title={toolTip || t('open_menu')} onClick={handleOpenNavMenu}>
         <TIconTButton
           width="max-content"

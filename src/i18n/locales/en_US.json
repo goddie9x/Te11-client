@@ -39,6 +39,7 @@
     "login_success": "Login success",
     "login_failed": "Login failed",
     "re_enter_password": "Enter password again",
+    "password": "Password",
     "forgot_password": "Forgot password? ",
     "reset_password": "Reset password",
     "password_reset_link": "Password reset link",
@@ -54,5 +55,8 @@
     "account_already_exists": "Account already exists",
     "account_not_found": "Account not found",
     "account_not_activated": "Account not activated",
-    "accounr_not_valid": "Account not valid"
+    "accounr_not_valid": "Account not valid",
+    "posts": "Posts",
+    "news": "News",
+    "post_not_found": "Post not found"
 }

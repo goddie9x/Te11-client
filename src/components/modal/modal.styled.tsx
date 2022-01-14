@@ -7,7 +7,7 @@ export const TModalWrapper = styled(Paper)<{ width?: number }>`
   transform: translate(-50%, -50%);
   background-color: ${({ theme }) => theme.palette.primary.contrastText};
   padding: ${({ theme }) => `${theme.spacing(5)}  ${theme.spacing(4)}`};
-  min-width: ${({ theme }) => theme.spacing(50)};
+  min-width: ${({ theme }) => theme.spacing(30)};
   width: ${({ width }) => width && width}px;
   max-height: 80vh;
   overflow-y: auto;

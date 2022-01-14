@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'react-i18next';
 
@@ -64,11 +64,13 @@ const THeaderMenuRenderOption = ({
   }, []);
 
   return (
-    <THeaderMenuRenderOptionStyled ref={menuRef} width={48} height={48} {...props}>
+    <THeaderMenuRenderOptionStyled ref={menuRef} width="max-content" minwidth={48} height={48} {...props}>
       <TTooltip title={toolTip || t('open_menu')} onClick={handleOpenNavMenu}>
         <TIconTButton
-          width={6}
+          width="max-content"
           height={6}
+          minwidth={6}
+          lineheight={1}
           shape="curved"
           aria-label="account of current user"
           aria-haspopup="true"

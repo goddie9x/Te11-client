@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
+import { Toolbar, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -28,10 +27,33 @@ const THeader = () => {
   //TODO: remove this after have API
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
   const pages = [
     {
       href: '/test',
       title: t('test'),
+      navChildren: [
+        {
+          href: '/test1',
+          title: t('test') + 1,
+          navChildren: [
+            { href: '/test3', title: t('test') + 3 },
+            { href: '/test4', title: t('test') + 4 },
+          ],
+        },
+        {
+          href: '/test2',
+          title: t('test') + 2,
+          navChildren: [
+            { href: '/test3', title: t('test') + 3 },
+            { href: '/test4', title: t('test') + 4 + 'dàiiiiiiiiiiiiiiiiiiiiiiiii' },
+          ],
+        },
+      ],
+    },
+    {
+      href: '/posts',
+      title: t('posts'),
       navChildren: [
         {
           href: '/test1',
@@ -81,7 +103,7 @@ const THeader = () => {
           <TLink href="/">
             <TImage src={Logo} width={75} marginRight={10} borderRadius={10} />
           </TLink>
-          <THeaderMenuDropdown marginRight={2} forMobile={true} menuList={pages} />
+          <THeaderMenuDropdown marginLeft={2} forMobile={true} menuList={pages} />
           <TBox display={{ xs: 'none', md: 'flex' }} flexGrow={1}>
             {pages.map((page, index) => (
               <TNavItem key={index} {...page} />
@@ -90,23 +112,33 @@ const THeader = () => {
           {isLogin ? (
             <THeaderMenuDropdown
               menuProps={{ width: '250px', textalign: 'left' }}
+              marginLeft={2}
               marginRight={2}
               toolTip={t('account_settings')}
               IconButton={<AccountCircleIcon />}
               menuList={AccountSettings}
             />
           ) : null}
-          <THeaderSetting />
+          <THeaderSetting marginLeft={2} />
           <THeaderMenuRenderOption
             marginLeft={2}
             menuList={loginOption}
             toolTip={t('login')}
-            IconButton={<LoginIcon />}
+            IconButton={
+              <TBox width="max-content">
+                <TBox display={{ xs: 'block', md: 'none' }}>
+                  <LoginIcon />
+                </TBox>
+                <TBox padding={1} display={{ xs: 'none', md: 'block' }}>
+                  {t('login') + '/' + t('register')}
+                </TBox>
+              </TBox>
+            }
             renderMenuItem={(title, onClick, index) => {
               return (
-                <TBox minwidth={12.5}>
+                <TBox key={index}>
                   <TButton
-                    key={index}
+                    minwidth={22}
                     onClick={() => {
                       onClick && onClick();
                     }}
@@ -121,7 +153,7 @@ const THeader = () => {
       </Container>
       <TScrollProgress height={5} display="block" />
       <TLoginModal />
-      <TRegisterModal/>
+      <TRegisterModal />
     </THeaderStyled>
   );
 };

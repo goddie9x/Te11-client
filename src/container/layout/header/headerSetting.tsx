@@ -18,8 +18,9 @@ import TBox from 'components/box';
 import TTooltip from 'components/toolTip';
 import TIconButton from 'components/iconButton';
 import TTypography from 'components/typography';
+import { TBoxProps } from 'components/box/box.styled';
 
-const THeaderSetting = () => {
+const THeaderSetting = (props: TBoxProps) => {
   const [lang, setLang] = React.useState<string>(i18n.language);
   const [openSetting, setOpenSetting] = useState(false);
 
@@ -43,7 +44,7 @@ const THeaderSetting = () => {
   };
 
   return (
-    <>
+    <TBox {...props}>
       <TTooltip title={t('settings')} onClick={openSettingModal}>
         <TIconButton width={6} height={6} shape="curved" aria-label="account of current user" aria-haspopup="true">
           <SettingsIcon />
@@ -72,7 +73,7 @@ const THeaderSetting = () => {
           </TFormControl>
         </>
       </TRightModal>
-    </>
+    </TBox>
   );
 };
 

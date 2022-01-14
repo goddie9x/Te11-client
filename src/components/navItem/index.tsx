@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 import TButton from 'components/button';
 import TLink from 'components/link';
@@ -20,25 +20,30 @@ const TNavItem = ({ href, title, navChildren }: TNavItemProps) => {
     history.listen(() => {
       const localHref = window.location.pathname.split('/');
       localHref.shift();
-  
+
       const arraySpitHref = href.split('/');
-      const currentHref = arraySpitHref.pop()||'';
-      const isNavActive =  localHref?.includes(currentHref);
-     
-      (!!isNavActive)?setActive(true):setActive(false);
-      (arraySpitHref.length<2)?setFirstNav(true):setFirstNav(false);
+      const currentHref = arraySpitHref.pop() || '';
+      const isNavActive = localHref?.includes(currentHref);
+
+      !!isNavActive ? setActive(true) : setActive(false);
+      arraySpitHref.length < 2 ? setFirstNav(true) : setFirstNav(false);
     });
-  },[history]);
+  }, [history]);
 
   return (
-    <TNavItemStyled position="relative" active={active} hasChild={!!navChildren} firstNav={firstNav}>
-      <TLink href={href}>
-        <TButton height="100%" fontSize={2.5} minwidth={12.5}>
-          {title}
-        </TButton>
-      </TLink>
+    <TNavItemStyled
+      position="relative"
+      paddingRight={1}
+      marginRight={1}
+      active={active}
+      hasChild={!!navChildren}
+      firstNav={firstNav}
+    >
+      <TButton height="100%" fontSize={2.5} minwidth={12.5}>
+        <TLink href={href}>{title}</TLink>
+      </TButton>
       {navChildren && navChildren.length && (
-        <TNavItemChildrenStyled position="absolute" left={firstNav?0:"100%"} top={firstNav?"100%":0}>
+        <TNavItemChildrenStyled position="absolute" left={firstNav ? 0 : '100%'} top={firstNav ? '100%' : 0} zIndex={1111}>
           {navChildren.map((child, index) => (
             <TNavItem key={index} href={href + child.href} title={child.title} navChildren={child.navChildren} />
           ))}

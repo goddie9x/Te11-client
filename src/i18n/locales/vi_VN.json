@@ -39,6 +39,7 @@
     "login_success": "Đăng nhập thành công",
     "login_failed": "Đăng nhập thất bại",
     "re_enter_password": "Nhập lại mật khẩu",
+    "password": "Mật khẩu",
     "forgot_password": "Quên mật khẩu?",
     "reset_password": "Đặt lại mật khẩu",
     "password_reset_link": "Link đặt lại mật khẩu",
@@ -54,5 +55,8 @@
     "account_already_exists": "Tài khoản đã tồn tại",
     "account_not_found": "Không tìm thấy tài khoản",
     "account_not_activated": "Tài khoản chưa được kích hoạt",
-    "accounr_not_valid": "Tài khoản không hợp lệ"
+    "accounr_not_valid": "Tài khoản không hợp lệ",
+    "posts": "Bài viết",
+    "news": "Tin tức",
+    "post_not_found": "Không tìm thấy bài viết"
 }

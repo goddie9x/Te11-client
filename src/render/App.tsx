@@ -6,6 +6,7 @@ import { createTheme } from '@mui/material/styles';
 
 import TRouter from 'router';
 import TParticles from 'components/particles';
+import TAlert from 'components/alert';
 
 import { RootState } from 'store';
 import { setDarkMode, setLanguage } from 'store/slices/common';
@@ -15,6 +16,7 @@ import { Language } from 'constants/enum/language';
 function App() {
   const storedDarkMode = localStorage.getItem('isDarkMode');
   const storedLanguage = localStorage.getItem('language');
+  const alertOpenStatus = useSelector((state: RootState) => state.alert.open);
 
   const dispatch = useDispatch();
   if(storedDarkMode ==="true"){
@@ -40,6 +42,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <TParticles />
         <TRouter />
+        {alertOpenStatus && <TAlert />}
       </ThemeProvider>
     </div>
   );

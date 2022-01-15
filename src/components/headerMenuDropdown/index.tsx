@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTranslation } from 'react-i18next';
 
@@ -80,6 +80,7 @@ const THeaderMenuDropdown = ({ menuList,menuProps, toolTip, iconButtonProps, Ico
             vertical: 'top',
             horizontal: 'left',
           }}
+          zindex={1401}
           open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
           {...menuProps}
@@ -93,4 +94,4 @@ const THeaderMenuDropdown = ({ menuList,menuProps, toolTip, iconButtonProps, Ico
   );
 };
 
-export default THeaderMenuDropdown;
+export default memo(THeaderMenuDropdown);

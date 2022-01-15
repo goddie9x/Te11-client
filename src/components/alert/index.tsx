@@ -8,9 +8,8 @@ import { clearAlert } from 'store/slices/alert';
 import TAlertStyled, { TAlertProps } from './alert.styled';
 
 const TAlert = (props: TAlertProps) => {
-  const { title, message } = useSelector((state: RootState) => state.alert);
+  const { title, message, type } = useSelector((state: RootState) => state.alert);
   const dispatch = useDispatch();
-
   const handleCloseAlert = () => {
     dispatch(clearAlert());
   };
@@ -27,8 +26,8 @@ const TAlert = (props: TAlertProps) => {
   }, []);
 
   return (
-    <Slide direction="up" in={!!message} mountOnEnter unmountOnExit>
-      <TAlertStyled position="fixed"  top={4} right={4} zindex={2000} onClose={handleCloseAlert} {...props}>
+    <Slide direction="up" in={!!type} mountOnEnter unmountOnExit>
+      <TAlertStyled position="fixed" severity={type} top={4} right={4} zindex={2000} onClose={handleCloseAlert} {...props}>
         <AlertTitle>{title}</AlertTitle>
         {message}
       </TAlertStyled>

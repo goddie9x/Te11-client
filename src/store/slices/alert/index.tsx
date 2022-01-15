@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface AlertState {
   open: boolean;
-  type: string;
+  type: 'success' | 'error' | 'warning' | 'info';
   title: string;
   message: string;
 }
 
 const initialState: AlertState = {
   open: false,
-  type: '',
+  type: 'success',
   title: '',
   message: '',
 };
@@ -26,7 +26,7 @@ const alertSlice = createSlice({
     },
     clearAlert: (state) => {
       state.open = false;
-      state.type = '';
+      state.type = 'success';
       state.title = '';
       state.message = '';
     },

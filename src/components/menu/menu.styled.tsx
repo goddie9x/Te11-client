@@ -26,6 +26,7 @@ export type TMenuProps = MenuProps & {
   textOverflow?: string;
   textShadow?: string;
   textJustify?: string;
+  zindex?: string | number;
 };
 
 const TMenuStyled = styled(Menu)<{
@@ -54,6 +55,7 @@ const TMenuStyled = styled(Menu)<{
   textOverflow?: string;
   textShadow?: string;
   textJustify?: string;
+  zindex?: string | number;
 }>`
   width: ${({ width, theme }) => width && (typeof width === 'string' ? width : theme.spacing(width))};
   height: ${({ height, theme }) => height && (typeof height === 'string' ? height : theme.spacing(height))};
@@ -90,6 +92,7 @@ const TMenuStyled = styled(Menu)<{
   text-overflow: ${({ textOverflow }) => textOverflow && textOverflow};
   text-shadow: ${({ textShadow }) => textShadow && textShadow};
   text-justify: ${({ textJustify }) => textJustify && textJustify};
+  z-index: ${({ zindex }) => zindex};
 `;
 
 export default TMenuStyled;

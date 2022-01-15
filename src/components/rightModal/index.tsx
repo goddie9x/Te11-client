@@ -1,7 +1,7 @@
 import React from 'react';
-import { ModalProps, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 
-import TRightModalStyled, { TRightModalWrapper } from './rightModal.styled';
+import TRightModalStyled, { TRightModalWrapper, TRightModalProps } from './rightModal.styled';
 import TBox from 'components/box';
 import TTypography from 'components/typography';
 import TDivider from 'components/divider';
@@ -9,11 +9,11 @@ import TDivider from 'components/divider';
 import CloseIcon from '@mui/icons-material/Close';
 import TIconButton from 'components/iconButton';
 
-const TRightModal = ({ children, title, ...props }: ModalProps) => {
+const TRightModal = ({ children, title, ...props }: TRightModalProps) => {
   const theme = useTheme();
 
   return (
-    <TRightModalStyled {...props}>
+    <TRightModalStyled {...props} >
       <TRightModalWrapper
         background={theme.palette.mode === 'dark' ? 'rgb(10, 25, 41)' : '#fff'}
         position="absolute"
@@ -31,17 +31,22 @@ const TRightModal = ({ children, title, ...props }: ModalProps) => {
                 {title}
               </TTypography>
             </TBox>
-            <TDivider marginBottom={3}/>
+            <TDivider marginBottom={3} />
           </>
         )}
         <TBox position="absolute" top={2} right={2}>
-          <TIconButton  background={theme.palette.mode==='dark'?'#fff':theme.palette.primary.contrastText} width={3} height={3} onClick={(event )=>{props.onClose?.(event, "escapeKeyDown");}}>
+          <TIconButton
+            background={theme.palette.mode === 'dark' ? '#fff' : theme.palette.primary.contrastText}
+            width={3}
+            height={3}
+            onClick={(event) => {
+              props.onClose?.(event, 'escapeKeyDown');
+            }}
+          >
             <CloseIcon />
           </TIconButton>
         </TBox>
-        <TBox padding={2}>
-            {children}
-        </TBox>
+        <TBox padding={2}>{children}</TBox>
       </TRightModalWrapper>
     </TRightModalStyled>
   );

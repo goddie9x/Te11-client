@@ -17,19 +17,17 @@ import THeaderMenuRenderOption from 'components/headerMenuDropdown/headerMenuRen
 import TLoginModal from 'container/modal/login';
 import TRegisterModal from 'container/modal/register';
 import TButton from 'components/button';
-import TAlert from 'components/alert';
 
 import Logo from 'assets/images/T_logo.png';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
-import { openLoginModal, openRegisterModal } from 'store/slices/auth';
+import { openLoginModal, openRegisterModal, logout } from 'store/slices/auth';
 
 const THeader = () => {
   //TODO: remove this after have API
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const alertOpenStatus = useSelector((state: RootState) => state.alert.open);
 
   const pages = [
     {
@@ -81,7 +79,13 @@ const THeader = () => {
     { href: 'user/profile', title: t('profile') },
     { href: 'user/account', title: t('account') },
     { href: 'user/dashboard', title: t('dashboard') },
-    { href: 'logout', title: t('logout') },
+    {
+      href: 'logout',
+      title: t('logout'),
+      onClick: () => {
+        dispatch(logout());
+      },
+    },
   ];
   const loginOption = [
     {
@@ -97,10 +101,10 @@ const THeader = () => {
       },
     },
   ];
-  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   return (
-    <THeaderStyled position="fixed" zindex={1400}>
+    <THeaderStyled position="fixed" zindex={1300}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <TLink href="/">
@@ -112,7 +116,7 @@ const THeader = () => {
               <TNavItem key={index} {...page} />
             ))}
           </TBox>
-          {isLogin ? (
+          {isLoggedIn && (
             <THeaderMenuDropdown
               menuProps={{ width: '250px', textalign: 'left' }}
               marginLeft={2}
@@ -121,43 +125,44 @@ const THeader = () => {
               IconButton={<AccountCircleIcon />}
               menuList={AccountSettings}
             />
-          ) : null}
+          )}
           <THeaderSetting marginLeft={2} />
-          <THeaderMenuRenderOption
-            marginLeft={2}
-            menuList={loginOption}
-            toolTip={t('login')}
-            IconButton={
-              <TBox width="max-content">
-                <TBox display={{ xs: 'block', md: 'none' }}>
-                  <LoginIcon />
+          {!isLoggedIn && (
+            <THeaderMenuRenderOption
+              marginLeft={2}
+              menuList={loginOption}
+              toolTip={t('login')}
+              IconButton={
+                <TBox width="max-content">
+                  <TBox display={{ xs: 'block', md: 'none' }}>
+                    <LoginIcon />
+                  </TBox>
+                  <TBox padding={1} display={{ xs: 'none', md: 'block' }}>
+                    {t('login') + '/' + t('register')}
+                  </TBox>
                 </TBox>
-                <TBox padding={1} display={{ xs: 'none', md: 'block' }}>
-                  {t('login') + '/' + t('register')}
-                </TBox>
-              </TBox>
-            }
-            renderMenuItem={(title, onClick, index) => {
-              return (
-                <TBox key={index}>
-                  <TButton
-                    minwidth={22}
-                    onClick={() => {
-                      onClick && onClick();
-                    }}
-                  >
-                    {title}
-                  </TButton>
-                </TBox>
-              );
-            }}
-          />
+              }
+              renderMenuItem={(title, onClick, index) => {
+                return (
+                  <TBox key={index}>
+                    <TButton
+                      minwidth={22}
+                      onClick={() => {
+                        onClick && onClick();
+                      }}
+                    >
+                      {title}
+                    </TButton>
+                  </TBox>
+                );
+              }}
+            />
+          )}
         </Toolbar>
       </Container>
       <TScrollProgress height={5} display="block" />
       <TLoginModal />
       <TRegisterModal />
-      {alertOpenStatus && <TAlert />}
     </THeaderStyled>
   );
 };

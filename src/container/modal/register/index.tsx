@@ -12,10 +12,12 @@ import TTypography from 'components/typography';
 import TButton from 'components/button';
 
 import { openLoginModal, openRegisterModal } from 'store/slices/auth';
-import { setAlert } from 'store/slices/alert';
+import {register} from 'store/thunk/auth';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const TRegisterModal = () => {
   const isOpenRegisterModal = useSelector((state: RootState) => state.auth.isOpenRegisterModal);
+  const turnOnReCaptchaRegister = useSelector((state: RootState) => state.auth.turnOnReCaptchaRegister);
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -23,6 +25,7 @@ const TRegisterModal = () => {
     account: '',
     password: '',
     reEnterPassword: '',
+    recaptcha: 'done',
   };
   const RegisterSchema = Yup.object().shape({
     account: Yup.string()
@@ -39,6 +42,7 @@ const TRegisterModal = () => {
       .trim(t('password_are_not_valid'))
       .oneOf([Yup.ref('password')], t('password_are_not_match'))
       .required(t('password_are_not_valid')),
+    recaptcha: Yup.string().required(t('recaptcha_required')),
   });
 
   const handleCloseRegisterModal = () => {
@@ -50,12 +54,13 @@ const TRegisterModal = () => {
       <Formik
         initialValues={initialValue}
         onSubmit={(values, actions) => {
-          dispatch(setAlert({ type: 'info', title: t('register'), message: t('this_is_a_feature_testing') }));
+          const { account, password } = values;
+          dispatch(register({ account, password }));
           actions.setSubmitting(false);
         }}
         validationSchema={RegisterSchema}
       >
-        {({ errors, touched, handleChange }) => {
+        {({ errors, touched, handleChange,setFieldValue }) => {
           return (
             <Form>
               <TBox display="flex" flexDirection="column">
@@ -91,6 +96,24 @@ const TRegisterModal = () => {
                   helperText={touched.reEnterPassword && errors.reEnterPassword}
                   onChange={handleChange}
                 />
+                {turnOnReCaptchaRegister && (
+                  <>
+                    <ReCAPTCHA
+                      sitekey="6LePBPwdAAAAALYlbbHOE4ylPkDLnhY05AMn5UIl"
+                      asyncScriptOnLoad={() => {
+                        setFieldValue('recaptcha', '');
+                      }}
+                      onChange={() => {
+                        setFieldValue('recaptcha', 'done');
+                      }}
+                    />
+                    {!!errors.recaptcha && (
+                      <TTypography color="error" variant="body2" marginTop={2}>
+                        {errors.recaptcha}
+                      </TTypography>
+                    )}
+                  </>
+                )}
                 <TButton type="submit" variant="contained" marginBottom={3}>
                   {t('register')}
                 </TButton>

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { useTranslation } from 'react-i18next';
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,20 +13,31 @@ import TTypography from 'components/typography';
 import TButton from 'components/button';
 
 import { openRegisterModal, openLoginModal } from 'store/slices/auth';
-import { setAlert } from 'store/slices/alert';
+import { login } from 'store/thunk/auth';
 
 const TLoginModal = () => {
   const isOpenLoginModal = useSelector((state: RootState) => state.auth.isOpenLoginModal);
+  const turnOnReCaptchaLogin = useSelector((state: RootState) => state.auth.turnOnReCaptchaLogin);
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const initialValue = {
     account: '',
     password: '',
+    recaptcha: 'done',
   };
   const LoginSchema = Yup.object().shape({
-    account: Yup.string().trim(t('accounr_not_valid')).min(5, t('accounr_not_valid')).max(50, t('accounr_not_valid')).required( t('accounr_not_valid')),
-    password: Yup.string().trim(t('password_are_not_valid')).min(8, t('password_are_not_valid')).max(50, t('password_are_not_valid')).required(t('password_are_not_valid')),
+    account: Yup.string()
+      .trim(t('accounr_not_valid'))
+      .min(5, t('accounr_not_valid'))
+      .max(50, t('accounr_not_valid'))
+      .required(t('accounr_not_valid')),
+    password: Yup.string()
+      .trim(t('password_are_not_valid'))
+      .min(8, t('password_are_not_valid'))
+      .max(50, t('password_are_not_valid'))
+      .required(t('password_are_not_valid')),
+    recaptcha: Yup.string().required(t('recaptcha_required')),
   });
 
   const handleCloseLoginModal = () => {
@@ -37,49 +49,71 @@ const TLoginModal = () => {
       <Formik
         initialValues={initialValue}
         onSubmit={(values, actions) => {
-          dispatch(setAlert({type:'info',title: t('login'), message:t('this_is_a_feature_testing')}));
+          const { account, password } = values;
+
+          dispatch(login({ account, password }));
           actions.setSubmitting(false);
         }}
         validationSchema={LoginSchema}
       >
-        {({ errors, touched, handleChange }) => {
-         return <Form>
-            <TBox display="flex" flexDirection="column">
-              <TInput
-                marginBottom={2}
-                name="account"
-                label={t('account')}
-                placeholder={t('account')}
-                error={!!touched.account && !!errors.account}
-                onMouseDown={() => (touched.account = true)}
-                helperText={touched.account && errors.account}
-                onChange={handleChange}
-              />
-              <TInput
-                marginBottom={2}
-                type="password"
-                name="password"
-                label={t('password')}
-                placeholder={t('password')}
-                error={!!touched.password && !!errors.password}
-                onMouseDown={() => (touched.password = true)}
-                helperText={touched.password && errors.password}
-                onChange={handleChange}
-              />
-              <TBox display="flex" marginBottom={2} alignItems="center">
-                <TButton >
-                  {t('forgot_password')}
+        {({ errors, touched, handleChange, setFieldValue }) => {
+          return (
+            <Form>
+              <TBox display="flex" flexDirection="column">
+                <TInput
+                  marginBottom={2}
+                  name="account"
+                  label={t('account')}
+                  placeholder={t('account')}
+                  error={!!touched.account && !!errors.account}
+                  onMouseDown={() => (touched.account = true)}
+                  helperText={touched.account && errors.account}
+                  onChange={handleChange}
+                />
+                <TInput
+                  marginBottom={2}
+                  type="password"
+                  name="password"
+                  label={t('password')}
+                  placeholder={t('password')}
+                  error={!!touched.password && !!errors.password}
+                  onMouseDown={() => (touched.password = true)}
+                  helperText={touched.password && errors.password}
+                  onChange={handleChange}
+                />
+                {turnOnReCaptchaLogin && (
+                  <>
+                    <ReCAPTCHA
+                      sitekey="6LePBPwdAAAAALYlbbHOE4ylPkDLnhY05AMn5UIl"
+                      asyncScriptOnLoad={() => {
+                        setFieldValue('recaptcha', '');
+                      }}
+                      onChange={() => {
+                        setFieldValue('recaptcha', 'done');
+                      }}
+                    />
+                    {!!errors.recaptcha && (
+                      <TTypography color="error" variant="body2" marginTop={2}>
+                        {errors.recaptcha}
+                      </TTypography>
+                    )}
+                  </>
+                )}
+                <TBox display="flex" marginBottom={2} alignItems="center">
+                  <TButton>{t('forgot_password')}</TButton>
+                </TBox>
+                <TButton type="submit" variant="contained" marginBottom={3}>
+                  {t('login')}
                 </TButton>
+                <TBox display="flex" marginBottom={2} alignItems="center">
+                  <TTypography variant="caption" color="textSecondary">
+                    {t('you_don_not_have_an_account')}
+                  </TTypography>
+                  <TButton onClick={() => dispatch(openRegisterModal(true))}>{t('register_here')}</TButton>
+                </TBox>
               </TBox>
-                <TButton type="submit" variant="contained" marginBottom={3}>{t('login')}</TButton>
-              <TBox display="flex" marginBottom={2} alignItems="center">
-                <TTypography variant="caption" color="textSecondary">
-                  {t('you_don_not_have_an_account')}
-                </TTypography>
-                <TButton onClick={() => dispatch(openRegisterModal(true))}>{t('register_here')}</TButton>
-              </TBox>
-            </TBox>
-          </Form>;
+            </Form>
+          );
         }}
       </Formik>
     </TModal>

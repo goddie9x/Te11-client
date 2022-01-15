@@ -5,7 +5,7 @@ const THelmet = ()=>{
     //TODO: will change it after get API
     const title = "Te11 app";
     const relativePath = "https://te11test.herokuapp.com";
-    const description = "Te11 app description";
+    const description = "Te11test là trang thử nghiệm cho TE11 sắp ra mắt";
     const verification = "UJFzXrWNZ2ORr4imXzCXIWjc4O3QHHmvMTV4BzCmC6w";
 
     return <Helmet>

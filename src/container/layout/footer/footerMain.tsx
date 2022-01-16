@@ -16,8 +16,8 @@ const TFooterMain = ({data}: TFooterMainProps) => {
   return (
     <TFooterMainStyled padding="40px 26px" container alignItems="center">
       <TGrid item xs={12} md={6} textalign="center">
-        <TImage src={Logo} borderRadius={50} height={75} marginBottom={10} />
-        <TTypography variant="h5" marginBottom={4}>
+        <TImage src={Logo} borderRadius={50} height={75} marginbottom={10} />
+        <TTypography variant="h5" marginbottom={4}>
           {t('main_quote')}
         </TTypography>
       </TGrid>

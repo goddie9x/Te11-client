@@ -11,7 +11,7 @@ export type TRightModalProps = ModalProps&{
   paddingRight?: string | number;
   margin?: string | number;
   marginTop?: string | number;
-  marginBottom?: string | number;
+  marginbottom?: string | number;
   marginLeft?: string | number;
   marginRight?: string | number;
   borderRadius?: string | number;
@@ -38,7 +38,7 @@ const TRightModalStyled = styled(Modal)<TRightModalProps>`
   padding-right: ${({ paddingRight, theme }) => paddingRight && (typeof paddingRight === 'string' ? paddingRight : theme.spacing(paddingRight))};
   margin: ${({ margin, theme }) => margin && (typeof margin === 'string' ? margin : theme.spacing(margin))};
   margin-top: ${({ marginTop, theme }) => marginTop && (typeof marginTop === 'string' ? marginTop : theme.spacing(marginTop))};
-  margin-bottom: ${({ marginBottom, theme }) => marginBottom && (typeof marginBottom === 'string' ? marginBottom : theme.spacing(marginBottom))};
+  margin-bottom: ${({ marginbottom, theme }) => marginbottom && (typeof marginbottom === 'string' ? marginbottom : theme.spacing(marginbottom))};
   margin-left: ${({ marginLeft, theme }) => marginLeft && (typeof marginLeft === 'string' ? marginLeft : theme.spacing(marginLeft))};
   margin-right: ${({ marginRight, theme }) => marginRight && (typeof marginRight === 'string' ? marginRight : theme.spacing(marginRight))};
   border-radius: ${({ borderRadius, theme }) => borderRadius && (typeof borderRadius === 'string' ? borderRadius : theme.spacing(borderRadius))};

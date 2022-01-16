@@ -5,7 +5,7 @@ export type TDividerProps = DividerProps & {
     height?:string | number;
     margin?:string | number;
     marginTop?: string | number;
-    marginBottom?: string | number;
+    marginbottom?: string | number;
     marginLeft?: string | number;
     marginRight?: string | number;
     padding?:string | number;
@@ -20,7 +20,7 @@ const TDividerStyled = styled(Divider)<{
     height?:string | number;
     margin?:string | number;
     marginTop?: string | number;
-    marginBottom?: string | number;
+    marginbottom?: string | number;
     marginLeft?: string | number;
     marginRight?: string | number;
     padding?:string | number;
@@ -33,7 +33,7 @@ const TDividerStyled = styled(Divider)<{
     height: ${({height, theme}) => height && ((typeof height === 'string')?(height): theme.spacing(height))};
     margin: ${({margin, theme}) => margin && ((typeof margin === 'string')?(margin): theme.spacing(margin))};
     margin-top: ${({marginTop, theme}) => marginTop && ((typeof marginTop === 'string')?(marginTop): theme.spacing(marginTop))};
-    margin-bottom: ${({marginBottom, theme}) => marginBottom && ((typeof marginBottom === 'string')?(marginBottom): theme.spacing(marginBottom))};
+    margin-bottom: ${({marginbottom, theme}) => marginbottom && ((typeof marginbottom === 'string')?(marginbottom): theme.spacing(marginbottom))};
     margin-left: ${({marginLeft, theme}) => marginLeft && ((typeof marginLeft === 'string')?(marginLeft): theme.spacing(marginLeft))};
     margin-right: ${({marginRight, theme}) => marginRight && ((typeof marginRight === 'string')?(marginRight): theme.spacing(marginRight))};
     padding: ${({padding, theme}) => padding && ((typeof padding === 'string')?(padding): theme.spacing(padding))};

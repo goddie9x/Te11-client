@@ -70,7 +70,7 @@ const Test = () => {
         Test modal
       </TButton>
       <TModal title="Test modal" open={openModalTest} onClose={() => setOpenModalTest(false)}>
-        <TCard marginBottom={5}>
+        <TCard marginbottom={5}>
           <TImage src={dataTest2[1].href} height={300} width="100%" />
           <TTypography variant="h3">{dataTest2[1].label}</TTypography>
         </TCard>
@@ -105,7 +105,7 @@ const Test = () => {
         items={dataTest2}
         renderItem={(item) => {
           return (
-            <TCard marginBottom={5}>
+            <TCard marginbottom={5}>
               <TImage src={item.href} height={300} width="100%" />
               <TTypography variant="h3">{item.label}</TTypography>
             </TCard>
@@ -121,7 +121,7 @@ const Test = () => {
         breakpoints={undefined}
         renderItem={(item) => {
           return (
-            <TCard marginBottom={5} height="100%" width="100%" padding={0.5}>
+            <TCard marginbottom={5} height="100%" width="100%" padding={0.5}>
               <TImage src={item.href} height={180} width="100%" />
               <TTypography variant="h5">{item.label}</TTypography>
             </TCard>

@@ -8,7 +8,7 @@ export type TImageProps = {
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
-  marginBottom?: number;
+  marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;

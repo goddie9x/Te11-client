@@ -21,7 +21,7 @@ const TGridCard = ({ title, subtitle, data, renderItem, xs, sm, md, lg, xl, spac
         {title}
       </TTypography>
       {subtitle && (
-        <TTypography variant="h4" textalign="center" marginBottom={3}>
+        <TTypography variant="h4" textalign="center" marginbottom={3}>
           {subtitle}
         </TTypography>
       )}

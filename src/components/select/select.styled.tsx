@@ -10,7 +10,7 @@ export type TSelectProps = SelectProps & {
   paddingRight?: string | number;
   margin?: string | number;
   marginTop?: string | number;
-  marginBottom?: string | number;
+  marginbottom?: string | number;
   marginLeft?: string | number;
   marginRight?: string | number;
   zindex?: number;
@@ -34,8 +34,8 @@ const TSelectStyled = styled(Select)<TSelectProps>`
   margin: ${({ margin, theme }) => margin && (typeof margin === 'string' ? margin : theme.spacing(margin))};
   margin-top: ${({ marginTop, theme }) =>
     marginTop && (typeof marginTop === 'string' ? marginTop : theme.spacing(marginTop))};
-  margin-bottom: ${({ marginBottom, theme }) =>
-    marginBottom && (typeof marginBottom === 'string' ? marginBottom : theme.spacing(marginBottom))};
+  margin-bottom: ${({ marginbottom, theme }) =>
+    marginbottom && (typeof marginbottom === 'string' ? marginbottom : theme.spacing(marginbottom))};
   margin-left: ${({ marginLeft, theme }) =>
     marginLeft && (typeof marginLeft === 'string' ? marginLeft : theme.spacing(marginLeft))};
   margin-right: ${({ marginRight, theme }) =>

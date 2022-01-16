@@ -65,7 +65,7 @@ const TRegisterModal = () => {
             <Form>
               <TBox display="flex" flexDirection="column">
                 <TInput
-                  marginBottom={2}
+                  marginbottom={2}
                   name="account"
                   label={t('account')}
                   placeholder={t('account')}
@@ -75,7 +75,7 @@ const TRegisterModal = () => {
                   onChange={handleChange}
                 />
                 <TInput
-                  marginBottom={2}
+                  marginbottom={2}
                   name="password"
                   type="password"
                   label={t('password')}
@@ -86,7 +86,7 @@ const TRegisterModal = () => {
                   onChange={handleChange}
                 />
                 <TInput
-                  marginBottom={2}
+                  marginbottom={2}
                   name="reEnterPassword"
                   type="password"
                   label={t('re_enter_password')}
@@ -114,10 +114,10 @@ const TRegisterModal = () => {
                     )}
                   </>
                 )}
-                <TButton type="submit" variant="contained" marginBottom={3}>
+                <TButton type="submit" variant="contained" marginbottom={3}>
                   {t('register')}
                 </TButton>
-                <TBox display="flex" marginBottom={2} alignItems="center">
+                <TBox display="flex" marginbottom={2} alignItems="center">
                   <TTypography variant="caption" color="textSecondary">
                     {t('you_already_have_an_account')}
                   </TTypography>

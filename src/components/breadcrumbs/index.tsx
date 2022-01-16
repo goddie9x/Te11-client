@@ -12,7 +12,7 @@ export type TBreadcrumbsProps = BreadcrumbsProps &{
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
-  marginBottom?: number;
+  marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;

@@ -15,7 +15,7 @@ export type TPaperProps = PaperProps&{
     margin?: number | string;
     marginTop?: number | string;
     marginRight?: number | string;
-    marginBottom?: number | string;
+    marginbottom?: number | string;
     marginLeft?: number | string;
     padding?: number | string;
     paddingTop?: number | string;
@@ -45,7 +45,7 @@ const TPaperStyled = styled(Paper)<TPaperProps>`
     margin: ${({margin, theme}) => margin && ((typeof margin === 'string')?(margin): theme.spacing(margin))};
     margin-top: ${({marginTop, theme}) => marginTop && ((typeof marginTop === 'string')?(marginTop): theme.spacing(marginTop))};
     margin-right: ${({marginRight, theme}) => marginRight && ((typeof marginRight === 'string')?(marginRight): theme.spacing(marginRight))};
-    margin-bottom: ${({marginBottom, theme}) => marginBottom && ((typeof marginBottom === 'string')?(marginBottom): theme.spacing(marginBottom))};
+    margin-bottom: ${({marginbottom, theme}) => marginbottom && ((typeof marginbottom === 'string')?(marginbottom): theme.spacing(marginbottom))};
     margin-left: ${({marginLeft, theme}) => marginLeft && ((typeof marginLeft === 'string')?(marginLeft): theme.spacing(marginLeft))};
     padding: ${({padding, theme}) => padding && ((typeof padding === 'string')?(padding): theme.spacing(padding))};
     padding-top: ${({paddingTop, theme}) => paddingTop && ((typeof paddingTop === 'string')?(paddingTop): theme.spacing(paddingTop))};

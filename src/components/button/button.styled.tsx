@@ -12,7 +12,7 @@ export type TButtonProps = ButtonProps & {
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
-  marginBottom?: number;
+  marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;
@@ -36,7 +36,7 @@ const TButtonStyled = styled(Button)<{
   margin?: string | number;
   padding?: string | number;
   marginTop?: number;
-  marginBottom?: number;
+  marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;
@@ -58,7 +58,7 @@ const TButtonStyled = styled(Button)<{
   margin: ${({ margin, theme }) => (margin&&Number(margin))? theme.spacing(margin as number) : margin};
   padding: ${({ padding, theme }) => (padding&&Number(padding))? theme.spacing(padding as number) : padding};
   margin-top: ${({ marginTop, theme }) => marginTop && theme.spacing(marginTop)};
-  margin-bottom: ${({ marginBottom, theme }) => marginBottom && theme.spacing(marginBottom)};
+  margin-bottom: ${({ marginbottom, theme }) => marginbottom && theme.spacing(marginbottom)};
   padding-top: ${({ paddingTop, theme }) => paddingTop && theme.spacing(paddingTop)};
   padding-bottom: ${({ paddingBottom, theme }) => paddingBottom && theme.spacing(paddingBottom)};
   margin-left: ${({ marginLeft, theme }) => marginLeft && theme.spacing(marginLeft)};

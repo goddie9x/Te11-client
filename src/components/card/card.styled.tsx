@@ -1,6 +1,8 @@
-import { Box, styled } from '@mui/material';
+import { styled } from '@mui/material';
 
-const TStyledCard = styled(Box)`
+import TBox from 'components/box';
+
+const TStyledCard = styled(TBox)`
   border-radius: ${({ theme }) => theme.spacing(0.5)};
   padding: ${({ theme }) => theme.spacing(0.5)};
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

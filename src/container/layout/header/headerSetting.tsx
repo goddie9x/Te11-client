@@ -52,7 +52,7 @@ const THeaderSetting = (props: TBoxProps) => {
       </TTooltip>
       <TRightModal open={openSetting} onClose={closeSettingModal} title={t('settings')}>
         <>
-          <TBox display="flex" height={50} alignItems="center" marginBottom={2}>
+          <TBox display="flex" height={50} alignItems="center" marginbottom={2}>
             <TTypography variant="body1" color="textPrimary">
               {t('dark_mode')}
             </TTypography>

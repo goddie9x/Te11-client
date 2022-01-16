@@ -10,7 +10,7 @@ export interface TIconButtonProps extends FabProps {
   margin?: string | number;
   padding?: string | number;
   marginTop?: number | string;
-  marginBottom?: number | string;
+  marginbottom?: number | string;
   paddingTop?: number | string;
   paddingBottom?: number | string;
   marginLeft?: number | string;
@@ -30,7 +30,7 @@ const TIconButtonStyled = styled(Fab)<{
   minwidth?: number | string;
   padding?: string | number;
   marginTop?: number | string;
-  marginBottom?: number | string;
+  marginbottom?: number | string;
   paddingTop?: number | string;
   paddingBottom?: number | string;
   marginLeft?: number | string;
@@ -47,8 +47,8 @@ const TIconButtonStyled = styled(Fab)<{
   margin: ${({ margin, theme }) => (margin && Number(margin) ? theme.spacing(margin as number) : margin)};
   padding: ${({ padding, theme }) => (padding && Number(padding) ? theme.spacing(padding as number) : padding)};
   margin-top: ${({ marginTop, theme }) => (marginTop && Number(marginTop) ? theme.spacing(marginTop as number) : marginTop)};
-  margin-bottom: ${({ marginBottom, theme }) =>
-    marginBottom && Number(marginBottom) ? theme.spacing(marginBottom as number) : marginBottom};
+  margin-bottom: ${({ marginbottom, theme }) =>
+    marginbottom && Number(marginbottom) ? theme.spacing(marginbottom as number) : marginbottom};
   padding-top: ${({ paddingTop, theme }) =>
     paddingTop && Number(paddingTop) ? theme.spacing(paddingTop as number) : paddingTop};
   padding-bottom: ${({ paddingBottom, theme }) =>

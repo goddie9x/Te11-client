@@ -6,7 +6,7 @@ export type TGridProps = GridProps & {
   margin?: number | string;
   padding?: number | string;
   marginTop?: number | string;
-  marginBottom?: number | string;
+  marginbottom?: number | string;
   marginLeft?: number | string;
   marginRight?: number | string;
   paddingTop?: number | string;
@@ -24,7 +24,7 @@ const TGridStyled = styled(Grid)<{
   margin?: number | string;
   padding?: number | string;
   marginTop?: number | string;
-  marginBottom?: number | string;
+  marginbottom?: number | string;
   marginLeft?: number | string;
   marginRight?: number | string;
   paddingTop?: number | string;
@@ -40,7 +40,7 @@ const TGridStyled = styled(Grid)<{
     margin: ${({ margin, theme})=> margin && ((typeof margin === 'string')?(margin): theme.spacing(margin))};
     padding: ${({ padding, theme})=> padding && ((typeof padding === 'string')?(padding): theme.spacing(padding))};
     margin-top: ${({ marginTop, theme})=> marginTop && ((typeof marginTop === 'string')?(marginTop): theme.spacing(marginTop))};
-    margin-bottom: ${({ marginBottom, theme})=> marginBottom && ((typeof marginBottom === 'string')?(marginBottom): theme.spacing(marginBottom))};
+    margin-bottom: ${({ marginbottom, theme})=> marginbottom && ((typeof marginbottom === 'string')?(marginbottom): theme.spacing(marginbottom))};
     margin-left: ${({ marginLeft, theme})=> marginLeft && ((typeof marginLeft === 'string')?(marginLeft): theme.spacing(marginLeft))};
     margin-right: ${({ marginRight, theme})=> marginRight && ((typeof marginRight === 'string')?(marginRight): theme.spacing(marginRight))};
     padding-top: ${({ paddingTop, theme})=> paddingTop && ((typeof paddingTop === 'string')?(paddingTop): theme.spacing(paddingTop))};

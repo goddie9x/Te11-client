@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Backdrop,  Fade, Modal, ModalProps, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -23,7 +23,7 @@ const TModal = ({ title, width, ...props }: TModalProps) => {
       <Fade in={props.open}>
         <TModalWrapper width={width}>
           {title && (
-            <TBox textalign="center" marginBottom={2}>
+            <TBox textalign="center" marginbottom={2}>
               <TTypography variant="h5" color={theme.palette.primary.main}>
                 {title}
               </TTypography>

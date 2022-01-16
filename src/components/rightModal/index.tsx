@@ -31,7 +31,7 @@ const TRightModal = ({ children, title, ...props }: TRightModalProps) => {
                 {title}
               </TTypography>
             </TBox>
-            <TDivider marginBottom={3} />
+            <TDivider marginbottom={3} />
           </>
         )}
         <TBox position="absolute" top={2} right={2}>

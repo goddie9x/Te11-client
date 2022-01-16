@@ -44,7 +44,7 @@ const Test2 = () => {
         data={dataTest2}
         renderItem={(item) => {
           return (
-            <TCard marginBottom={5} height="100%" width="100%" padding={0.5}>
+            <TCard marginbottom={5} height="100%" width="100%" padding={0.5}>
               <TImage src={item.href} height={180} width="100%" />
               <TTypography variant="h5">{item.label}</TTypography>
             </TCard>

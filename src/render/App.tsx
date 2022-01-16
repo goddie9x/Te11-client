@@ -9,7 +9,7 @@ import TParticles from 'components/particles';
 import TAlert from 'components/alert';
 
 import { RootState } from 'store';
-import { setDarkMode, setLanguage } from 'store/slices/common';
+import { loadParticlesMode, setDarkMode, setLanguage } from 'store/slices/common';
 
 import { Language } from 'constants/enum/language';
 
@@ -17,6 +17,7 @@ function App() {
   const storedDarkMode = localStorage.getItem('isDarkMode');
   const storedLanguage = localStorage.getItem('language');
   const alertOpenStatus = useSelector((state: RootState) => state.alert.open);
+  const isParticlesOn = useSelector((state: RootState) => state.common.isParticlesOn);
 
   const dispatch = useDispatch();
   if(storedDarkMode ==="true"){
@@ -25,7 +26,8 @@ function App() {
   if(storedLanguage ===Language.VI_VN){
     dispatch(setLanguage(Language.VI_VN));
   }
-  
+  dispatch(loadParticlesMode());
+
   const isDarkMode = useSelector((state: RootState) => state.common.isDarkMode);
   const theme = useMemo(
     () =>
@@ -40,7 +42,7 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <TParticles />
+        {isParticlesOn&&<TParticles />}
         <TRouter />
         {alertOpenStatus && <TAlert />}
       </ThemeProvider>

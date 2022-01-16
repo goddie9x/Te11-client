@@ -23,6 +23,7 @@ import Logo from 'assets/images/T_logo.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { openLoginModal, openRegisterModal, logout } from 'store/slices/auth';
+import { setAlert } from 'store/slices/alert';
 
 const THeader = () => {
   //TODO: remove this after have API
@@ -84,6 +85,13 @@ const THeader = () => {
       title: t('logout'),
       onClick: () => {
         dispatch(logout());
+        dispatch(
+          setAlert({
+            title: t('you_are_not_logged_in'),
+            message: t('you_should_login_to_get_more_infomation'),
+            type: 'warning',
+          }),
+        );
       },
     },
   ];

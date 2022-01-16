@@ -103,9 +103,11 @@ const authSlice = createSlice({
       state.isLogining = true;
     });
     builder.addCase(getCurrentUserData.fulfilled, (state, { payload }) => {
-      state.isLogining = false;
-      state.isLoggedIn = true;
-      state.userData = payload;
+      if(payload){
+        state.isLogining = false;
+        state.isLoggedIn = true;
+        state.userData = payload;
+      }
     });
     builder.addCase(register.pending, (state) => {
       state.isLogining = true;

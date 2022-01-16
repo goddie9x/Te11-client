@@ -1,16 +1,18 @@
 import React, { memo, useState } from 'react';
 import i18n from 'i18n';
 import { InputLabel, Select, SelectChangeEvent } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
 
 import SettingsIcon from '@mui/icons-material/Settings';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Language } from 'constants/enum/language';
-import { setLanguage } from 'store/slices/common';
+import { setLanguage, setParticlesMode } from 'store/slices/common';
 
+import { RootState } from 'store';
+
+import MenuItem from '@mui/material/MenuItem';
 import TSwitchDarkMode from 'components/switchDarkMode';
 import TFormControl from 'components/formControl';
 import TRightModal from 'components/rightModal';
@@ -19,10 +21,12 @@ import TTooltip from 'components/toolTip';
 import TIconButton from 'components/iconButton';
 import TTypography from 'components/typography';
 import { TBoxProps } from 'components/box/box.styled';
+import TSwitch from 'components/switch';
 
 const THeaderSetting = (props: TBoxProps) => {
   const [lang, setLang] = React.useState<string>(i18n.language);
   const [openSetting, setOpenSetting] = useState(false);
+  const isParticlesOn = useSelector((state: RootState) => state.common.isParticlesOn);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -71,6 +75,14 @@ const THeaderSetting = (props: TBoxProps) => {
               <MenuItem value={Language.VI_VN}>Việt Nam</MenuItem>
             </Select>
           </TFormControl>
+          <TBox display="flex" height={50} alignItems="center" marginbottom={2}>
+            <TTypography variant="body1" color="textPrimary">
+              {t('effect')}
+            </TTypography>
+            <TSwitch checked={isParticlesOn} onChange={()=>{
+                dispatch(setParticlesMode(!isParticlesOn));
+            }}/>
+          </TBox>
         </>
       </TRightModal>
     </TBox>

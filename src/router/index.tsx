@@ -14,7 +14,6 @@ const TRouter = () => {
 
   useEffect(() => {
     dispatch(getCurrentUserData());
-    console.log('getCurrentUserData');
   }, []);
 
   return isLoggedIn ? <TAppRouter /> : <TAuthRouter />;

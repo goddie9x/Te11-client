@@ -34,7 +34,7 @@ const TNavItem = ({ href, title, navChildren }: TNavItemProps) => {
     <TNavItemStyled
       position="relative"
       paddingRight={1}
-      marginRight={1}
+      marginright={1}
       active={active}
       hasChild={!!navChildren}
       firstNav={firstNav}
@@ -43,7 +43,7 @@ const TNavItem = ({ href, title, navChildren }: TNavItemProps) => {
         <TLink href={href}>{title}</TLink>
       </TButton>
       {navChildren && navChildren.length && (
-        <TNavItemChildrenStyled position="absolute" left={firstNav ? 0 : '100%'} top={firstNav ? '100%' : 0} zIndex={1111}>
+        <TNavItemChildrenStyled position="absolute" left={firstNav ? 0 : '100%'} top={firstNav ? '100%' : 0} zindex={1111}>
           {navChildren.map((child, index) => (
             <TNavItem key={index} href={href + child.href} title={child.title} navChildren={child.navChildren} />
           ))}

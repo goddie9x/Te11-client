@@ -11,6 +11,15 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
   },
+  react: {
+    bindI18n: 'loaded languageChanged',
+    bindI18nStore: 'added',
+    useSuspense: true,
+  },
+});
+
+i18n.on('languageChanged', (lng: Language) => {
+  localStorage.setItem('language', lng);
 });
 
 export default i18n;

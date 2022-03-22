@@ -1,22 +1,5 @@
-import { Property } from 'csstype';
 import React from 'react';
-import TImageStyled from './image.styled';
-
-export type TImageProps = {
-  objectFit?: Property.ObjectFit;
-  objectPosition?: Property.ObjectPosition;
-  margin?: string | number;
-  padding?: string | number;
-  marginTop?: number;
-  marginbottom?: number;
-  paddingTop?: number;
-  paddingBottom?: number;
-  marginLeft?: number;
-  marginRight?: number;
-  paddingLeft?: number;
-  paddingRight?: number;
-  borderRadius?: number;
-} & React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
+import TImageStyled, { TImageProps } from './image.styled';
 
 const TImage = ({ objectFit, objectPosition, ...props }: TImageProps) => {
   return <TImageStyled fit={objectFit} {...props} position={objectPosition} />;

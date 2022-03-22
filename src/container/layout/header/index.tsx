@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Toolbar, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
@@ -11,12 +11,14 @@ import THeaderStyled from './header.styled';
 import TNavItem from 'components/navItem';
 import TImage from 'components/image';
 import TLink from 'components/link';
-import THeaderMenuDropdown from 'components/headerMenuDropdown';
+import THeaderMenuDropdown, { TPagesProps } from 'components/headerMenuDropdown';
 import THeaderSetting from './headerSetting';
-import THeaderMenuRenderOption from 'components/headerMenuDropdown/headerMenuRenderOption';
+import THeaderMenuRenderOption, { TMenuItemProps } from 'components/headerMenuDropdown/headerMenuRenderOption';
 import TLoginModal from 'container/modal/login';
 import TRegisterModal from 'container/modal/register';
 import TButton from 'components/button';
+import THeaderNotification from './headerNotification';
+import TResetPasswordModal from 'container/modal/resetPassword';
 
 import Logo from 'assets/images/T_logo.png';
 
@@ -24,78 +26,68 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { openLoginModal, openRegisterModal, logout } from 'store/slices/auth';
 import { setAlert } from 'store/slices/alert';
+import TScrollToTop from 'components/scrollToTop';
 
-const THeader = () => {
-  //TODO: remove this after have API
+import { getCurrentUserData } from 'store/thunk/auth';
+import THeaderSearch from './headerSearch';
+interface THeaderProps {
+  navs?: Array<TPagesProps>;
+  AccSettings?: Array<TPagesProps>;
+  loginOpt?: Array<TMenuItemProps>;
+}
+
+const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  const pages = [
-    {
-      href: '/test',
-      title: t('test'),
-      navChildren: [
-        {
-          href: '/test1',
-          title: t('test') + 1,
-          navChildren: [
-            { href: '/test3', title: t('test') + 3 },
-            { href: '/test4', title: t('test') + 4 },
-          ],
-        },
-        {
-          href: '/test2',
-          title: t('test') + 2,
-          navChildren: [
-            { href: '/test3', title: t('test') + 3 },
-            { href: '/test4', title: t('test') + 4 + 'dàiiiiiiiiiiiiiiiiiiiiiiiii' },
-          ],
-        },
-      ],
-    },
+  const [loggingOut, setLoggingOut] = useState(false);
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+  const reloadHeader = useSelector((state: RootState) => state.common.reloadHeader);
+  const userData = useSelector((state: RootState) => state.auth.userData);
+  const navlinks = navs || [
     {
       href: '/posts',
       title: t('posts'),
+      navChildren: [{ href: '/create', title: t('create_post') }],
+    },
+    {
+      href: '/schedules',
+      title: t('schedules'),
       navChildren: [
         {
-          href: '/test1',
-          title: t('test') + 1,
-          navChildren: [
-            { href: '/test3', title: t('test') + 3 },
-            { href: '/test4', title: t('test') + 4 },
-          ],
+          href: '/examination',
+          title: t('examination_schedule'),
+          navChildren: [{ href: '/manager', title: t('examination_schedule_manager') }],
         },
-        {
-          href: '/test2',
-          title: t('test') + 2,
-          navChildren: [
-            { href: '/test3', title: t('test') + 3 },
-            { href: '/test4', title: t('test') + 4 + 'dàiiiiiiiiiiiiiiiiiiiiiiiii' },
-          ],
-        },
+        { href: '/create', title: t('create_schedules') },
+        { href: '/manager', title: t('schedules_manager') },
       ],
     },
+    {href:'/group-chat', title: t('chat_room')},
+    { href: '/dir', title: t('generate_short_link') },
   ];
-  const AccountSettings = [
-    { href: 'user/profile', title: t('profile') },
-    { href: 'user/account', title: t('account') },
-    { href: 'user/dashboard', title: t('dashboard') },
+
+  const AccountSettings = AccSettings || [
+    { href: '/user/profile/' + userData?._id, title: t('profile') },
+    { href: '/user/account', title: t('account') },
+    { href: '/user/dashboard', title: t('dashboard') },
     {
       href: 'logout',
       title: t('logout'),
       onClick: () => {
+        setLoggingOut(true);
         dispatch(logout());
         dispatch(
           setAlert({
-            title: t('you_are_not_logged_in'),
-            message: t('you_should_login_to_get_more_infomation'),
+            title: t('logged_out'),
+            message: t('logged_out'),
             type: 'warning',
           }),
         );
+        setLoggingOut(false);
       },
     },
   ];
-  const loginOption = [
+  const loginOption = loginOpt || [
     {
       title: t('login'),
       onClick: () => {
@@ -109,35 +101,48 @@ const THeader = () => {
       },
     },
   ];
-  const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    if (loggingOut) {
+      localStorage.removeItem('tokenUser');
+    }
+    dispatch(getCurrentUserData());
+  }, [isLoggedIn, reloadHeader]);
 
   return (
     <THeaderStyled position="fixed" zindex={1300}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <TLink href="/">
-            <TImage src={Logo} width={75} marginRight={10} borderRadius={10} />
+            <TImage src={Logo} width={75} marginright={10} borderradius={10} />
           </TLink>
-          <THeaderMenuDropdown marginLeft={2} forMobile={true} menuList={pages} />
+          <THeaderMenuDropdown marginLeft={{xs:0.5,md:2}} forMobile={true} menuList={navlinks} />
           <TBox display={{ xs: 'none', md: 'flex' }} flexGrow={1}>
-            {pages.map((page, index) => (
+            {navlinks.map((page, index) => (
               <TNavItem key={index} {...page} />
             ))}
           </TBox>
-          {isLoggedIn && (
-            <THeaderMenuDropdown
-              menuProps={{ width: '250px', textalign: 'left' }}
-              marginLeft={2}
-              marginRight={2}
-              toolTip={t('account_settings')}
-              IconButton={<AccountCircleIcon />}
-              menuList={AccountSettings}
-            />
-          )}
-          <THeaderSetting marginLeft={2} />
-          {!isLoggedIn && (
+          <THeaderSearch />
+          {isLoggedIn ? (
+            <>
+              <THeaderNotification marginLeft={{xs:0.5,md:2}} />
+              <THeaderMenuDropdown
+                menuProps={{ width: '250px', textalign: 'left' }}
+                marginLeft={{xs:0.5,md:2}}
+                toolTip={t('account_settings')}
+                IconButton={
+                  userData?.image ? (
+                    <TImage borderradius={9999} padding={4} width="100%" height="100%" src={userData?.image} />
+                  ) : (
+                    <AccountCircleIcon />
+                  )
+                }
+                menuList={AccountSettings}
+              />
+            </>
+          ) : (
             <THeaderMenuRenderOption
-              marginLeft={2}
+              marginLeft={{xs:0.5,md:2}}
               menuList={loginOption}
               toolTip={t('login')}
               IconButton={
@@ -166,10 +171,13 @@ const THeader = () => {
               }}
             />
           )}
+          <THeaderSetting marginLeft={{xs:0.5,md:2}} />
         </Toolbar>
       </Container>
       <TScrollProgress height={5} display="block" />
+      <TScrollToTop bottom={3} right={3} zindex={1300} />
       <TLoginModal />
+      <TResetPasswordModal />
       <TRegisterModal />
     </THeaderStyled>
   );

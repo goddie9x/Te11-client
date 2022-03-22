@@ -10,16 +10,16 @@ const TLinearProgress = ({
   height,
   fontWeight,
   width,
-  zIndex,
+  zindex,
   color = 'secondary',
   value,
   ...props
 }: TLinearProgressProps) => {
   return (
-    <TBox {...props} width={width ? width : '100%'} zIndex={zIndex} height={height} boxSizing="border-box">
+    <TBox {...props} width={width ? width : '100%'} zindex={zindex} height={height} boxSizing="border-box">
       <TLinearProgressStyled variant="determinate" color={color} value={value} {...props} />
       {showPercentage && (
-        <TTypography fontSize={fontSize} fontWeight={fontWeight} marginTop={1}>
+        <TTypography fontSize={fontSize} fontWeight={fontWeight} margintop={1}>
           {value}%
         </TTypography>
       )}

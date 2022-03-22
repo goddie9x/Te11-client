@@ -6,12 +6,18 @@ export interface CommonState {
   isDarkMode: boolean;
   language: Language;
   isParticlesOn: boolean;
+  isLoading: boolean;
+  reloadHeader: boolean;
+  musicOn: boolean;
 }
 
 const initialState: CommonState = {
   isDarkMode: false,
   language: Language.EN_US,
-  isParticlesOn: true,
+  isParticlesOn: false,
+  isLoading: false,
+  reloadHeader: false,
+  musicOn: false,
 };
 
 const commonSlice = createSlice({
@@ -32,12 +38,43 @@ const commonSlice = createSlice({
       localStorage.setItem('isParticlesOn', payload);
     },
     loadParticlesMode: (state) => {
-      state.isParticlesOn = localStorage.getItem('isParticlesOn') !== 'false';
+      state.isParticlesOn = localStorage.getItem('isParticlesOn') === 'true';
+    },
+    setMusicOn: (state, { payload }) => {
+      state.musicOn = payload;
+      localStorage.setItem('musicOn', payload);
+    },
+    loadLanguage: (state) => {
+      state.language = localStorage.getItem('language') === Language.VI_VN ? Language.VI_VN : Language.EN_US;
+      i18n.changeLanguage(state.language);
+    },
+    loadDarkMode: (state) => {
+      state.isDarkMode = localStorage.getItem('isDarkMode') === 'true';
+    },
+    loadMusic: (state) => {
+      state.musicOn = localStorage.getItem('musicOn') === 'true';
+    },
+    setLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
+    triggerReloadHeader: (state) => {
+      state.reloadHeader = !state.reloadHeader;
     },
   },
 });
 
 const { reducer, actions } = commonSlice;
 
-export const { setDarkMode, setLanguage, setParticlesMode, loadParticlesMode } = actions;
+export const {
+  setDarkMode,
+  setLanguage,
+  setParticlesMode,
+  loadParticlesMode,
+  loadLanguage,
+  loadDarkMode,
+  loadMusic,
+  setLoading,
+  triggerReloadHeader,
+  setMusicOn,
+} = actions;
 export { reducer as commonReducer };

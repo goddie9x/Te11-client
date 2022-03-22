@@ -4,11 +4,11 @@ import React, { useCallback } from 'react';
 import TSliderStyled, { TSliderProps } from './slider.styled';
 import TBox from 'components/box';
 
-export default function TSlider({ items, width, height, renderItem, ...props }: TSliderProps<any>) {
+const TSlider = ({ items, width, height, renderItem, ...props }: TSliderProps<any>) => {
   const memoizedRenderItem = useCallback(renderItem, []);
 
   return (
-    <TBox width={width} height={height}{...props}>
+    <TBox width={width} height={height} {...props}>
       <TSliderStyled
         spaceBetween={30}
         slidesPerView={4}
@@ -25,7 +25,7 @@ export default function TSlider({ items, width, height, renderItem, ...props }: 
             slidesPerView: 2,
             spaceBetween: 20,
           },
-          1:{
+          1: {
             slidesPerView: 1,
           },
         }}
@@ -34,7 +34,7 @@ export default function TSlider({ items, width, height, renderItem, ...props }: 
         pagination={{
           clickable: true,
           renderBullet: function (index, className) {
-            return '<span class=\"' + className + '\">' + (index + 1) + '</span>';
+            return '<span class="' + className + '">' + (index + 1) + '</span>';
           },
         }}
         autoplay={{
@@ -49,4 +49,6 @@ export default function TSlider({ items, width, height, renderItem, ...props }: 
       </TSliderStyled>
     </TBox>
   );
-}
+};
+
+export default TSlider;

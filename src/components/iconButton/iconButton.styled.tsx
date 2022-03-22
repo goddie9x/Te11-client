@@ -9,16 +9,17 @@ export interface TIconButtonProps extends FabProps {
   shape?: TShape;
   margin?: string | number;
   padding?: string | number;
-  marginTop?: number | string;
+  margintop?: number | string;
   marginbottom?: number | string;
   paddingTop?: number | string;
   paddingBottom?: number | string;
   marginLeft?: number | string;
-  marginRight?: number | string;
+  marginright?: number | string;
   paddingLeft?: number | string;
-  paddingRight?: number | string;
+  paddingright?: number | string;
   background?: string;
   lineheight?: number | string;
+  position?: string;
 }
 
 const TIconButtonStyled = styled(Fab)<{
@@ -29,16 +30,17 @@ const TIconButtonStyled = styled(Fab)<{
   minheight?: number | string;
   minwidth?: number | string;
   padding?: string | number;
-  marginTop?: number | string;
+  margintop?: number | string;
   marginbottom?: number | string;
   paddingTop?: number | string;
   paddingBottom?: number | string;
   marginLeft?: number | string;
-  marginRight?: number | string;
+  marginright?: number | string;
   paddingLeft?: number | string;
-  paddingRight?: number | string;
+  paddingright?: number | string;
   background?: string;
   lineheight?: number | string;
+  position?: string;
 }>`
   width: ${({ width, theme }) => width && (typeof width === 'string' ? width : theme.spacing(width > 4.5 ? width : 4.5))};
   height: ${({ height, theme }) =>
@@ -46,7 +48,7 @@ const TIconButtonStyled = styled(Fab)<{
   border-radius: ${({ shape = 'none', theme }) => shape !== 'none' && (shape === 'round' ? '999px' : theme.spacing(0.5))};
   margin: ${({ margin, theme }) => (margin && Number(margin) ? theme.spacing(margin as number) : margin)};
   padding: ${({ padding, theme }) => (padding && Number(padding) ? theme.spacing(padding as number) : padding)};
-  margin-top: ${({ marginTop, theme }) => (marginTop && Number(marginTop) ? theme.spacing(marginTop as number) : marginTop)};
+  margin-top: ${({ margintop, theme }) => (margintop && Number(margintop) ? theme.spacing(margintop as number) : margintop)};
   margin-bottom: ${({ marginbottom, theme }) =>
     marginbottom && Number(marginbottom) ? theme.spacing(marginbottom as number) : marginbottom};
   padding-top: ${({ paddingTop, theme }) =>
@@ -55,16 +57,17 @@ const TIconButtonStyled = styled(Fab)<{
     paddingBottom && Number(paddingBottom) ? theme.spacing(paddingBottom as number) : paddingBottom};
   margin-left: ${({ marginLeft, theme }) =>
     marginLeft && (Number(marginLeft) ? theme.spacing(marginLeft as number) : marginLeft)};
-  margin-right: ${({ marginRight, theme }) =>
-    marginRight && (Number(marginRight) ? theme.spacing(marginRight as number) : marginRight)};
+  margin-right: ${({ marginright, theme }) =>
+    marginright && (Number(marginright) ? theme.spacing(marginright as number) : marginright)};
   padding-left: ${({ paddingLeft, theme }) =>
     paddingLeft && (Number(paddingLeft) ? theme.spacing(paddingLeft as number) : paddingLeft)};
-  padding-right: ${({ paddingRight, theme }) =>
-    paddingRight && (Number(paddingRight) ? theme.spacing(paddingRight as number) : paddingRight)};
+  padding-right: ${({ paddingright, theme }) =>
+    paddingright && (Number(paddingright) ? theme.spacing(paddingright as number) : paddingright)};
   background-color: ${({ background }) => background};
   line-height: ${({ lineheight }) => lineheight};
   min-width: ${({ minwidth, theme }) => minwidth && (typeof minwidth === 'string' ? minwidth : theme.spacing(minwidth))};
   min-height: ${({ minheight, theme }) => minheight && (typeof minheight === 'string' ? minheight : theme.spacing(minheight))};
+  position: ${({ position }) => position};
 `;
 
 export default TIconButtonStyled;

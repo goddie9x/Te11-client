@@ -7,14 +7,15 @@ export type TFormControlLabelProps = FormControlLabelProps & {
   minHeight?: number;
   margin?: string | number;
   padding?: string | number;
-  marginTop?: number;
+  margintop?: number;
   marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;
-  marginRight?: number;
+  marginright?: number;
   paddingLeft?: number;
-  paddingRight?: number;
+  paddingright?: number;
+  textColor?: string;
 };
 
 const TFormControlLabelStyled = styled(FormControlLabel)<{
@@ -24,29 +25,31 @@ const TFormControlLabelStyled = styled(FormControlLabel)<{
   minHeight?: number;
   margin?: string | number;
   padding?: string | number;
-  marginTop?: number;
+  margintop?: number;
   marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;
-  marginRight?: number;
+  marginright?: number;
   paddingLeft?: number;
-  paddingRight?: number;
+  paddingright?: number;
+  textColor?: string;
 }>`
-  width: ${({ width, theme }) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
-  height: ${({ height, theme }) => height&&((typeof height=== 'string')?(height): theme.spacing(height))};
-  margin: ${({ margin, theme }) => (margin&&Number(margin))? theme.spacing(margin as number) : margin};
-  padding: ${({ padding, theme }) => (padding&&Number(padding))? theme.spacing(padding as number) : padding};
-  margin-top: ${({ marginTop, theme }) => marginTop && theme.spacing(marginTop)};
+  width: ${({ width, theme }) => width && (typeof width === 'string' ? width : theme.spacing(width))};
+  height: ${({ height, theme }) => height && (typeof height === 'string' ? height : theme.spacing(height))};
+  margin: ${({ margin, theme }) => (margin && Number(margin) ? theme.spacing(margin as number) : margin)};
+  padding: ${({ padding, theme }) => (padding && Number(padding) ? theme.spacing(padding as number) : padding)};
+  margin-top: ${({ margintop, theme }) => margintop && theme.spacing(margintop)};
   margin-bottom: ${({ marginbottom, theme }) => marginbottom && theme.spacing(marginbottom)};
   padding-top: ${({ paddingTop, theme }) => paddingTop && theme.spacing(paddingTop)};
   padding-bottom: ${({ paddingBottom, theme }) => paddingBottom && theme.spacing(paddingBottom)};
   margin-left: ${({ marginLeft, theme }) => marginLeft && theme.spacing(marginLeft)};
-  margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
+  margin-right: ${({ marginright, theme }) => marginright && theme.spacing(marginright)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
-  padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
+  padding-right: ${({ paddingright, theme }) => paddingright && theme.spacing(paddingright)};
   min-width: ${({ minwidth, theme }) => minwidth && theme.spacing(minwidth)};
   min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};
+  color: ${({ textColor, theme }) => (textColor ? textColor : theme.palette.text.primary)};
 `;
 
 export default TFormControlLabelStyled;

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import TInputStyled,{TInputProps} from './input.styled';
+import TInputStyled, { TInputProps } from './input.styled';
 
 const TInput = (props: TInputProps) => {
-    return <TInputStyled variant="outlined" {...props} />;
+  return <TInputStyled variant="outlined" {...props} />;
 };
 
-export default TInput;
+export default memo(TInput);

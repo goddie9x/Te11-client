@@ -8,7 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Language } from 'constants/enum/language';
-import { setLanguage, setParticlesMode } from 'store/slices/common';
+import { setLanguage, setMusicOn, setParticlesMode } from 'store/slices/common';
 
 import { RootState } from 'store';
 
@@ -22,11 +22,13 @@ import TIconButton from 'components/iconButton';
 import TTypography from 'components/typography';
 import { TBoxProps } from 'components/box/box.styled';
 import TSwitch from 'components/switch';
+import { THeaderSettingMusicWrapper } from './header.styled';
 
 const THeaderSetting = (props: TBoxProps) => {
-  const [lang, setLang] = React.useState<string>(i18n.language);
   const [openSetting, setOpenSetting] = useState(false);
   const isParticlesOn = useSelector((state: RootState) => state.common.isParticlesOn);
+  const language = useSelector((state: RootState) => state.common.language);
+  const musicOn = useSelector((state: RootState) => state.common.musicOn);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -44,7 +46,6 @@ const THeaderSetting = (props: TBoxProps) => {
 
     i18n.changeLanguage(lang);
     dispatch(setLanguage(lang));
-    setLang(lang);
   };
 
   return (
@@ -62,12 +63,12 @@ const THeaderSetting = (props: TBoxProps) => {
             </TTypography>
             <TSwitchDarkMode />
           </TBox>
-          <TFormControl height={5}>
+          <TFormControl height={5} marginbottom={4}>
             <InputLabel id="select-language">{t('language')}</InputLabel>
             <Select
               labelId="select-language"
               id="select-language"
-              value={lang}
+              value={language}
               label="Language"
               onChange={handleChangeLanguage}
             >
@@ -79,10 +80,37 @@ const THeaderSetting = (props: TBoxProps) => {
             <TTypography variant="body1" color="textPrimary">
               {t('effect')}
             </TTypography>
-            <TSwitch checked={isParticlesOn} onChange={()=>{
+            <TSwitch
+              checked={isParticlesOn}
+              onChange={() => {
                 dispatch(setParticlesMode(!isParticlesOn));
-            }}/>
+              }}
+            />
           </TBox>
+          <TBox display="flex" height={50} alignItems="center" marginbottom={2}>
+            <TTypography variant="body1" color="textPrimary">
+              {t('music')}
+            </TTypography>
+            <TSwitch
+              checked={musicOn}
+              onChange={() => {
+                dispatch(setMusicOn(!musicOn));
+              }}
+            />
+          </TBox>
+          <THeaderSettingMusicWrapper height={380}>
+            {musicOn && (
+              <iframe
+                src="https://www.nhaccuatui.com/lh/auto/ZfAokcm4aVPO"
+                width="335"
+                height="380"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay"
+                loading="lazy"
+              />
+            )}
+          </THeaderSettingMusicWrapper>
         </>
       </TRightModal>
     </TBox>

@@ -1,6 +1,6 @@
 import { IconButton, Paper, styled } from "@mui/material";
 
-export const TModalWrapper = styled(Paper)<{ width?: number }>`
+export const TModalWrapper = styled(Paper)<{ width?: number| string}>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -8,7 +8,7 @@ export const TModalWrapper = styled(Paper)<{ width?: number }>`
   background-color: ${({ theme }) => theme.palette.primary.contrastText};
   padding: ${({ theme }) => `${theme.spacing(5)}  ${theme.spacing(4)}`};
   min-width: ${({ theme }) => theme.spacing(30)};
-  width: ${({ width }) => width && width}px;
+  width: ${({ width, theme }) => width && (typeof width === 'string' ? width : theme.spacing(width))|| 'auto'};
   max-height: 80vh;
   overflow-y: auto;
   box-shadow: none;

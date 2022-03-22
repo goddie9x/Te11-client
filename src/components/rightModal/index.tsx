@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '@mui/material';
 
-import TRightModalStyled, { TRightModalWrapper, TRightModalProps } from './rightModal.styled';
+import { TRightModalWrapper, TRightModalProps, TRightModalBackdrop } from './rightModal.styled';
 import TBox from 'components/box';
 import TTypography from 'components/typography';
 import TDivider from 'components/divider';
@@ -9,19 +9,28 @@ import TDivider from 'components/divider';
 import CloseIcon from '@mui/icons-material/Close';
 import TIconButton from 'components/iconButton';
 
-const TRightModal = ({ children, title, ...props }: TRightModalProps) => {
+const TRightModal = ({ children, open, title, ...props }: TRightModalProps) => {
   const theme = useTheme();
 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [open]);
+
   return (
-    <TRightModalStyled {...props} >
+    <>
+      <TRightModalBackdrop open={open} onClick={(event) => props.onClose?.(event, 'escapeKeyDown')} />
       <TRightModalWrapper
         background={theme.palette.mode === 'dark' ? 'rgb(10, 25, 41)' : '#fff'}
-        position="absolute"
+        position="fixed"
         top={0}
-        right={0}
-        bottom={0}
+        right={-2}
         minwidth={40}
-        borderRadius="8px 0 0 8px"
+        open={open}
+        borderradius="8px 0 0 8px"
         {...props}
       >
         {title && (
@@ -31,7 +40,7 @@ const TRightModal = ({ children, title, ...props }: TRightModalProps) => {
                 {title}
               </TTypography>
             </TBox>
-            <TDivider marginbottom={3} />
+            <TDivider marginbottom={1} />
           </>
         )}
         <TBox position="absolute" top={2} right={2}>
@@ -46,9 +55,9 @@ const TRightModal = ({ children, title, ...props }: TRightModalProps) => {
             <CloseIcon />
           </TIconButton>
         </TBox>
-        <TBox padding={2}>{children}</TBox>
+        <TBox padding={2} overflowy="auto">{children}</TBox>
       </TRightModalWrapper>
-    </TRightModalStyled>
+    </>
   );
 };
 

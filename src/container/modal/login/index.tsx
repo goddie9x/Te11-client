@@ -12,7 +12,7 @@ import TBox from 'components/box';
 import TTypography from 'components/typography';
 import TButton from 'components/button';
 
-import { openRegisterModal, openLoginModal } from 'store/slices/auth';
+import { openRegisterModal, openLoginModal, openResetPasswordModal } from 'store/slices/auth';
 import { login } from 'store/thunk/auth';
 
 const TLoginModal = () => {
@@ -42,6 +42,10 @@ const TLoginModal = () => {
 
   const handleCloseLoginModal = () => {
     dispatch(openLoginModal(false));
+  };
+
+  const handleOpenResetPasswordModal = () => {
+    dispatch(openResetPasswordModal(true));
   };
 
   return (
@@ -84,7 +88,7 @@ const TLoginModal = () => {
                 {turnOnReCaptchaLogin && (
                   <>
                     <ReCAPTCHA
-                      sitekey="6LePBPwdAAAAALYlbbHOE4ylPkDLnhY05AMn5UIl"
+                      sitekey="6LcxUo4eAAAAACeuXLHxJaH1TTR9S7LXy_jPqn-x"
                       asyncScriptOnLoad={() => {
                         setFieldValue('recaptcha', '');
                       }}
@@ -93,14 +97,14 @@ const TLoginModal = () => {
                       }}
                     />
                     {!!errors.recaptcha && (
-                      <TTypography color="error" variant="body2" marginTop={2}>
+                      <TTypography color="error" variant="body2" margintop={2}>
                         {errors.recaptcha}
                       </TTypography>
                     )}
                   </>
                 )}
                 <TBox display="flex" marginbottom={2} alignItems="center">
-                  <TButton>{t('forgot_password')}</TButton>
+                  <TButton onClick={handleOpenResetPasswordModal}>{t('forgot_password')}</TButton>
                 </TBox>
                 <TButton type="submit" variant="contained" marginbottom={3}>
                   {t('login')}

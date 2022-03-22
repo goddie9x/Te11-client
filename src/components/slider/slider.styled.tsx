@@ -5,11 +5,13 @@ import SwiperCore, { Pagination, Navigation, EffectFade, Autoplay } from 'swiper
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import { BoxProps, styled } from '@mui/material';
+import {  styled } from '@mui/material';
+
+import { TBoxProps } from 'components/box/box.styled';
 
 SwiperCore.use([Pagination, EffectFade, Navigation, Autoplay]);
 
-export type TSliderProps<T> = Omit<SwiperProps, "width" | "height"> & BoxProps & {
+export type TSliderProps<T> = Omit<SwiperProps, "width" | "height"> & TBoxProps & {
   items: Array<T>;
   renderItem: (item: T) => React.ReactNode;
 };

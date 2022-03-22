@@ -6,7 +6,7 @@ import { TModalCloseButton, TModalWrapper } from './modal.styled';
 import TBox from 'components/box';
 import TTypography from 'components/typography';
 
-export type TModalProps = ModalProps& { title?: string; width?: number };
+export type TModalProps = ModalProps& { title?: string; width?: number| string };
 
 const TModal = ({ title, width, ...props }: TModalProps) => {
   const theme = useTheme();

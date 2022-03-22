@@ -1,21 +1,21 @@
 import { Link, LinkProps } from 'react-router-dom';
 import { styled } from '@mui/material';
 export type TLinkProps = Omit<LinkProps,'to'>& {
-  href: string;
+  href: LinkProps["to"];
   textalign?: string;
   fontSize?: number;
   fontWeight?: number;
   lineheight?: number;
   margin?: string | number;
   padding?: string | number;
-  marginTop?: number;
+  margintop?: number;
   marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;
-  marginRight?: number;
+  marginright?: number;
   paddingLeft?: number;
-  paddingRight?: number;
+  paddingright?: number;
   width?: number | string;
   minwidth?: number;
   height?: number | string;
@@ -23,6 +23,7 @@ export type TLinkProps = Omit<LinkProps,'to'>& {
   uppercase?: boolean;
   color?: string;
   textDecoration?: string;
+  underline?: "none" | "hover" | "always";
 };
 
 export const StyledLink = styled(Link)<{
@@ -32,14 +33,14 @@ export const StyledLink = styled(Link)<{
   lineheight?: number;
   margin?: string | number;
   padding?: string | number;
-  marginTop?: number;
+  margintop?: number;
   marginbottom?: number;
   paddingTop?: number;
   paddingBottom?: number;
   marginLeft?: number;
-  marginRight?: number;
+  marginright?: number;
   paddingLeft?: number;
-  paddingRight?: number;
+  paddingright?: number;
   width?: number | string;
   minwidth?: number;
   height?: number | string;
@@ -55,14 +56,14 @@ export const StyledLink = styled(Link)<{
   text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'none')};
   margin: ${({ margin, theme }) => (margin && Number(margin) ? theme.spacing(margin as number) : margin)};
   padding: ${({ padding, theme }) => (padding && Number(padding) ? theme.spacing(padding as number) : padding)};
-  margin-top: ${({ marginTop, theme }) => marginTop && theme.spacing(marginTop)};
+  margin-top: ${({ margintop, theme }) => margintop && theme.spacing(margintop)};
   margin-bottom: ${({ marginbottom, theme }) => marginbottom && theme.spacing(marginbottom)};
   padding-top: ${({ paddingTop, theme }) => paddingTop && theme.spacing(paddingTop)};
   padding-bottom: ${({ paddingBottom, theme }) => paddingBottom && theme.spacing(paddingBottom)};
   margin-left: ${({ marginLeft, theme }) => marginLeft && theme.spacing(marginLeft)};
-  margin-right: ${({ marginRight, theme }) => marginRight && theme.spacing(marginRight)};
+  margin-right: ${({ marginright, theme }) => marginright && theme.spacing(marginright)};
   padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
-  padding-right: ${({ paddingRight, theme }) => paddingRight && theme.spacing(paddingRight)};
+  padding-right: ${({ paddingright, theme }) => paddingright && theme.spacing(paddingright)};
   text-align: ${({ textalign }) => textalign};
   font-size: ${({ fontSize, theme }) => fontSize && theme.spacing(fontSize)};
   font-weight: ${({ fontWeight, theme }) => fontWeight && theme.typography.fontWeightBold};

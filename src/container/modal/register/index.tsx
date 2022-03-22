@@ -12,7 +12,7 @@ import TTypography from 'components/typography';
 import TButton from 'components/button';
 
 import { openLoginModal, openRegisterModal } from 'store/slices/auth';
-import {register} from 'store/thunk/auth';
+import { register } from 'store/thunk/auth';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 const TRegisterModal = () => {
@@ -24,6 +24,7 @@ const TRegisterModal = () => {
   const initialValue = {
     account: '',
     password: '',
+    email: '',
     reEnterPassword: '',
     recaptcha: 'done',
   };
@@ -33,6 +34,7 @@ const TRegisterModal = () => {
       .min(5, t('accounr_not_valid'))
       .max(50, t('accounr_not_valid'))
       .required(t('accounr_not_valid')),
+    email: Yup.string().email(t('email_not_valid')),
     password: Yup.string()
       .trim(t('password_are_not_valid'))
       .min(8, t('password_are_not_valid'))
@@ -54,13 +56,13 @@ const TRegisterModal = () => {
       <Formik
         initialValues={initialValue}
         onSubmit={(values, actions) => {
-          const { account, password } = values;
-          dispatch(register({ account, password }));
+          const { account, password, email } = values;
+          dispatch(register({ account, password, email }));
           actions.setSubmitting(false);
         }}
         validationSchema={RegisterSchema}
       >
-        {({ errors, touched, handleChange,setFieldValue }) => {
+        {({ errors, touched, handleChange, setFieldValue }) => {
           return (
             <Form>
               <TBox display="flex" flexDirection="column">
@@ -72,6 +74,16 @@ const TRegisterModal = () => {
                   error={!!touched.account && !!errors.account}
                   onMouseDown={() => (touched.account = true)}
                   helperText={touched.account && errors.account}
+                  onChange={handleChange}
+                />
+                <TInput
+                  marginbottom={2}
+                  name="email"
+                  label={t('email')}
+                  placeholder={t('email')}
+                  error={!!touched.email && !!errors.email}
+                  onMouseDown={() => (touched.email = true)}
+                  helperText={touched.email && errors.email}
                   onChange={handleChange}
                 />
                 <TInput
@@ -99,7 +111,7 @@ const TRegisterModal = () => {
                 {turnOnReCaptchaRegister && (
                   <>
                     <ReCAPTCHA
-                      sitekey="6LePBPwdAAAAALYlbbHOE4ylPkDLnhY05AMn5UIl"
+                      sitekey="6LcxUo4eAAAAACeuXLHxJaH1TTR9S7LXy_jPqn-x"
                       asyncScriptOnLoad={() => {
                         setFieldValue('recaptcha', '');
                       }}
@@ -108,7 +120,7 @@ const TRegisterModal = () => {
                       }}
                     />
                     {!!errors.recaptcha && (
-                      <TTypography color="error" variant="body2" marginTop={2}>
+                      <TTypography color="error" variant="body2" margintop={2}>
                         {errors.recaptcha}
                       </TTypography>
                     )}

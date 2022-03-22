@@ -1,39 +1,45 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ArrowUp from 'components/icon/arrowUp';
 import { TFloatingProps } from 'components/floating/floating.styled';
 import TFloating from 'components/floating';
 import TIconButton from 'components/iconButton';
+import TTooltip from 'components/toolTip';
 
-const TScrollToTop = ({positionShowUp, ...props}: TFloatingProps) => {
-    const [show, setShow] = useState(false);
+const TScrollToTop = ({ positionShowUp, ...props }: TFloatingProps) => {
+  const [show, setShow] = useState(false);
+  const { t } = useTranslation();
 
-    const clickScrollTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+  const clickScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setShow(scrollTop > (positionShowUp || 0));
     };
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            setShow(scrollTop > (positionShowUp || 0));
-        };
+    window.addEventListener('scroll', handleScroll);
 
-        window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    });
-
-    return (show?(<TFloating {...props} onClick={clickScrollTop}>
-      <TIconButton>
-        <ArrowUp fontSize="large" />
-      </TIconButton>
-    </TFloating>)
-    :null);
+  return show ? (
+    <TFloating {...props} onClick={clickScrollTop}>
+      <TTooltip title={t('scroll_to_top')}>
+        <TIconButton>
+          <ArrowUp fontSize="large" />
+        </TIconButton>
+      </TTooltip>
+    </TFloating>
+  ) : null;
 };
 
 export default TScrollToTop;

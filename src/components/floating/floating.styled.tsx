@@ -1,8 +1,9 @@
-import { BoxProps, styled } from "@mui/material";
+import { styled } from "@mui/material";
 
 import TBox from "components/box";
+import { TBoxProps } from "components/box/box.styled";
 
-export type TFloatingProps = BoxProps&{
+export type TFloatingProps = TBoxProps&{
     positionShowUp?: number;
     top?: number;
     left?: number;

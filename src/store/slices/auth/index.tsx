@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { login, register, getCurrentUserData } from 'store/thunk/auth';
 export interface UserDataSchema {
+  _id: string;
   name?: string;
   fullName?: string;
-  email?: string;
-  phone?: string;
+  email?: Array<string>;
+  phone?: Array<string>;
   address?: string;
   account: string;
   gender?: number;
@@ -14,6 +15,7 @@ export interface UserDataSchema {
   image?: string;
   quote?: string;
   description?: string;
+  subDescription?: string;
 }
 export interface AuthState {
   isLoggedIn: boolean;
@@ -21,6 +23,7 @@ export interface AuthState {
   userData?: UserDataSchema;
   isOpenLoginModal: boolean;
   isOpenRegisterModal: boolean;
+  isOpenResetPasswordModal: boolean;
   numberOfLoginAttempts: number;
   numberOfRegisterAttempts: number;
   turnOnReCaptchaLogin: boolean;
@@ -32,6 +35,7 @@ const initialState: AuthState = {
   isLogining: false,
   isOpenLoginModal: false,
   isOpenRegisterModal: false,
+  isOpenResetPasswordModal: false,
   numberOfLoginAttempts: 0,
   numberOfRegisterAttempts: 0,
   turnOnReCaptchaLogin: false,
@@ -46,13 +50,14 @@ const authSlice = createSlice({
       state.isLoggedIn = payload;
     },
     logout: (state) => {
-      state.isLoggedIn = false;
+      localStorage.removeItem('tokenUser');
       state.userData = undefined;
-      document.cookie =  'tokenUser=; Max-Age=0';
+      state.isLoggedIn = false;
     },
     openLoginModal: (state, { payload }) => {
       state.isOpenLoginModal = payload;
       state.isOpenRegisterModal = payload ? false : state.isOpenRegisterModal;
+      state.isOpenResetPasswordModal = payload ? false : state.isOpenResetPasswordModal;
     },
     closeLoginModal: (state) => {
       state.isOpenLoginModal = false;
@@ -60,9 +65,18 @@ const authSlice = createSlice({
     openRegisterModal: (state, { payload }) => {
       state.isOpenRegisterModal = payload;
       state.isOpenLoginModal = payload ? false : state.isOpenLoginModal;
+      state.isOpenResetPasswordModal = payload ? false : state.isOpenResetPasswordModal;
     },
     closeRegisterModal: (state) => {
       state.isOpenRegisterModal = false;
+    },
+    openResetPasswordModal: (state, { payload }) => {
+      state.isOpenResetPasswordModal = payload;
+      state.isOpenRegisterModal = payload ? false : state.isOpenRegisterModal;
+      state.isOpenLoginModal = payload ? false : state.isOpenLoginModal;
+    },
+    closeResetPasswordModal: (state) => {
+      state.isOpenResetPasswordModal = false;
     },
     incrementLoginAttempts: (state) => {
       state.numberOfLoginAttempts++;
@@ -94,7 +108,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isOpenLoginModal = false;
       state.isOpenRegisterModal = false;
-      document.cookie = 'tokenUser=' + payload.token + ';max-age=86400';
+      localStorage.setItem('tokenUser', payload.token);
     });
     builder.addCase(login.rejected, (state) => {
       state.isLogining = false;
@@ -103,10 +117,10 @@ const authSlice = createSlice({
       state.isLogining = true;
     });
     builder.addCase(getCurrentUserData.fulfilled, (state, { payload }) => {
-      if(payload){
+      if (payload) {
         state.isLogining = false;
         state.isLoggedIn = true;
-        state.userData = payload;
+        state.userData = { ...payload.currentUser };
       }
     });
     builder.addCase(register.pending, (state) => {
@@ -117,7 +131,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isOpenLoginModal = false;
       state.isOpenRegisterModal = false;
-      document.cookie = 'tokenUser=' + payload.token + ';max-age=86400';
+      localStorage.setItem('tokenUser', payload.token);
     });
     builder.addCase(register.rejected, (state) => {
       state.isLogining = false;
@@ -134,6 +148,8 @@ export const {
   closeLoginModal,
   openRegisterModal,
   closeRegisterModal,
+  openResetPasswordModal,
+  closeResetPasswordModal,
   incrementLoginAttempts,
   incrementRegisterAttempts,
   turnOffReCaptchaRegister,

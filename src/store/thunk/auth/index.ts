@@ -31,6 +31,9 @@ export const login = createAsyncThunk('auth/login', async (data: LoginSchema, { 
   if (response.status < 200 || response.status >= 300) {
     dispatch(setLoading(false));
     dispatch(setAlert({ title: i18n.t('error'), message: i18n.t('login_failed'), type: 'error' }));
+    if(response.status == 403){
+      dispatch(setAlert({ title: i18n.t('error'), message: i18n.t('account_banned'), type: 'error' }));
+    }
     dispatch(incrementLoginAttempts());
     return rejectWithValue(i18n.t('login_failed'));
   }

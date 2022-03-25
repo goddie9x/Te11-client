@@ -34,7 +34,8 @@ const Genders = ['male', 'female', 'other'];
 
 const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
   const { _id } = props.match.params;
-  const currentUserId = useSelector((state: RootState) => state.auth.userData?._id);
+  const currentUser = useSelector((state: RootState) => state.auth.userData);
+  const currentUserId = currentUser?._id;
   const [user, setUser] = useState<UserDataSchema>({} as UserDataSchema);
   const [editable, setEditable] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -118,7 +119,28 @@ const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
         });
     }
   };
-
+  const handleBanUser = () => {
+    dispatch(setLoading(true));
+    fetch('https://te11api.herokuapp.com/user/ban/' + _id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ tokenUser: localStorage.getItem('tokenUser') }),
+    })
+      .then((res) => {
+        if (res.status >= 400) {
+          throw new Error();
+        }
+        dispatch(setLoading(false));
+        dispatch(setAlert({ type: 'success', message: t('user_ban_successfully'), title: t('success') }));
+        setTriggerReloadData(!triggerReloadData);
+      })
+      .catch(() => {
+        dispatch(setLoading(false));
+        dispatch(setAlert({ type: 'error', message: t('user_ban_failed'), title: t('error') }));
+      });
+  };
   useEffect(() => {
     let isSubscribed = true;
 
@@ -159,8 +181,15 @@ const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
       }),
     );
   }, [user]);
-  return (
-    <TGrid container>
+  return user?.deleted?<TTypography variant="h3" color="error" textalign="center" marginY={10}>
+    {t('account_has_been_banned',{account:user?.fullName|| user.account})}
+  </TTypography>:(
+    <TGrid container position="relative">
+      {currentUser && currentUser.role < 2 && currentUser.role < user.role && (
+        <TButton onClick={handleBanUser} position="absolute" color="error" variant="contained" top={-1} right={10}>
+          {t('ban_this_user')}
+        </TButton>
+      )}
       <TGrid item xs={12} md={6} lg={4} padding={1}>
         <TCard textAlign="center" padding={3} borderradius={1}>
           <TImagePicker

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import TBox from 'components/box';
 import TImage from 'components/image';
@@ -12,6 +13,8 @@ import TImagesView from 'components/imagesView';
 import TMenu from 'components/menu';
 import { MenuItem } from '@mui/material';
 
+import { RootState } from 'store';
+
 const TImagePicker = ({ imageProps, allowBrowse, editable, variant, src, onSave, ...props }: TImagePickerProps) => {
   const { t } = useTranslation();
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -20,6 +23,7 @@ const TImagePicker = ({ imageProps, allowBrowse, editable, variant, src, onSave,
   const [openSelectedImage, setOpenSelectedImage] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const imageInput = useRef<HTMLInputElement>(null);
+  const userData = useSelector((state: RootState) => state.auth.userData);
 
   const handleChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event !== null && event.target !== null && event.target.files !== null && event.target.files[0] !== null) {
@@ -53,7 +57,7 @@ const TImagePicker = ({ imageProps, allowBrowse, editable, variant, src, onSave,
               setOpenSelectedImage(false);
               setAnchorEl(null);
             }}
-            deleteable={false}
+            deleteable={userData&&userData.role<2}
           />
         </TModal>
         {editable && (

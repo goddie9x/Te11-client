@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { CKEditorEventPayload, CKEditorInstance } from 'ckeditor4-react';
 import { useDispatch, useSelector } from 'react-redux';
 import SendIcon from '@mui/icons-material/Send';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import TBox from 'components/box';
-import TInput from 'components/input';
 import TIconButton from 'components/iconButton';
 import { TBoxProps } from 'components/box/box.styled';
 import TRoomWrapper from './room.styled';
@@ -18,6 +18,7 @@ import { TRoomsProps } from '..';
 import TMessage, { TMessageProps } from 'components/message';
 import { setHelmet } from 'store/slices/helmet';
 import TButton from 'components/button';
+import TEditor from 'components/CKEditor';
 
 export type TRoomProps = TBoxProps & {
   chatWrapperProps?: TBoxProps;
@@ -29,17 +30,16 @@ export type TRoomProps = TBoxProps & {
 const socket = io('https://te11api.herokuapp.com');
 
 const TRoom = ({ chatWrapperProps, roomId, isChatToUser, ...props }: TRoomProps) => {
-  const [messageToSend, setMessageToSend] = useState('');
   const [messages, setMessages] = useState<Array<TMessageProps> | []>([]);
   const [roomInfo, setRoomInfo] = useState<TRoomsProps | undefined>();
   const [activeScrollToBottom, setActiveScrollToBottom] = useState(false);
   const [haveNewMessage, setHaveNewMessage] = useState(false);
-
+  const currentUser = useSelector((state: RootState) => state.auth.userData);
   const chatWindow = useRef<HTMLDivElement>(null);
-
+  const editorInstanceRef = useRef<CKEditorInstance | null>(null);
+  console.log(currentUser);
   const { t } = useTranslation();
   const history = useHistory();
-  const currentUser = useSelector((state: RootState) => state.auth.userData);
   const currentUserId = currentUser?._id || '';
   const dispatch = useDispatch();
 
@@ -85,8 +85,10 @@ const TRoom = ({ chatWrapperProps, roomId, isChatToUser, ...props }: TRoomProps)
     });
   };
   const handleSendMessage = () => {
+    console.log('Send message');
+    const messageToSend = editorInstanceRef.current?.getData();
     if (messageToSend.trim() === '') {
-      setMessageToSend('');
+      editorInstanceRef.current?.setData('');
       return;
     }
     socket.emit('chat-room:user-chat', {
@@ -97,22 +99,17 @@ const TRoom = ({ chatWrapperProps, roomId, isChatToUser, ...props }: TRoomProps)
       avatar: currentUser?.image || '',
       time: new Date(),
     });
-    setMessageToSend('');
+    editorInstanceRef.current?.setData('');
     setTimeout(() => {
       if (chatWindow && chatWindow.current) {
         chatWindow.current.scrollTop = chatWindow.current.scrollHeight;
       }
     }, 1000);
   };
-  const handleEnterEvent = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Enter') {
-      return;
-    } else {
-      if (!event.shiftKey) {
+  const handleEnterEvent = (event: CKEditorEventPayload<'key'>) => {
+    const evtData = event.data;
+    if (evtData&& evtData.keyCode == 13) {
         handleSendMessage();
-      } else {
-        setMessageToSend(messageToSend + '\n');
-      }
     }
   };
   useEffect(() => {
@@ -266,16 +263,41 @@ const TRoom = ({ chatWrapperProps, roomId, isChatToUser, ...props }: TRoomProps)
         )}
       </TRoomWrapper>
       <TBox display="flex" flexWrap="nowrap">
-        <TInput
-          multiline
-          lineheight={2}
-          minheight={5}
-          label={t('message')}
-          name="message"
-          value={messageToSend}
-          onKeyPress={handleEnterEvent}
-          fullWidth
-          onChange={(e) => setMessageToSend(e.target.value)}
+        <TEditor
+          containerProps={{ width: '100%' }}
+          config={{
+            toolbar: [
+              ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', 'Undo', 'Redo'],
+              ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', 'CopyFormatting', 'RemoveFormat'],
+              ['Styles', 'Format', 'Font', 'FontSize', 'TextColor', 'BGColor'],
+              [
+                'NumberedList',
+                'BulletedList',
+                'Outdent',
+                'Indent',
+                'Blockquote',
+                'CreateDiv',
+                'JustifyLeft',
+                'JustifyCenter',
+                'JustifyRight',
+                'JustifyBlock',
+                'BidiLtr',
+                'BidiRtl',
+              ],
+              ['Image', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Emoji', 'PageBreak'],
+              ['Find', 'Replace', 'SelectAll'],
+            ],
+            autocomplete: true,
+            extraPlugins: ['colorbutton', 'autocomplete', 'emoji', 'find', 'smiley'],
+            disallowedContent: 'script; *[on*]',
+            height: 80,
+          }}
+          eventHandler={{
+            onKey: (evt: CKEditorEventPayload<'key'>) => {
+              editorInstanceRef.current = evt.editor;
+              handleEnterEvent(evt);
+            },
+          }}
         />
         <TIconButton variant="extended" shape="curved" onClick={() => handleSendMessage()}>
           <SendIcon />

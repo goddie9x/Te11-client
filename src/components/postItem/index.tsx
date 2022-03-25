@@ -48,6 +48,7 @@ const TPostItem = ({
   const { t } = useTranslation();
   const date = moment(updatedAt).format('DD / MM / YYYY');
   const userData = useSelector((state: RootState) => state.auth.userData);
+
   const dispatch = useDispatch();
 
   const deletePost = () => {
@@ -71,13 +72,13 @@ const TPostItem = ({
   };
 
   useEffect(() => {
-    if (userData && userData._id == authorId) {
+    if (userData && (userData._id == authorId || userData.role < 2)) {
       setEditable(true);
     } else {
       setEditable(false);
     }
   }, [userData, authorId]);
-  return deteled?null:(
+  return deteled ? null : (
     <TGrid container {...props} position="relative">
       {editable && (
         <TBox position="absolute" right={16} top={8}>

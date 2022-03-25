@@ -16,6 +16,7 @@ export interface UserDataSchema {
   quote?: string;
   description?: string;
   subDescription?: string;
+  deleted?: boolean;
 }
 export interface AuthState {
   isLoggedIn: boolean;

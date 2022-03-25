@@ -47,18 +47,16 @@ const TMessage = ({ username, avatar, message, time, hideAvatar, isCurrentUser, 
               <TTypography variant="body1" color={isCurrentUser ? 'secondary' : 'primary'}>
                 {username}
               </TTypography>
-              <TBox display="flex" alignItems="center" color={isCurrentUser ? 'secondary' : 'primary'}>
+              <TBox display="flex" marginX={1} alignItems="center" flexDirection={isCurrentUser ? 'row' : 'row-reverse'} color={isCurrentUser ? 'secondary' : 'primary'}>
                 <AccessTimeIcon color={isCurrentUser ? 'secondary' : 'primary'} />
-                <TTypography marginLeft={1} variant="body2">
+                <TTypography marginLeft={1} variant="body2" marginX={1}>
                   {moment(time).format('HH:mm A DD/MM/yyyy')}
                 </TTypography>
               </TBox>
             </TBox>
             <TDivider margintop={0.5} marginbottom={1} />
             {message?.split('\n').map((item, index) => (
-              <TTypography key={index} variant="body1" textAlign={isCurrentUser ? 'right' : 'left'}>
-                {item}
-              </TTypography>
+              <TTypography key={index} dangerouslySetInnerHTML={{__html: item}} textAlign={isCurrentUser ? 'right' : 'left'}/>
             ))}
           </TMessageWrapper>
         </TGrid>

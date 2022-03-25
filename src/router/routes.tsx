@@ -17,6 +17,7 @@ import TGeneratorPost, { TMatchGeneratorPostParams } from 'pages/posts/generator
 import TViewPost, { TMatchParamsViewPost } from 'pages/posts/view';
 import TChatRooms from 'pages/chat';
 import TRoom from 'pages/chat/room';
+import TUsersManager from 'pages/user/manager';
 
 export type TMatchDefaultParam = {
   id?: string;
@@ -208,6 +209,20 @@ export const TRoutesLogged: Array<TRouteProps> = [
   {
     path: '/user/profile/:_id',
     main: (props: RouteComponentProps<TMatchParamsTViewUser>) => <TViewUser {...props} />,
+    title: 'profile',
+    breadcrumbs: [{ href: '/', label: 'home' }],
+    exact: true,
+  },
+  {
+    path: '/dashboard/user-manager',
+    main: () => <TUsersManager />,
+    title: 'profile',
+    breadcrumbs: [{ href: '/', label: 'home' }],
+    exact: true,
+  },
+  {
+    path: '/dashboard/banned',
+    main: () => <TUsersManager store="banned" />,
     title: 'profile',
     breadcrumbs: [{ href: '/', label: 'home' }],
     exact: true,

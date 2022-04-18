@@ -18,7 +18,7 @@ export type TBreadcrumbsProps = BreadcrumbsProps &{
   paddingBottom?: number;
   marginLeft?: number;
   marginRight?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   items: Array<{ href: string; label: string }>;
 };

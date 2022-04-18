@@ -25,7 +25,7 @@ const TFooterHead = (socicalsUrl: socicalsUrl) => {
   const { t } = useTranslation();
 
   return (
-    <TFooterHeadStyled paddingLeft={3.25} paddingright={3.25} container padding={1} alignItems="center">
+    <TFooterHeadStyled paddingleft={3.25} paddingright={3.25} container padding={1} alignItems="center">
       <TGrid item xs={12} md={6}>
         <TTypography variant="h5">{t('get_connected_with_me_on_social_networks')}</TTypography>
       </TGrid>

@@ -3,6 +3,7 @@ import unionBy from 'lodash/unionBy';
 import { useTranslation } from 'react-i18next';
 import { setHelmet } from 'store/slices/helmet';
 import { useDispatch } from 'react-redux';
+import io from 'socket.io-client';
 
 import TPostItem, { TPostItemProps } from 'components/postItem';
 import TButton from 'components/button';
@@ -23,10 +24,15 @@ export type TPostProps = TBoxProps & {
   tag?: Array<string>;
   loadMore?: boolean;
   titleRender?: JSX.Element;
+  showTitle?: boolean;
 };
 
-const TPost = ({ loadMore, userId, titleRender, ...props }: TPostProps) => {
+const socket = io('https://te11api.herokuapp.com');
+
+const TPost = ({ userId,showTitle, titleRender, ...props }: TPostProps) => {
   const [posts, setPosts] = useState<Array<TPostItemProps> | []>([]);
+  const [reload,setReload] = useState(false);
+  const [totalPosts, setTotalPosts] = useState(0);
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -52,8 +58,11 @@ const TPost = ({ loadMore, userId, titleRender, ...props }: TPostProps) => {
           return response.json();
         })
         .then((data) => {
-          const newPost = unionBy(posts, data, '_id');
-          setPosts(newPost);
+          if (data.posts && data.amount) {
+            const newPost = unionBy(posts, data.posts, '_id');
+            setPosts(newPost);
+            setTotalPosts(data.amount);
+          }
           dispatch(setLoading(false));
         })
         .catch(() => {
@@ -67,11 +76,20 @@ const TPost = ({ loadMore, userId, titleRender, ...props }: TPostProps) => {
 
   useEffect(() => {
     let isSubscribed = true;
-    if (isSubscribed) {
+    if (isSubscribed&&showTitle) {
       dispatch(setHelmet({ title: t('posts') }));
     }
     return () => {
       isSubscribed = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on('posts:update', () => {
+      setReload(!reload);
+    });
+    return () => {
+      socket.off('posts:update');
     };
   }, []);
 
@@ -81,7 +99,7 @@ const TPost = ({ loadMore, userId, titleRender, ...props }: TPostProps) => {
       {posts.map((post, index) => (
         <TPostItem key={index} marginbottom={4} {...post} />
       ))}
-      {loadMore ? (
+      {posts.length < totalPosts ? (
         <TBox margintop={4} textalign="center">
           <TButton variant="outlined" onClick={() => setPage(page + 1)}>
             {t('view_more')}

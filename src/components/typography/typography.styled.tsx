@@ -15,7 +15,7 @@ export type TTypographyProps = TypographyProps & {
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   color?: Property.Color | undefined;
   lineheight?: number;
@@ -41,7 +41,7 @@ const TTypographyStyled = styled(Typography)<TTypographyProps>`
   padding-bottom: ${({ paddingBottom, theme }) => paddingBottom && theme.spacing(paddingBottom)};
   margin-left: ${({ marginLeft, theme }) => marginLeft && theme.spacing(marginLeft)};
   margin-right: ${({ marginright, theme }) => marginright && theme.spacing(marginright)};
-  padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
+  padding-left: ${({ paddingleft, theme }) => paddingleft && theme.spacing(paddingleft)};
   padding-right: ${({ paddingright, theme }) => paddingright && theme.spacing(paddingright)};
   color: ${({ color, theme }) => color ?color : theme.palette.primary.dark};
   line-height: ${({ lineheight }) => lineheight};

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ArrowUp from 'components/icon/arrowUp';
@@ -7,8 +7,7 @@ import TFloating from 'components/floating';
 import TIconButton from 'components/iconButton';
 import TTooltip from 'components/toolTip';
 
-const TScrollToTop = ({ positionShowUp, ...props }: TFloatingProps) => {
-  const [show, setShow] = useState(false);
+const TScrollToTop = (props : TFloatingProps) => {
   const { t } = useTranslation();
 
   const clickScrollTop = () => {
@@ -17,21 +16,7 @@ const TScrollToTop = ({ positionShowUp, ...props }: TFloatingProps) => {
       behavior: 'smooth',
     });
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setShow(scrollTop > (positionShowUp || 0));
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  });
-
-  return show ? (
+  return (
     <TFloating {...props} onClick={clickScrollTop}>
       <TTooltip title={t('scroll_to_top')}>
         <TIconButton>
@@ -39,7 +24,7 @@ const TScrollToTop = ({ positionShowUp, ...props }: TFloatingProps) => {
         </TIconButton>
       </TTooltip>
     </TFloating>
-  ) : null;
+  );
 };
 
 export default TScrollToTop;

@@ -11,7 +11,7 @@ export type TDividerProps = DividerProps & {
     padding?:string | number;
     paddingTop?: string | number;
     paddingBottom?: string | number;
-    paddingLeft?: string | number;
+    paddingleft?: string | number;
     paddingright?: string | number;
 };
 
@@ -26,7 +26,7 @@ const TDividerStyled = styled(Divider)<{
     padding?:string | number;
     paddingTop?: string | number;
     paddingBottom?: string | number;
-    paddingLeft?: string | number;
+    paddingleft?: string | number;
     paddingright?: string | number;
 }>`
     width: ${({width, theme}) => width && ((typeof width === 'string')?(width): theme.spacing(width))};
@@ -39,7 +39,7 @@ const TDividerStyled = styled(Divider)<{
     padding: ${({padding, theme}) => padding && ((typeof padding === 'string')?(padding): theme.spacing(padding))};
     padding-top: ${({paddingTop, theme}) => paddingTop && ((typeof paddingTop === 'string')?(paddingTop): theme.spacing(paddingTop))};
     padding-bottom: ${({paddingBottom, theme}) => paddingBottom && ((typeof paddingBottom === 'string')?(paddingBottom): theme.spacing(paddingBottom))};
-    padding-left: ${({paddingLeft, theme}) => paddingLeft && ((typeof paddingLeft === 'string')?(paddingLeft): theme.spacing(paddingLeft))};
+    padding-left: ${({paddingleft, theme}) => paddingleft && ((typeof paddingleft === 'string')?(paddingleft): theme.spacing(paddingleft))};
     padding-right: ${({paddingright, theme}) => paddingright && ((typeof paddingright === 'string')?(paddingright): theme.spacing(paddingright))};
 `;
 

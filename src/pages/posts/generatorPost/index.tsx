@@ -158,6 +158,7 @@ const TGeneratorPost = ({ match }: RouteComponentProps<TMatchGeneratorPostParams
             .then((res) => {
               setSlug(res);
               setSubmitting(false);
+              socket.emit('posts:updated', {});
               socket.emit('notif:created', {
                 type: 'success',
                 message: 'Generate post successfully',
@@ -172,15 +173,15 @@ const TGeneratorPost = ({ match }: RouteComponentProps<TMatchGeneratorPostParams
         }}
         enableReinitialize
       >
-        {({ errors,touched, values, handleChange, setFieldValue }) => (
+        {({ errors, touched, values, handleChange, setFieldValue }) => (
           <Form>
             <TGrid container>
               <TGrid item xs={12} md={8}>
                 <TInput
                   name="title"
                   label={t('title')}
-                  error={touched.title&&!!errors.title}
-                  helperText={touched.title&&errors.title}
+                  error={touched.title && !!errors.title}
+                  helperText={touched.title && errors.title}
                   value={values.title}
                   onChange={handleChange}
                   width="100%"
@@ -202,8 +203,8 @@ const TGeneratorPost = ({ match }: RouteComponentProps<TMatchGeneratorPostParams
                   label={t('description')}
                   value={values.description}
                   onChange={handleChange}
-                  error={touched.description&&!!errors.description}
-                  helperText={touched.description&&errors.description}
+                  error={touched.description && !!errors.description}
+                  helperText={touched.description && errors.description}
                   width="100%"
                   margintop={2}
                   marginbottom={2}

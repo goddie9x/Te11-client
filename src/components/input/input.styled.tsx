@@ -15,7 +15,7 @@ export type TInputProps = TextFieldProps & {
   padding?: number | string;
   paddingTop?: number | string;
   paddingBottom?: number | string;
-  paddingLeft?: number | string;
+  paddingleft?: number | string;
   paddingRight?: number | string;
   fontSize?: number | string;
   fontWeight?: number | string;
@@ -65,8 +65,8 @@ const TInputStyled = styled(TextField)<TInputProps>`
       paddingTop && (typeof paddingTop === 'string' ? paddingTop : theme.spacing(paddingTop))};
     padding-bottom: ${({ paddingBottom, theme }) =>
       paddingBottom && (typeof paddingBottom === 'string' ? paddingBottom : theme.spacing(paddingBottom))};
-    padding-left: ${({ paddingLeft, theme }) =>
-      paddingLeft && (typeof paddingLeft === 'string' ? paddingLeft : theme.spacing(paddingLeft))};
+    padding-left: ${({ paddingleft, theme }) =>
+      paddingleft && (typeof paddingleft === 'string' ? paddingleft : theme.spacing(paddingleft))};
     padding-right: ${({ paddingRight, theme }) =>
       paddingRight && (typeof paddingRight === 'string' ? paddingRight : theme.spacing(paddingRight))};
       line-height: ${({ lineheight, theme }) =>

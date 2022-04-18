@@ -13,7 +13,7 @@ export type TAlertProps = AlertProps & {
     padding?: number | string;
     paddingTop?: number | string;
     paddingBottom?: number | string;
-    paddingLeft?: number | string;
+    paddingleft?: number | string;
     paddingright?: number | string;
     margin?: number | string;
     margintop?: number | string;
@@ -49,7 +49,7 @@ const TAlertStyled = styled(Alert)<TAlertProps>`
     padding: ${({ padding, theme})=> padding && ((typeof padding === 'string')?(padding): theme.spacing(padding))};
     padding-top: ${({ paddingTop, theme})=> paddingTop && ((typeof paddingTop === 'string')?(paddingTop): theme.spacing(paddingTop))};
     padding-bottom: ${({ paddingBottom, theme})=> paddingBottom && ((typeof paddingBottom === 'string')?(paddingBottom): theme.spacing(paddingBottom))};
-    padding-left: ${({ paddingLeft, theme})=> paddingLeft && ((typeof paddingLeft === 'string')?(paddingLeft): theme.spacing(paddingLeft))};
+    padding-left: ${({ paddingleft, theme})=> paddingleft && ((typeof paddingleft === 'string')?(paddingleft): theme.spacing(paddingleft))};
     padding-right: ${({ paddingright, theme})=> paddingright && ((typeof paddingright === 'string')?(paddingright): theme.spacing(paddingright))};
     margin: ${({ margin, theme})=> margin && ((typeof margin === 'string')?(margin): theme.spacing(margin))};
     margin-top: ${({ margintop, theme})=> margintop && ((typeof margintop === 'string')?(margintop): theme.spacing(margintop))};

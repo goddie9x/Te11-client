@@ -47,7 +47,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
   const _id = match.params._id;
   const currentUser = useSelector((state: RootState) => state.auth.userData);
   const canPost = currentUser && currentUser.role < 2;
-  const [scheduleData, setScheduleData] =useState<TGeneratorSchedule>();
+  const [scheduleData, setScheduleData] = useState<TGeneratorSchedule>();
   const currentLanguage = useSelector((state: RootState) => state.common.language);
   const daysOfWeek = currentLanguage === Language.EN_US ? dayOfWeekEn : dayOfWeekVi;
   const partsOfDay = currentLanguage === Language.EN_US ? partsOfDayEn : partsOfDayVi;
@@ -84,26 +84,28 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    if(_id){
-      fetch('https://te11api.herokuapp.com/schedules/stored/'+_id)
-      .then(res => {
-        if(res.status >= 400){
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then(res => {
-        setScheduleData(res);
-      })
-      .catch(() => {
-        dispatch(setAlert({
-          type: 'error',
-          message: t('schedule_not_found'),
-          title: t('error'),
-        }));
-      });
+    if (_id) {
+      fetch('https://te11api.herokuapp.com/schedules/stored/' + _id)
+        .then((res) => {
+          if (res.status >= 400) {
+            throw new Error(res.statusText);
+          }
+          return res.json();
+        })
+        .then((res) => {
+          setScheduleData(res);
+        })
+        .catch(() => {
+          dispatch(
+            setAlert({
+              type: 'error',
+              message: t('schedule_not_found'),
+              title: t('error'),
+            }),
+          );
+        });
     }
-  },[]);
+  }, []);
   return (
     <Formik
       initialValues={initialValues}
@@ -124,6 +126,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                 type: 'success',
                 message: 'Create schedule successfully',
               });
+              socket.emit('schedule:updated', {});
             } else {
               throw new Error('create-failed');
             }
@@ -136,10 +139,10 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
       }}
       validationSchema={CreateScheduleSchema}
     >
-      {({ errors,touched, values, handleChange, setFieldValue }) => (
+      {({ errors, touched, values, handleChange, setFieldValue }) => (
         <Form>
           <TGrid container>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TSelect
                 disabled={!canPost}
                 name="type"
@@ -156,33 +159,33 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                 ))}
               </TSelect>
             </TGrid>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TInput
                 disabled={!canPost}
                 name="name"
                 value={values.name}
                 label={t('name')}
-                error={touched.name&&!!errors.name}
+                error={touched.name && !!errors.name}
                 onChange={handleChange}
-                helperText={touched.name&&errors.name}
+                helperText={touched.name && errors.name}
                 marginbottom={3}
                 width="100%"
               />
             </TGrid>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TInput
                 disabled={!canPost}
                 name="room"
                 value={values.room}
                 label={t('room')}
-                error={touched.room&&!!errors.room}
+                error={touched.room && !!errors.room}
                 onChange={handleChange}
-                helperText={touched.room&&errors.room}
+                helperText={touched.room && errors.room}
                 marginbottom={3}
                 width="100%"
               />
             </TGrid>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TSelect
                 disabled={!canPost}
                 name="dayOfWeek"
@@ -199,7 +202,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                 ))}
               </TSelect>
             </TGrid>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TSelect
                 disabled={!canPost}
                 name="partOfDay"
@@ -217,54 +220,54 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                 ))}
               </TSelect>
             </TGrid>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TInput
                 disabled={!canPost}
                 name="dayStart"
                 value={values.dayStart}
-                error={touched.dayStart&&!!errors.dayStart}
+                error={touched.dayStart && !!errors.dayStart}
                 label={t('day_start')}
                 onChange={handleChange}
                 type="date"
                 marginbottom={3}
-                helperText={touched.dayStart&&errors.dayStart}
+                helperText={touched.dayStart && errors.dayStart}
                 width="100%"
                 placeholder=""
               />
             </TGrid>
-            <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+            <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
               <TInput
                 disabled={!canPost}
                 name="time"
                 value={values.time}
-                error={touched.time&&!!errors.time}
+                error={touched.time && !!errors.time}
                 label={t('time')}
                 onChange={handleChange}
                 marginbottom={3}
                 placeholder={t('time_examples')}
-                helperText={touched.time&&errors.time}
+                helperText={touched.time && errors.time}
                 width="100%"
               />
             </TGrid>
             {values.type == 0 && (
-              <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1}>
+              <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1}>
                 <TInput
                   disabled={!canPost}
                   name="dayEnd"
                   value={values.dayEnd}
-                  error={touched.dayEnd&&!!errors.dayEnd}
+                  error={touched.dayEnd && !!errors.dayEnd}
                   label={t('day_end')}
                   placeholder=""
                   onChange={handleChange}
                   type="date"
                   marginbottom={3}
-                  helperText={touched.dayEnd&&errors.dayEnd}
+                  helperText={touched.dayEnd && errors.dayEnd}
                   width="100%"
                 />
               </TGrid>
             )}
             {values.linkMeet.map((link, index) => (
-              <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1} key={index}>
+              <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1} key={index}>
                 <TGrid container marginbottom={3} alignItems="center">
                   <TGrid item xs={8}>
                     <TInput
@@ -285,7 +288,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                   </TGrid>
                   {!!canPost && (
                     <>
-                      <TGrid item xs={2} paddingLeft={2} paddingRight={1}>
+                      <TGrid item xs={2} paddingleft={2} paddingRight={1}>
                         <TButton
                           variant="contained"
                           onClick={() => {
@@ -299,7 +302,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                           {t('add')}
                         </TButton>
                       </TGrid>
-                      <TGrid item xs={2} paddingLeft={2} paddingRight={1}>
+                      <TGrid item xs={2} paddingleft={2} paddingRight={1}>
                         <TButton
                           variant="contained"
                           color="error"
@@ -321,7 +324,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
               </TGrid>
             ))}
             {values.linkClass.map((link, index) => (
-              <TGrid item md={6} xs={12} paddingLeft={1} paddingRight={1} key={index}>
+              <TGrid item md={6} xs={12} paddingleft={1} paddingRight={1} key={index}>
                 <TGrid container marginbottom={3} alignItems="center">
                   <TGrid item xs={8}>
                     <TInput
@@ -341,7 +344,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                   </TGrid>
                   {!!canPost && (
                     <>
-                      <TGrid item xs={2} paddingLeft={2} paddingRight={1}>
+                      <TGrid item xs={2} paddingleft={2} paddingRight={1}>
                         <TButton
                           variant="contained"
                           onClick={() => {
@@ -355,7 +358,7 @@ const TGeneratorSchedule = ({ match }: RouteComponentProps<TMatchGeneratorSchedu
                           {t('add')}
                         </TButton>
                       </TGrid>
-                      <TGrid item xs={2} paddingLeft={2} paddingRight={1}>
+                      <TGrid item xs={2} paddingleft={2} paddingRight={1}>
                         <TButton
                           variant="contained"
                           color="error"

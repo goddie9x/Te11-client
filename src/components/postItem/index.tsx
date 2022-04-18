@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import io from 'socket.io-client';
 
 import TGrid from 'components/grid';
 import TLink from 'components/link';
@@ -30,6 +31,8 @@ export type TPostItemProps = TGridProps & {
   colorTag?: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
   publicType?: number;
 };
+
+const socket = io('https://te11api.herokuapp.com');
 
 const TPostItem = ({
   slug,
@@ -61,14 +64,17 @@ const TPostItem = ({
       body: JSON.stringify({ tokenUser: localStorage.getItem('tokenUser') }),
     }).then((res) => {
       if (res.status >= 400) {
-        dispatch(setLoading(false));
-        dispatch(setAlert({ type: 'error', message: t('cannot_delete_post'), title: t('error') }));
-        return;
+        throw new Error('Bad response from server');
       }
+      socket.emit('posts:updated');
       dispatch(setLoading(false));
       dispatch(setAlert({ type: 'success', message: t('post_deleted'), title: t('success') }));
       setDeteled(true);
-    });
+    })
+      .catch((err) => {
+        dispatch(setLoading(false));
+        dispatch(setAlert({ type: 'error', message: t('cannot_delete_post'), title: t('error') }));
+      });
   };
 
   useEffect(() => {
@@ -108,7 +114,7 @@ const TPostItem = ({
           </TCard>
         </TLink>
       </TGrid>
-      <TGrid paddingLeft={3} paddingY={0.75} item xs={12} sm={6} md={7} lg={9}>
+      <TGrid paddingleft={3} paddingY={0.75} item xs={12} sm={6} md={7} lg={9}>
         <TBox marginbottom={2}>
           {tag &&
             tag.length > 0 &&

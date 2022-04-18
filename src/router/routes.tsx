@@ -67,7 +67,7 @@ export const TRoutesLogged: Array<TRouteProps> = [
   },
   {
     path: '/posts',
-    main: () => <TPost loadMore />,
+    main: () => <TPost />,
     title: 'posts',
     breadcrumbs: [{ href: '/', label: 'home' }],
     exact: true,
@@ -94,7 +94,7 @@ export const TRoutesLogged: Array<TRouteProps> = [
   },
   {
     path: '/posts/tag/',
-    main: () => <TPost loadMore />,
+    main: () => <TPost />,
     title: 'posts',
     breadcrumbs: [{ href: '/', label: 'home' }],
     exact: true,
@@ -288,7 +288,7 @@ export const TRoutesNotLogged: Array<TRouteProps> = [
   },
   {
     path: '/posts',
-    main: () => <TPost loadMore />,
+    main: () => <TPost showTitle/>,
     title: 'posts',
     breadcrumbs: [{ href: '/', label: 'home' }],
     exact: true,

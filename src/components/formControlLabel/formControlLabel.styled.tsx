@@ -13,7 +13,7 @@ export type TFormControlLabelProps = FormControlLabelProps & {
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   textColor?: string;
 };
@@ -31,7 +31,7 @@ const TFormControlLabelStyled = styled(FormControlLabel)<{
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   textColor?: string;
 }>`
@@ -45,7 +45,7 @@ const TFormControlLabelStyled = styled(FormControlLabel)<{
   padding-bottom: ${({ paddingBottom, theme }) => paddingBottom && theme.spacing(paddingBottom)};
   margin-left: ${({ marginLeft, theme }) => marginLeft && theme.spacing(marginLeft)};
   margin-right: ${({ marginright, theme }) => marginright && theme.spacing(marginright)};
-  padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
+  padding-left: ${({ paddingleft, theme }) => paddingleft && theme.spacing(paddingleft)};
   padding-right: ${({ paddingright, theme }) => paddingright && theme.spacing(paddingright)};
   min-width: ${({ minwidth, theme }) => minwidth && theme.spacing(minwidth)};
   min-height: ${({ minHeight, theme }) => minHeight && theme.spacing(minHeight)};

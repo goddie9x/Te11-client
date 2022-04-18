@@ -1,10 +1,11 @@
-import React,{memo} from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import TBox from 'components/box';
 import TTypography from 'components/typography';
 import TFooterHead from './footerHead';
 import TFooterMain from './footerMain';
+import TSharePopup from 'components/sharePopup';
 
 const TFooter = () => {
   const { t } = useTranslation();
@@ -44,9 +45,10 @@ const TFooter = () => {
 
   return (
     <TBox height="max-content">
-     <TFooterHead {...socicalsUrl}/>
-      <TFooterMain data={footerGridColumnData}/>
-      <TBox height={50} paddingLeft={3.25} lineheight={50} paddingRight={3.25} background="#38262647">
+      <TSharePopup />
+      <TFooterHead {...socicalsUrl} />
+      <TFooterMain data={footerGridColumnData} />
+      <TBox height={50} paddingleft={3.25} lineheight={50} paddingRight={3.25} background="#38262647">
         <TTypography variant="h6" textalign="center" lineheight={2.3} color="textSecondary">
           {t('copyright')}
         </TTypography>

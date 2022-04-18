@@ -314,7 +314,7 @@ const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
                             <TGrid item xs={3} sm={1.5} md={3} lg={1.5} textalign="center">
                               <TButton
                                 minwidth={7}
-                                paddingLeft={2.5}
+                                paddingleft={2.5}
                                 paddingright={2.5}
                                 variant="outlined"
                                 color="secondary"
@@ -330,7 +330,7 @@ const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
                             <TGrid item xs={3} sm={1.5} md={3} lg={1.5} textalign="center">
                               <TButton
                                 minwidth={7}
-                                paddingLeft={2.5}
+                                paddingleft={2.5}
                                 paddingright={2.5}
                                 variant="outlined"
                                 color="error"
@@ -382,7 +382,7 @@ const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
                                 variant="outlined"
                                 color="secondary"
                                 minwidth={7}
-                                paddingLeft={2.5}
+                                paddingleft={2.5}
                                 paddingright={2.5}
                                 onClick={() => {
                                   const newPhoneList = values.phone ? [...values.phone] : [];
@@ -398,7 +398,7 @@ const TViewUser = (props: RouteComponentProps<TMatchParamsTViewUser>) => {
                                 variant="outlined"
                                 color="error"
                                 minwidth={7}
-                                paddingLeft={2.5}
+                                paddingleft={2.5}
                                 paddingright={2.5}
                                 onClick={() => {
                                   const newPhoneList = values.phone ? [...values.phone] : [];

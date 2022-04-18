@@ -2,6 +2,7 @@ import React, { useEffect, useState, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import io from 'socket.io-client';
 
 import TTable, { TTableColumnData } from 'components/table';
 import TBox from 'components/box';
@@ -28,6 +29,8 @@ export type TSchedulesManagerProps = {
 export type TScheduleRowProps = TGeneratorSchedule & {
   _id: string;
 };
+
+const socket = io('https://te11api.herokuapp.com');
 
 const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
   const [page, setPage] = useState(1);
@@ -60,7 +63,7 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
   };
 
   const handleEditSchedule = (_id?: string) => {
-    history.push('/schedules/edit/'+_id);
+    history.push('/schedules/edit/' + _id);
   };
   const restoreSchedule = (scheduleID: string) => {
     dispatch(setLoading(true));
@@ -79,6 +82,7 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
         dispatch(setAlert({ type: 'success', title: t('success'), message: t('schedule_restore_successfully') }));
         setRows((prevRows) => prevRows.filter((row) => row._id !== scheduleID));
         setOpositeStoredCount((prevCount) => prevCount + 1);
+        socket.emit('schedule:updated', {});
         setTotalSchedules((prevCount) => prevCount - 1);
       })
       .catch(() => {
@@ -115,6 +119,7 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
         if (store !== 'trash') {
           setOpositeStoredCount((prevCount) => prevCount + 1);
         }
+        socket.emit('schedule:updated', {});
         setTotalSchedules((prevCount) => prevCount - 1);
       })
       .catch(() => {
@@ -181,6 +186,7 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
             setRows((prevRows) => prevRows.filter((row) => !selectedRowID.includes(row._id)));
             setOpositeStoredCount((prevCount) => prevCount - selectedRowID.length);
             setTotalSchedules((prevCount) => prevCount + selectedRowID.length);
+            socket.emit('schedule:updated', {});
             setSelectedRowID([]);
           })
           .catch(() => {
@@ -212,6 +218,7 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
               setOpositeStoredCount((prevCount) => prevCount + selectedRowID.length);
             }
             setTotalSchedules((prevCount) => prevCount - selectedRowID.length);
+            socket.emit('schedule:updated', {});
             setSelectedRowID([]);
           })
           .catch(() => {
@@ -313,7 +320,7 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
       : [{ label: t('delete'), value: 'delete' }];
 
   useEffect(() => {
-    if(!userData||userData.role>1){
+    if (!userData || userData.role > 1) {
       history.push('/no_permissions');
     }
     const urlGetSchedule =
@@ -360,6 +367,14 @@ const TSchedulesManager = ({ type, store }: TSchedulesManagerProps) => {
     };
   }, [page, triggerReloadData, rowsPerPage]);
 
+  useEffect(() => {
+    socket.on('schedule:update', () => {
+      setTriggerReloadData(!triggerReloadData);
+    });
+    return () => {
+      socket.off('schedule:update');
+    };
+  }, []);
   return rows ? (
     <TBox>
       <TBox display="flex" my={2} px={6} alignItems="center" justifyContent="space-between">

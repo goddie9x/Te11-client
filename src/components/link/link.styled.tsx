@@ -14,7 +14,7 @@ export type TLinkProps = Omit<LinkProps,'to'>& {
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   width?: number | string;
   minwidth?: number;
@@ -39,7 +39,7 @@ export const StyledLink = styled(Link)<{
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   width?: number | string;
   minwidth?: number;
@@ -62,7 +62,7 @@ export const StyledLink = styled(Link)<{
   padding-bottom: ${({ paddingBottom, theme }) => paddingBottom && theme.spacing(paddingBottom)};
   margin-left: ${({ marginLeft, theme }) => marginLeft && theme.spacing(marginLeft)};
   margin-right: ${({ marginright, theme }) => marginright && theme.spacing(marginright)};
-  padding-left: ${({ paddingLeft, theme }) => paddingLeft && theme.spacing(paddingLeft)};
+  padding-left: ${({ paddingleft, theme }) => paddingleft && theme.spacing(paddingleft)};
   padding-right: ${({ paddingright, theme }) => paddingright && theme.spacing(paddingright)};
   text-align: ${({ textalign }) => textalign};
   font-size: ${({ fontSize, theme }) => fontSize && theme.spacing(fontSize)};

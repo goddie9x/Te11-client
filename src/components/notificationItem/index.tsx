@@ -101,7 +101,7 @@ const NotificationItem = ({
             <IconNotification type={type || 1} />
           </TBox>
         </TGrid>
-        <TGrid paddingLeft={1} item xs={8}>
+        <TGrid paddingleft={1} item xs={8}>
           <TTypography variant="body1" color="textSecondary">
             {userNameAthor}
           </TTypography>

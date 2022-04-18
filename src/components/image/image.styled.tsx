@@ -12,7 +12,7 @@ export type TImageProps = {
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   borderradius?: number;
   minwidth?: number;
@@ -33,7 +33,7 @@ const TImageStyled = styled.img<{
   paddingBottom?: number;
   marginLeft?: number;
   marginright?: number;
-  paddingLeft?: number;
+  paddingleft?: number;
   paddingright?: number;
   borderradius?: number;
   minwidth?: number;
@@ -54,7 +54,7 @@ const TImageStyled = styled.img<{
   padding-bottom: ${({ paddingBottom }) => (paddingBottom && Number(paddingBottom) ? paddingBottom + 'px' : paddingBottom)};
   margin-left: ${({ marginLeft }) => (marginLeft && Number(marginLeft) ? marginLeft + 'px' : marginLeft)};
   margin-right: ${({ marginright }) => (marginright && Number(marginright) ? marginright + 'px' : marginright)};
-  padding-left: ${({ paddingLeft }) => (paddingLeft && Number(paddingLeft) ? paddingLeft + 'px' : paddingLeft)};
+  padding-left: ${({ paddingleft }) => (paddingleft && Number(paddingleft) ? paddingleft + 'px' : paddingleft)};
   padding-right: ${({ paddingright }) => (paddingright && Number(paddingright) ? paddingright + 'px' : paddingright)};
   border-radius: ${({ borderradius }) => (borderradius && Number(borderradius) ? borderradius + 'px' : borderradius)};
   min-width: ${({ minwidth }) => minwidth}px;

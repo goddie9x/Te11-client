@@ -62,7 +62,7 @@ const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
         { href: '/manager', title: t('schedules_manager') },
       ],
     },
-    {href:'/group-chat', title: t('chat_room')},
+    { href: '/group-chat', title: t('chat_room') },
     { href: '/dir', title: t('generate_short_link') },
   ];
 
@@ -116,7 +116,7 @@ const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
           <TLink href="/">
             <TImage src={Logo} width={75} marginright={10} borderradius={10} />
           </TLink>
-          <THeaderMenuDropdown marginLeft={{xs:0.5,md:2}} forMobile={true} menuList={navlinks} />
+          <THeaderMenuDropdown marginLeft={{ xs: 0.5, md: 2 }} forMobile={true} menuList={navlinks} />
           <TBox display={{ xs: 'none', md: 'flex' }} flexGrow={1}>
             {navlinks.map((page, index) => (
               <TNavItem key={index} {...page} />
@@ -125,11 +125,11 @@ const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
           <THeaderSearch />
           {isLoggedIn ? (
             <>
-              <THeaderNotification marginLeft={{xs:0.5,md:2}} />
+              <THeaderNotification marginLeft={{ xs: 0.5, md: 2 }} />
               <THeaderMenuDropdown
                 menuProps={{ width: '250px', textalign: 'left' }}
-                marginLeft={{xs:0.5,md:2}}
-                toolTip={t('account_settings')}
+                marginLeft={{ xs: 0.5, md: 2 }}
+                toolTip={userData?.fullName || userData?.account || t('account_settings')}
                 IconButton={
                   userData?.image ? (
                     <TImage borderradius={9999} padding={4} width="100%" height="100%" src={userData?.image} />
@@ -142,7 +142,7 @@ const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
             </>
           ) : (
             <THeaderMenuRenderOption
-              marginLeft={{xs:0.5,md:2}}
+              marginLeft={{ xs: 0.5, md: 2 }}
               menuList={loginOption}
               toolTip={t('login')}
               IconButton={
@@ -171,11 +171,11 @@ const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
               }}
             />
           )}
-          <THeaderSetting marginLeft={{xs:0.5,md:2}} />
+          <THeaderSetting marginLeft={{ xs: 0.5, md: 2 }} />
         </Toolbar>
       </Container>
       <TScrollProgress height={5} display="block" />
-      <TScrollToTop bottom={3} right={3} zindex={1300} />
+      <TScrollToTop positionShowUp={200} bottom={16} right={16} zindex={1300} />
       <TLoginModal />
       <TResetPasswordModal />
       <TRegisterModal />

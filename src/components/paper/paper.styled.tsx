@@ -21,7 +21,7 @@ export type TPaperProps = PaperProps&{
     paddingTop?: number | string;
     paddingright?: number | string;
     paddingBottom?: number | string;
-    paddingLeft?: number | string;
+    paddingleft?: number | string;
     borderradius?: number | string;
     border?: number | string;
     borderColor?: string;
@@ -51,7 +51,7 @@ const TPaperStyled = styled(Paper)<TPaperProps>`
     padding-top: ${({paddingTop, theme}) => paddingTop && ((typeof paddingTop === 'string')?(paddingTop): theme.spacing(paddingTop))};
     padding-right: ${({paddingright, theme}) => paddingright && ((typeof paddingright === 'string')?(paddingright): theme.spacing(paddingright))};
     padding-bottom: ${({paddingBottom, theme}) => paddingBottom && ((typeof paddingBottom === 'string')?(paddingBottom): theme.spacing(paddingBottom))};
-    padding-left: ${({paddingLeft, theme}) => paddingLeft && ((typeof paddingLeft === 'string')?(paddingLeft): theme.spacing(paddingLeft))};
+    padding-left: ${({paddingleft, theme}) => paddingleft && ((typeof paddingleft === 'string')?(paddingleft): theme.spacing(paddingleft))};
     border-radius: ${({borderradius, theme}) => borderradius && ((typeof borderradius === 'string')?(borderradius): theme.spacing(borderradius))};
     border: ${({border, theme}) => border && ((typeof border === 'string')?(border): theme.spacing(border))};
     border-color: ${({borderColor}) => borderColor };

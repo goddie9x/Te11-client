@@ -10,7 +10,7 @@ export type TMenuProps = MenuProps & {
   padding?: string | number;
   paddingTop?: string | number;
   paddingBottom?: string | number;
-  paddingLeft?: string | number;
+  paddingleft?: string | number;
   paddingright?: string | number;
   margin?: string | number;
   margintop?: string | number;
@@ -48,8 +48,8 @@ const TMenuStyled = styled(Menu)<TMenuProps>`
     paddingTop && (typeof paddingTop === 'string' ? paddingTop : theme.spacing(paddingTop))};
   padding-bottom: ${({ paddingBottom, theme }) =>
     paddingBottom && (typeof paddingBottom === 'string' ? paddingBottom : theme.spacing(paddingBottom))};
-  padding-left: ${({ paddingLeft, theme }) =>
-    paddingLeft && (typeof paddingLeft === 'string' ? paddingLeft : theme.spacing(paddingLeft))};
+  padding-left: ${({ paddingleft, theme }) =>
+    paddingleft && (typeof paddingleft === 'string' ? paddingleft : theme.spacing(paddingleft))};
   padding-right: ${({ paddingright, theme }) =>
     paddingright && (typeof paddingright === 'string' ? paddingright : theme.spacing(paddingright))};
   margin: ${({ margin, theme }) => margin && (typeof margin === 'string' ? margin : theme.spacing(margin))};

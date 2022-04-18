@@ -2,6 +2,7 @@ import React, { useEffect, useState, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import io from 'socket.io-client';
 
 import TTable, { TTableColumnData } from 'components/table';
 import TBox from 'components/box';
@@ -21,8 +22,11 @@ export type TSchedulesProps = {
   type?: number;
 };
 
+const socket = io('https://te11api.herokuapp.com');
+
 const TSchedules = ({ type }: TSchedulesProps) => {
   const [page, setPage] = useState(1);
+  const [reload, setReload] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [totalSchedules, setTotalSchedules] = useState(0);
   const [rows, setRows] = useState([]);
@@ -123,9 +127,17 @@ const TSchedules = ({ type }: TSchedulesProps) => {
     return () => {
       isSubscribed = false;
     };
-  }, [page]);
+  }, [page, reload]);
   useEffect(() => {
     dispatch(setHelmet({ title: type === 1 ? t('examination_schedule') : t('schedules') }));
+  }, []);
+  useEffect(() => {
+    socket.on('schedule:update', () => {
+      setReload(!reload);
+    });
+    return () => {
+      socket.off('schedule:update');
+    };
   }, []);
 
   return rows ? (

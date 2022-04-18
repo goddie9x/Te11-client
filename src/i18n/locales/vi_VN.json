@@ -277,5 +277,7 @@
     "user_force_delete_failed": "Xóa người dùng thất bại",
     "banned_amount": "Số lượng đã chặn ({{amount}})",
     "total_amount": "Tổng số lượng ({{amount}})",
-    "manager_users": "Quản lý người dùng"
+    "manager_users": "Quản lý người dùng",
+    "copied_share_link_to_clipboard": "Đã sao chép liên kết chia sẻ vào bộ nhớ tạm",
+    "share_this_page": "Chia sẻ trang này"
 }

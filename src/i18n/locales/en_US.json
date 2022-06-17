@@ -279,5 +279,9 @@
     "total_amount": "Banned amount ({{amount}})",
     "manager_users": "Manager users",
     "copied_share_link_to_clipboard": "Copied share link to clipboard",
-    "share_this_page": "Share this page"
+    "share_this_page": "Share this page",
+    "edit_role": "Edit role",
+    "select_role": "Select role",
+    "user_edit_role_successfully": "User edit role successfully",
+    "user_edit_role_failed": "User edit role failed"
 }

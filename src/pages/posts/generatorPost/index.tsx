@@ -8,9 +8,6 @@ import io from 'socket.io-client';
 import { PostType, PublicType } from 'constants/enum/postType';
 
 import TBox from 'components/box';
-import { setAlert } from 'store/slices/alert';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import TInput from 'components/input';
 import TEditor from 'components/CKEditor';
 import { CKEditorEventPayload } from 'ckeditor4-react';
@@ -23,6 +20,11 @@ import { onSaveProps } from 'components/imagePicker/imagePicker.styled';
 import { setLoading } from 'store/slices/common';
 import TButton from 'components/button';
 import { Autocomplete } from '@mui/material';
+
+import { setAlert } from 'store/slices/alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { RootState } from 'store';
 
 export type TMatchGeneratorPostParams = {
   slug?: string;
@@ -54,6 +56,7 @@ const TGeneratorPost = ({ match }: RouteComponentProps<TMatchGeneratorPostParams
     tag: [],
     type: 0,
   });
+  const userRole = useSelector((state: RootState) => state.auth.userData)?.role;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -230,26 +233,28 @@ const TGeneratorPost = ({ match }: RouteComponentProps<TMatchGeneratorPostParams
                       ))}
                     </TSelect>
                   </TGrid>
-                  <TGrid item xs={12} md={6}>
-                    <TSelect
-                      name="publicType"
-                      value={values.publicType}
-                      label={t('public_type')}
-                      onChange={handleChange}
-                      formControlProps={{
-                        margintop: 2,
-                        marginbottom: 2,
-                        width: '100%',
-                      }}
-                      width="100%"
-                    >
-                      {PublicType.map((item, index) => (
-                        <MenuItem key={index} value={index}>
-                          {t(item)}
-                        </MenuItem>
-                      ))}
-                    </TSelect>
-                  </TGrid>
+                  {userRole && userRole < 3 && (
+                    <TGrid item xs={12} md={6}>
+                      <TSelect
+                        name="publicType"
+                        value={values.publicType}
+                        label={t('public_type')}
+                        onChange={handleChange}
+                        formControlProps={{
+                          margintop: 2,
+                          marginbottom: 2,
+                          width: '100%',
+                        }}
+                        width="100%"
+                      >
+                        {PublicType.map((item, index) => (
+                          <MenuItem key={index} value={index}>
+                            {t(item)}
+                          </MenuItem>
+                        ))}
+                      </TSelect>
+                    </TGrid>
+                  )}
                 </TGrid>
                 <TBox marginY={2}>
                   <Autocomplete

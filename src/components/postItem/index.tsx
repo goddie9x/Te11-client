@@ -71,7 +71,7 @@ const TPostItem = ({
       dispatch(setAlert({ type: 'success', message: t('post_deleted'), title: t('success') }));
       setDeteled(true);
     })
-      .catch((err) => {
+      .catch(() => {
         dispatch(setLoading(false));
         dispatch(setAlert({ type: 'error', message: t('cannot_delete_post'), title: t('error') }));
       });

@@ -68,7 +68,6 @@ const THeader = ({ navs, AccSettings, loginOpt }: THeaderProps) => {
 
   const AccountSettings = AccSettings || [
     { href: '/user/profile/' + userData?._id, title: t('profile') },
-    { href: '/user/account', title: t('account') },
     { href: '/dashboard/user-manager', title: t('dashboard') },
     {
       href: 'logout',

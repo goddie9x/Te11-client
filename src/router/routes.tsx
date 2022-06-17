@@ -67,7 +67,7 @@ export const TRoutesLogged: Array<TRouteProps> = [
   },
   {
     path: '/posts',
-    main: () => <TPost />,
+    main: () => <TPost showTitle/>,
     title: 'posts',
     breadcrumbs: [{ href: '/', label: 'home' }],
     exact: true,

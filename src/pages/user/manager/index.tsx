@@ -16,6 +16,7 @@ import { setLoading } from 'store/slices/common';
 import { setAlert } from 'store/slices/alert';
 import { RootState } from 'store';
 import { setHelmet } from 'store/slices/helmet';
+import TSelectRoleModal from './selectRoleModal';
 
 export type TUsersManagerProps = {
   store?: string;
@@ -28,14 +29,18 @@ export type TUsersManagerRowProps = {
   //0: god, 1: admin, 2: classmate, 3: normal users
   role: number;
 };
+export const userRoles = ['god', 'admin', 'classmate', 'normal user'];
 
 const TUsersManager = ({ store }: TUsersManagerProps) => {
   const [page, setPage] = useState(1);
+  const [roleSelected, setRoleSelected] = useState(3);
+  const [openSelectRoleModal, setOpenSelectRoleModal] = useState(false);
+  const [userIdChangingRole, setUserIdChangingRole] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [totalUsers, setTotalUsers] = useState(0);
   const [rows, setRows] = useState<Array<TUsersManagerRowProps>>([]);
   const [selectedRowID, setSelectedRowID] = useState<Array<string>>([]);
-  const [actionSelected, setActionSelected] = useState<string>('ban');
+  const [actionSelected, setActionSelected] = useState<string>('delete');
   const [opositeStoredCount, setOpositeStoredCount] = useState(0);
   const [triggerReloadData, setTriggerReloadData] = useState(false);
   const userData = useSelector((state: RootState) => state.auth.userData);
@@ -44,7 +49,6 @@ const TUsersManager = ({ store }: TUsersManagerProps) => {
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
-
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentCheckBox = event.target;
     const checked = currentCheckBox.checked;
@@ -213,10 +217,65 @@ const TUsersManager = ({ store }: TUsersManagerProps) => {
             dispatch(setAlert({ type: 'error', title: t('error'), message: t('user_force_delete_failed') }));
           });
         break;
+      case 'editRole':
+        dispatch(setLoading(true));
+        fetch('https://te11api.herokuapp.com/user/handleMultiAction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            tokenUser: localStorage.getItem('tokenUser'),
+            method: 'editRole',
+            ids: selectedRowID,
+            role: roleSelected,
+          }),
+        })
+          .then((response) => {
+            dispatch(setLoading(false));
+            if (response.status >= 400) {
+              throw new Error('Bad response from server');
+            }
+            dispatch(setAlert({ type: 'success', title: t('success'), message: t('user_edit_role_successfully') }));
+            setRows((prevRows) => prevRows.filter((row) => !selectedRowID.includes(row._id)));
+            setSelectedRowID([]);
+          })
+          .catch(() => {
+            dispatch(setLoading(false));
+            dispatch(setAlert({ type: 'error', title: t('error'), message: t('user_edit_role_failed') }));
+          });
+        break;
       default:
         break;
     }
     setTriggerReloadData(!triggerReloadData);
+  };
+  const handleEditRole = (_id: string) => {
+    dispatch(setLoading(true));
+    fetch('https://te11api.herokuapp.com/user/edit-role/' + _id, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tokenUser: localStorage.getItem('tokenUser'),
+        role: roleSelected,
+      }),
+    })
+      .then((response) => {
+        dispatch(setLoading(false));
+        setUserIdChangingRole('');
+        if (response.status >= 400) {
+          throw new Error('Bad response from server');
+        }
+        dispatch(setAlert({ type: 'success', title: t('success'), message: t('user_edit_role_successfully') }));
+        setRows((prevRows) => prevRows.filter((row) => !selectedRowID.includes(row._id)));
+        setSelectedRowID([]);
+      })
+      .catch(() => {
+        dispatch(setLoading(false));
+        dispatch(setAlert({ type: 'error', title: t('error'), message: t('user_edit_role_failed') }));
+      });
   };
   const columns: TTableColumnData[] = [
     {
@@ -227,33 +286,57 @@ const TUsersManager = ({ store }: TUsersManagerProps) => {
         <Checkbox name="_id" checked={selectedRowID.includes(value as string)} value={value} onChange={handleCheckbox} />
       ),
     },
-    { field: 'account', headerName: t('account'), sortable: true, align: 'center' },
+    { field: 'fullName', headerName: t('fullname'), sortable: true, align: 'center' },
+    {
+      field: 'account',
+      headerName: t('account'),
+      sortable: true,
+      renderCell: ({ value, _id }) => {
+        const userUrl = '/user/profile/' + _id;
+        return <TLink href={userUrl}>{value}</TLink>;
+      },
+      align: 'center',
+    },
     {
       field: 'role',
       headerName: t('user_role'),
       sortable: true,
+      renderCell: ({ value }) => <TTypography variant="body2">{userRoles[value as number]}</TTypography>,
       align: 'center',
     },
     {
       field: 'multiAction',
       headerName: t('action'),
       align: 'center',
-      renderCell: ({ _id }) => (
-        <TBox display="flex" alignItems="center" textalign="center">
-          {store === 'banned' ? (
-            <TButton variant="contained" color="warning" onClick={() => unbanUser(_id as string)}>
-              {t('unban')}
+      renderCell: ({ _id }) => {
+        return (
+          <TBox display="flex" alignItems="center" textalign="center">
+            {store === 'banned' ? (
+              <TButton variant="contained" color="warning" onClick={() => unbanUser(_id as string)}>
+                {t('unban')}
+              </TButton>
+            ) : (
+              <TButton
+                variant="contained"
+                color="warning"
+                onClick={() => {
+                  if (userIdChangingRole) {
+                    handleEditRole(_id as string);
+                  } else {
+                    setUserIdChangingRole(_id as string);
+                    setOpenSelectRoleModal(true);
+                  }
+                }}
+              >
+                {userIdChangingRole == _id ? t('update') : t('edit')}
+              </TButton>
+            )}
+            <TButton variant="contained" color="error" marginLeft={1} onClick={() => banUser(_id as string)}>
+              {currentPage == 'banned/' ? t('delete') : t('ban')}
             </TButton>
-          ) : (
-            <TButton variant="contained" color="warning">
-              {t('edit')}
-            </TButton>
-          )}
-          <TButton variant="contained" color="error" marginLeft={1} onClick={() => banUser(_id as string)}>
-            {currentPage == 'banned/' ? t('delete') : t('ban')}
-          </TButton>
-        </TBox>
-      ),
+          </TBox>
+        );
+      },
     },
   ];
   const actionsForSelectedRows =
@@ -262,13 +345,17 @@ const TUsersManager = ({ store }: TUsersManagerProps) => {
           { label: t('unban'), value: 'unban' },
           { label: t('force_delete'), value: 'forceDelete' },
         ]
-      : [{ label: t('delete'), value: 'delete' }];
+      : [
+          { label: t('ban'), value: 'delete' },
+          { label: t('edit_role'), value: 'editRole', onClick: () => setOpenSelectRoleModal(true) },
+        ];
 
   useEffect(() => {
     if (!userData || userData.role > 2) {
       history.push('/no_permissions');
     }
-    const urlGeTUsersManager = 'https://te11api.herokuapp.com/user/' + currentPage + '?page=' + page + '&perPage=' + rowsPerPage;
+    const urlGeTUsersManager =
+      'https://te11api.herokuapp.com/user/' + currentPage + '?page=' + page + '&perPage=' + rowsPerPage;
     const tokenUser = localStorage.getItem('tokenUser');
     let isSubscribed = true;
 
@@ -304,9 +391,9 @@ const TUsersManager = ({ store }: TUsersManagerProps) => {
       isSubscribed = false;
     };
   }, [page, triggerReloadData, rowsPerPage]);
-useEffect(() => {
-  dispatch(setHelmet({title: t('manager_users')}));
-}, []);
+  useEffect(() => {
+    dispatch(setHelmet({ title: t('manager_users') }));
+  }, []);
   return rows ? (
     <TBox>
       <TBox display="flex" my={2} px={6} alignItems="center" justifyContent="space-between">
@@ -320,7 +407,7 @@ useEffect(() => {
             }}
           >
             {actionsForSelectedRows.map((action, index) => (
-              <MenuItem key={index} value={action.value}>
+              <MenuItem key={index} value={action.value} onClick={() => action?.onClick?.()}>
                 {action.label}
               </MenuItem>
             ))}
@@ -352,6 +439,14 @@ useEffect(() => {
             setRowsPerPage(+event.target.value);
             setPage(1);
           },
+        }}
+      />
+      <TSelectRoleModal
+        isOpen={openSelectRoleModal}
+        onSelect={(role) => setRoleSelected(role)}
+        currenRole={roleSelected}
+        onClose={() => {
+          setOpenSelectRoleModal(false);
         }}
       />
     </TBox>

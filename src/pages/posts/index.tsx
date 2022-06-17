@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 
 import TPostItem, { TPostItemProps } from 'components/postItem';
 import TButton from 'components/button';
-import TTypography from 'components/typography';
 import { TBoxProps } from 'components/box/box.styled';
 import TBox from 'components/box';
 
@@ -29,9 +28,9 @@ export type TPostProps = TBoxProps & {
 
 const socket = io('https://te11api.herokuapp.com');
 
-const TPost = ({ userId,showTitle, titleRender, ...props }: TPostProps) => {
+const TPost = ({ userId, showTitle = false, titleRender, ...props }: TPostProps) => {
   const [posts, setPosts] = useState<Array<TPostItemProps> | []>([]);
-  const [reload,setReload] = useState(false);
+  const [reload, setReload] = useState(false);
   const [totalPosts, setTotalPosts] = useState(0);
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
@@ -76,7 +75,7 @@ const TPost = ({ userId,showTitle, titleRender, ...props }: TPostProps) => {
 
   useEffect(() => {
     let isSubscribed = true;
-    if (isSubscribed&&showTitle) {
+    if (isSubscribed && showTitle) {
       dispatch(setHelmet({ title: t('posts') }));
     }
     return () => {
@@ -105,17 +104,7 @@ const TPost = ({ userId,showTitle, titleRender, ...props }: TPostProps) => {
             {t('view_more')}
           </TButton>
         </TBox>
-      ) : (
-        posts.length > 0 && (
-          <TBox margintop={4} textalign="center">
-            <TButton onClick={() => setPage(page + 1)}>
-              <TTypography variant="h6" color="primary">
-                {t('view_more')}
-              </TTypography>
-            </TButton>
-          </TBox>
-        )
-      )}
+      ) : null}
     </TBox>
   );
 };
